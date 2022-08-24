@@ -19,9 +19,13 @@ class Bookmark {
       el.innerHTML = this.options.text
     }    
   }
+  bookmarkThis () {
+    console.log('testing booking click')
+  }
   handleClick (event) {  
     if (this.options.onClick) {
       this.options.onClick(event)
+      this.bookmarkThis()
     } 
   }
 }
