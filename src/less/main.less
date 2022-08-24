@@ -5,15 +5,12 @@ html, body {
 .websy-bookmark {
   width: 40px;
   height: 40px;
-}
-
-.popup {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
 
-.popup .popuptext {
+.websy-bookmark .popuptext {
   visibility: hidden;
   width: 160px;
   background-color: rgb(87, 85, 85);
@@ -29,7 +26,7 @@ html, body {
 }
 
 /* Popup arrow */
-.popup .popuptext::after {
+.websy-bookmark .popuptext:after {
   content: 'add bookmarks here';
   position: absolute;
   top: 100%;
@@ -41,10 +38,10 @@ html, body {
 }
 
 /* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
+.websy-bookmark .show {
   visibility: visible;
   -webkit-animation: fadein 1s;
-  animation: fadein 1s;
+  animation: fadeIn 1s;
 }
 
 /* Add animation (fade in the popup) */
