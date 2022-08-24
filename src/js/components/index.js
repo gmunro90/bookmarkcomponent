@@ -6,8 +6,11 @@ class Bookmark {
   constructor (elementId, options) {
     this.elementId = elementId
     const DEFAULTS = {
-      text: 'testing',
-      appearance: 'bookmark'
+      text: 'Bookmarks',
+      onClick: () => {
+        let popup = document.getElementById('myPopup')
+        popup.classList.toggle('show')
+      }
     }
     this.options = Object.assign({}, DEFAULTS, options)
     const el = document.getElementById(this.elementId)
