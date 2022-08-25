@@ -24,10 +24,9 @@ class Bookmark {
         <title>Bookmark</title>
         <path d="M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z" fill="none" stroke="currentColor"
           stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
-          <span>${this.options.text}</span>
+          <h5>${this.options.text}</h5>
         </svg>
-        <span class="popuptext" id="myPopup">Popup text...</span>
-        
+
       `
       el.innerHTML = html
     }    
@@ -41,6 +40,14 @@ class Bookmark {
       this.bookmarkThis()
     } 
   }
+}
+
+function openForm () {
+  document.getElementById('myForm').style.display = 'block'
+}
+
+function closeForm () {
+  document.getElementById('myForm').style.display = 'none'
 }
 
 

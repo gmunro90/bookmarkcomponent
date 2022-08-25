@@ -31,7 +31,7 @@ var Bookmark = /*#__PURE__*/function () {
 
     if (el) {
       el.addEventListener('click', this.handleClick.bind(this));
-      var html = "\n        <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n        <title>Bookmark</title>\n        <path d=\"M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z\" fill=\"none\" stroke=\"currentColor\"\n          stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\" />\n          <span>".concat(this.options.text, "</span>\n        </svg>\n        <span class=\"popuptext\" id=\"myPopup\">Popup text...</span>\n        \n      ");
+      var html = "\n        <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n        <title>Bookmark</title>\n        <path d=\"M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z\" fill=\"none\" stroke=\"currentColor\"\n          stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\" />\n          <h5>".concat(this.options.text, "</h5>\n        </svg>\n\n      ");
       el.innerHTML = html;
     }
   }
@@ -53,5 +53,13 @@ var Bookmark = /*#__PURE__*/function () {
 
   return Bookmark;
 }();
+
+function openForm() {
+  document.getElementById('myForm').style.display = 'block';
+}
+
+function closeForm() {
+  document.getElementById('myForm').style.display = 'none';
+}
 
 var bookmarkTest = new Bookmark('websy-bookmark');
