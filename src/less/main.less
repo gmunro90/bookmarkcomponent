@@ -9,8 +9,6 @@ html, body {
   display: inline-block;
   cursor: pointer;
 }
-
-/* The popup form - hidden by default */
 .bookmark-popup {
   display: none;
   position: fixed;
@@ -19,8 +17,6 @@ html, body {
   border: 3px solid #f1f1f1;
   z-index: 9;
 }
-
-/* Add styles to the container */
 .bookmark-container {
   width: 500px;
   padding: 10px;
@@ -28,33 +24,40 @@ html, body {
 }
 .bookmark-topline {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid rgba(3, 3, 3, .2);
+  box-shadow: 0 1px 1px #0000001a;
 }
 .bookmark-container .create-new {
-  background-color: #ffffff;
-  padding: 7px 2px;
+  background-color: initial;
+  border: 1px solid #b3b3b3;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: #595959;
   cursor: pointer;
-  width: 31%;
-  border: .5 solid rgb(0, 0, 0);
+  font-size: 13px;
+  font-weight: 700;
+  height: 28px;
+  line-height: 24px;
+  min-width: 44px;
+  outline: none;
+  padding: 0 16px;
+  position: relative;
+  text-decoration: none;
+  transition: border-color .2s ease-out;
+  vertical-align: middle;
 }
 
 .bookmark-container .btn {
-  background-color: #ffffff;
-  color: rgb(255, 255, 255);
-  padding: 16px 20px;
+  color: rgb(27, 22, 22);
+  padding: 10px 17px;
   cursor: pointer;
-  width: 100%;
+  // width: 100%;
   margin-bottom: 10px;
   opacity: .8;
   border: .5 solid rgb(0, 0, 0);
 }
-
-/* Add a red background color to the cancel button */
-.bookmark-container .cancel {
-  background-color: rgb(188, 181, 181);
-}
-
-/* Add some hover effects to buttons */
 .bookmark-container .btn:hover, .open-button:hover {
   opacity: 1;
 }

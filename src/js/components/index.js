@@ -3,7 +3,6 @@ class Bookmark {
   constructor (elementId, options) {
     this.elementId = elementId
     const DEFAULTS = {
-      text: 'Websy Bookmark'
     }
     this.options = Object.assign({}, DEFAULTS, options)
     const el = document.getElementById(this.elementId)
@@ -14,7 +13,6 @@ class Bookmark {
         <title>Bookmark</title>
         <path d="M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z" fill="none" stroke="currentColor"
           stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
-          <h5>${this.options.text}</h5>
         </svg>`
       el.innerHTML = html
     }    

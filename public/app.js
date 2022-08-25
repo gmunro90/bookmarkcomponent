@@ -20,15 +20,13 @@ var Bookmark = /*#__PURE__*/function () {
     _classCallCheck(this, Bookmark);
 
     this.elementId = elementId;
-    var DEFAULTS = {
-      text: 'Websy Bookmark'
-    };
+    var DEFAULTS = {};
     this.options = _extends({}, DEFAULTS, options);
     var el = document.getElementById(this.elementId);
 
     if (el) {
       el.addEventListener('click', this.handleClick.bind(this));
-      var html = "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n        <title>Bookmark</title>\n        <path d=\"M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z\" fill=\"none\" stroke=\"currentColor\"\n          stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\" />\n          <h5>".concat(this.options.text, "</h5>\n        </svg>");
+      var html = "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n        <title>Bookmark</title>\n        <path d=\"M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z\" fill=\"none\" stroke=\"currentColor\"\n          stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\" />\n        </svg>";
       el.innerHTML = html;
     }
   }
