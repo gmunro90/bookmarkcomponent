@@ -14,39 +14,35 @@ Bookmark
 include
 */
 
-/*
-global
-Bookmark
- */
+/* global Bookmark */
 var Bookmark = /*#__PURE__*/function () {
   function Bookmark(elementId, options) {
     _classCallCheck(this, Bookmark);
 
     this.elementId = elementId;
     var DEFAULTS = {
-      text: 'Bookmarks'
+      text: 'Websy Bookmark'
     };
     this.options = _extends({}, DEFAULTS, options);
     var el = document.getElementById(this.elementId);
 
     if (el) {
       el.addEventListener('click', this.handleClick.bind(this));
-      var html = "\n        <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n        <title>Bookmark</title>\n        <path d=\"M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z\" fill=\"none\" stroke=\"currentColor\"\n          stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\" />\n          <h5>".concat(this.options.text, "</h5>\n        </svg>\n\n      ");
+      var html = "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n        <title>Bookmark</title>\n        <path d=\"M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z\" fill=\"none\" stroke=\"currentColor\"\n          stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\" />\n          <h5>".concat(this.options.text, "</h5>\n        </svg>");
       el.innerHTML = html;
     }
   }
 
   _createClass(Bookmark, [{
-    key: "bookmarkThis",
-    value: function bookmarkThis() {
-      console.log('testing booking click');
-    }
-  }, {
     key: "handleClick",
     value: function handleClick(event) {
       if (this.options.onClick) {
-        this.options.onClick(event);
-        this.bookmarkThis();
+        this.options.onClick(event); // if (myForm.style.display = 'block') {
+        //   closeForm() 
+        // } 
+        // else {
+        //   openForm()
+        // }
       }
     }
   }]);
@@ -54,12 +50,16 @@ var Bookmark = /*#__PURE__*/function () {
   return Bookmark;
 }();
 
+var myForm = document.getElementById('myForm');
+
 function openForm() {
-  document.getElementById('myForm').style.display = 'block';
+  if (myForm) {
+    myForm.style.display = 'block';
+  }
 }
 
 function closeForm() {
-  document.getElementById('myForm').style.display = 'none';
+  myForm.style.display = 'none';
 }
 
 var bookmarkTest = new Bookmark('websy-bookmark');

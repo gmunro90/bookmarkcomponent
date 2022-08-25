@@ -10,26 +10,28 @@
 </head>
 
 <body>
-  <button class="websy-bookmark" id="websy-bookmark">
-    
+
+  <button class="websy-bookmark" id="websy-bookmark" onclick="openForm()">
   </button>
 
-  <button class="open-button" onclick="openForm()">Open Form</button>
-  
-  <div class="form-popup" id="myForm">
-    <form action="/action_page.php" class="form-container">
-      <h1>Login</h1>
-  
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required>
-  
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-  
-      <button type="submit" class="btn">Login</button>
-      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  <div class="bookmark-popup" id="myForm">
+    <form class="bookmark-container">
+      <div class="bookmark-topline">
+        <span>Bookmarks</span><button class="create-new">Create new bookmark</button>
+      </div>
+      <div class="btn">
+      </div>
+      <input type="search">
+      <button type="button" class="btn cancel" onclick="closeForm()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+          <title>Close</title>
+          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+            d="M368 368L144 144M368 144L144 368" />
+        </svg>
+      </button>
     </form>
   </div>
+
   <script src="/resources/app.debug.js"></script>
 </body>
 
