@@ -1,13 +1,9 @@
 /*
 global
 Bookmark
+include
 */
 
-const options = {
-  text: 'websy designs bookmark',
-  onClick: () => {
-    console.log('success')
-  }
-}
+include('./components/index.js')
 
-const bookmarkTest = new Bookmark('websy-bookmark', options)
+const bookmarkTest = new Bookmark('websy-bookmark')
