@@ -40,3 +40,9 @@ function openForm () {
 function closeForm () {
   myForm.style.display = 'none'
 }
+
+const createNew = document.getElementById('createForm')
+
+function createNewBookmark () {
+  createNew.style.display = 'block'
+}

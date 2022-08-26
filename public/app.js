@@ -60,4 +60,10 @@ function closeForm() {
   myForm.style.display = 'none';
 }
 
+var createNew = document.getElementById('createForm');
+
+function createNewBookmark() {
+  createNew.style.display = 'block';
+}
+
 var bookmarkTest = new Bookmark('websy-bookmark');
