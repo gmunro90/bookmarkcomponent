@@ -10,12 +10,12 @@ class Bookmark {
       el.addEventListener('click', this.handleClick.bind(this))
       let html =
       `<div>
-      <svg xmlns="http://www.w3.org/2000/svg" class="bookmarkTest" viewBox="0 0 512 512">
+      <svg xmlns="http://www.w3.org/2000/svg" class="bookmarkBtn" viewBox="0 0 512 512">
         <title>Bookmark</title>
         <path d="M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z" fill="none" stroke="currentColor"
           stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
         </svg>
-        <div class="bookmarkPopup" id="myForm"></div>
+        <div class="bookmarkPopup" id="bookmarkPopup"></div>
         <div class="bookmark-container" id="bookmark-container">
           <div class="bookmark-topline">
             <span>Bookmarks</span><button class="createNew">Create new bookmark</button>
@@ -64,7 +64,7 @@ class Bookmark {
     }    
   }
   handleClick (event) {  
-    if (event.target.classList.contains('bookmarkTest')) {
+    if (event.target.classList.contains('bookmarkBtn')) {
       openForm() 
     } 
     if (event.target.classList.contains('bookmarkPopup')) {
@@ -80,7 +80,7 @@ class Bookmark {
 }
 
 function openForm () {
-  const myForm = document.getElementById('myForm')
+  const myForm = document.getElementById('bookmarkPopup')
   if (myForm) { 
     myForm.style.display = 'block'
   }
@@ -90,7 +90,7 @@ function openForm () {
   }
 }
 function closeForm () {
-  const myForm = document.getElementById('myForm')
+  const myForm = document.getElementById('bookmarkPopup')
   myForm.style.display = 'none'
   const bookmarkContainer = document.getElementById('bookmark-container')
   if (bookmarkContainer) { 
