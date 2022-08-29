@@ -15,10 +15,10 @@ class Bookmark {
         <path d="M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z" fill="none" stroke="currentColor"
           stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
         </svg>
-        <div class="bookmark-popup" id="myForm"></div>
+        <div class="bookmarkPopup" id="myForm"></div>
         <div class="bookmark-container" id="bookmark-container">
           <div class="bookmark-topline">
-            <span>Bookmarks</span><button class="create-new">Create new bookmark</button>
+            <span>Bookmarks</span><button class="createNew">Create new bookmark</button>
           </div>
           <div class="btn">
           </div>
@@ -56,7 +56,7 @@ class Bookmark {
         </div>
       </div>
     
-      <div class="create-new-popup" id="createForm">
+      <div class="createNewPopup" id="createForm">
        <h1>hello testing popup</h1>
           </div>
         </div>`
@@ -67,13 +67,13 @@ class Bookmark {
     if (event.target.classList.contains('bookmarkTest')) {
       openForm() 
     } 
-    if (event.target.classList.contains('bookmark-popup')) {
+    if (event.target.classList.contains('bookmarkPopup')) {
       closeForm() 
     } 
-    if (event.target.classList.contains('create-new')) {
+    if (event.target.classList.contains('createNew')) {
       createNewBookmark()
     }
-    if (event.target.classList.contains('create-new-popup')) {
+    if (event.target.classList.contains('createNewPopup')) {
       closeBookmark()
     }
   }
