@@ -11,13 +11,19 @@ html, body {
   display: none;
   position: fixed;
   border: 3px solid #f1f1f1;
-  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 .bookmark-container {
+  display: none;
   width: 600px;
   height: 500px;
   padding: 20px;
   background-color: rgb(255, 255, 255);
+  position: absolute;
+  border: 1px solid rgb(139, 139, 139);
 }
 .bookmark-topline {
   display: flex;
@@ -27,7 +33,7 @@ html, body {
   box-shadow: 0 1px 1px #0000001a;
   padding: 0 0 10px;
 }
-.bookmark-container .create-new {
+.create-new {
   background-color: initial;
   border: 1px solid #b3b3b3;
   border-radius: 3px;
@@ -71,6 +77,8 @@ hr {
 .search-icon {
   width: 18px;
   margin: 0 8px 0 0;
+  position: relative;
+  top: 3.5px;
 }
 .caret {
   width: 15px;
@@ -79,5 +87,15 @@ hr {
   display: none;
   position: fixed;
   border: 3px solid #f1f1f1;
-  z-index: 1;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, .7);
+}
+.bookmarkTest {
+  * {
+    pointer-events: none;
+  }
 }
