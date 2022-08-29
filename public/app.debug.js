@@ -67,9 +67,9 @@ class Bookmark {
        viewBox="0 0 512 512"><title>Close</title><path fill="none"
         stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
         stroke-width="32" d="M368 368L144 144M368 144L144 368"/>
-        </svg>
     </div>
-
+ 
+ 
     `
       el.innerHTML = html
     }    
@@ -112,10 +112,8 @@ function closeForm () {
 function createNewBookmark () {
   const createNew = document.getElementById('createForm')
   const body = document.querySelector('body')
-  const websyBtn = document.querySelector('websy-bookmark')
   createNew.style.display = 'flex' 
   body.style.backgroundColor = '#dddddd'
-  websyBtn.style.backgroundColor = '#ffffff'
 }
 
 function closeBookmark () {
