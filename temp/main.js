@@ -62,13 +62,15 @@ class Bookmark {
       </div>
     
       <div class="createNewPopup" id="createForm">
-       
-      <div class="newBookmarkTopline>
-
-      <h3>Create bookmark</h3></div>
-            
-          </div>
-        </div>`
+      <h2>Create bookmark</h2>
+     
+      <svg xmlns="http://www.w3.org/2000/svg" class="closeCreate"
+       viewBox="0 0 512 512"><title>Close</title><path fill="none"
+        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+        stroke-width="32" d="M368 368L144 144M368 144L144 368"/>
+        </svg>
+    </div>
+       `
       el.innerHTML = html
     }    
   }
@@ -82,7 +84,7 @@ class Bookmark {
     if (event.target.classList.contains('createNew')) {
       createNewBookmark()
     }
-    if (event.target.classList.contains('createNewPopup')) {
+    if (event.target.classList.contains('closeCreate')) {
       closeBookmark()
     }
   }
