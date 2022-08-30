@@ -6,7 +6,7 @@ module.exports = function (grunt) {
     includes: {
       js: {
         options: {
-          includeRegexp: /^include\(+['"]?([^'"]+)['"]?\)*$/
+          includeRegexp: /^include\(+['']?([^'']+)['']?\)*$/
         },
         files: [
           {
@@ -32,7 +32,7 @@ module.exports = function (grunt) {
           optimization: 2
         },
         files: [{
-          dest: `public/app.min.css`, src: "src/less/main.less"
+          dest: `public/app.min.css`, src: 'src/less/main.less'
         }]
       }
     },
