@@ -12,6 +12,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 global
 Bookmark
 include
+enigma
+schema
 */
 
 /* global Bookmark */
@@ -90,3 +92,16 @@ function closeBookmark() {
 }
 
 var bookmarkTest = new Bookmark('websy-bookmark');
+var session = enigma.create({
+  schema: schema,
+  url: ''
+});
+session.open().then(function (global) {
+  console.log(global); //   global.getDocList().then(response => {
+  //     console.log(response)
+  // })
+
+  global.openDoc('').then(function (app) {
+    console.log(app);
+  });
+});
