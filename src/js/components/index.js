@@ -56,14 +56,24 @@ class Bookmark {
       </div>
 
       <div class="createNewPopup" id="createForm">
+  
+
+    <div class="createTopline">
       <h2>Create bookmark</h2>
-      <svg xmlns="http://www.w3.org/2000/svg" class="closeCreate"
-       viewBox="0 0 512 512"><title>Close</title><path fill="none"
-        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-        stroke-width="32" d="M368 368L144 144M368 144L144 368"/>
+      <hr>
+      <svg xmlns="http://www.w3.org/2000/svg" class="closeCreate" viewbox="0 0 512 512">
+        <title>Close</title>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+          d="M368 368L144 144M368 144L144 368" />
+      </svg><br>
     </div>
- 
- 
+    <form>
+    <label for="bookmarkName">Title</label><br>
+      <input type="text" id="bookmarkName" name="bookmarkName">
+      <label for="bookmarkDescription">Description <span class="optional">(optional)</span></label><br>
+      <input type="text" id="bookmarkDescription" name="bookmarkDescription">
+    </form>
+  </div>
     `
       el.innerHTML = html
     }    
@@ -105,9 +115,7 @@ function closeForm () {
 
 function createNewBookmark () {
   const createNew = document.getElementById('createForm')
-  const body = document.querySelector('body')
   createNew.style.display = 'flex' 
-  body.style.backgroundColor = '#dddddd'
 }
 
 function closeBookmark () {
