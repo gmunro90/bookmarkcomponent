@@ -78,6 +78,7 @@ class Bookmark {
       <input type="text" id="bookmarkName" name="bookmarkName">
       <label for="bookmarkDescription">Description <span class="optional">(optional)</span></label><br>
       <input type="text" id="bookmarkDescription" name="bookmarkDescription">
+      <button id="create-submit">Create</button>
     </form>
   </div>
     `
