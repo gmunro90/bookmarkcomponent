@@ -75,7 +75,7 @@ class Bookmark {
       <input type='text' id='bookmarkName' name='bookmarkName'>
       <label for='bookmarkDescription'>Description <span class='optional'>(optional)</span></label><br>
       <input type='text' id='bookmarkDescription' name='bookmarkDescription'>
-      <button class='create-submit' id='create-submit'>Create</button>
+      <button class='createSubmit' id='createSubmit'>Create</button>
     </form>
   </div>
     `
@@ -104,9 +104,16 @@ class Bookmark {
     )
       .then((model) => {
         model.getLayout().then(layout => {
-          console.log(layout)
+          if (layout.qBookmarkList.qItems.qMeta.published === true) {
+            publicBookmarks.push()
+          } 
+          else {
+            myBookmarks.push()
+          }
         })
       })
+    let publicBookmarks = []
+    let myBookmarks = []
   }
 
   handleClick (event) {  
@@ -122,16 +129,17 @@ class Bookmark {
     if (event.target.classList.contains('closeCreate')) {
       closeBookmark()
     }
-    if (event.target.classList.contains('create-submit')) {
+    if (event.target.classList.contains('createSubmit')) {
       this.options.app.createBookmark(
         {
           qInfo: {
             qType: 'bookmark'
           },
           qMetaDef: {
-            title: 'Bookmark (1)',
-            description: ''
-          }}
+            title: `${this.el.target.value}`,
+            description: `${this.el.target.value}`
+          }
+        }
       )
     }
   }

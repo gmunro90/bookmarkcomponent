@@ -18,8 +18,6 @@ session.open().then(global => {
   console.log(global)
   global.openDoc('af650d53-f31b-476d-b28b-7db3bd2f620f').then(app => {
     console.log(app)
-    const bookmarkTest = new Bookmark('websy-bookmark', {app})
+    const bookmark = new Bookmark('websy-bookmark', {app})
   })
 })
-
-// app.createBookmark()
