@@ -37,16 +37,15 @@ class Bookmark {
             </div>
           </div>
           <div class='my-bookmarks'>
-            <div class="caret-div">
             <svg class='caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
               <title>Caret Down</title>
               <path
                 d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />
             </svg>
-            <span>My bookmarks <span id="myBookmarkCount">(0)</span></span>
+            <span>My bookmarks <span id="myBookmarksCount">(0)</span></span>
             <div id="mybookmarks-placeholder"><p class='public-text'>You have no public bookmarks</p>
             <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>
-            </div>
+          
             </div>
           </div>
         </div>
@@ -80,7 +79,7 @@ class Bookmark {
     const bookmarkDescription = document.getElementById('bookmarkDescription')
     let publicCount = document.getElementById('publicCount')
     let publicBookmarks = []
-    let myBookmarksCount = document.getElementById('myBookmarkCount')
+    let myBookmarksCount = document.getElementById('myBookmarksCount')
     let myBookmarks = []
     this.options.app.createSessionObject(
       {
@@ -138,6 +137,7 @@ class Bookmark {
           const myBookmarksPlaceholder = document.getElementById('mybookmarks-placeholder')
           myBookmarksPlaceholder.innerHTML = bookmarkHtml 
           publicCount.textContent = `(` + publicBookmarks.length + `)`
+          myBookmarksCount.textContent = `(` + myBookmarks.length + `)`
         })
       })
   }
