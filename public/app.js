@@ -73,7 +73,7 @@ var Bookmark = /*#__PURE__*/function () {
           });
           var publicPlaceholder = document.getElementById('public-placeholder');
           publicPlaceholder.innerHTML = publicHtml;
-          publicCount.textContent = publicBookmarks.length;
+          publicCount.textContent = "(" + publicBookmarks.length + ")";
         });
       });
     }

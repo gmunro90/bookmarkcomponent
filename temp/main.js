@@ -131,7 +131,7 @@ class Bookmark {
           })
           const publicPlaceholder = document.getElementById('public-placeholder')
           publicPlaceholder.innerHTML = publicHtml
-          publicCount.textContent = publicBookmarks.length
+          publicCount.textContent = `(` + publicBookmarks.length + `)`
         })
       })
   }
