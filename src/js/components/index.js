@@ -39,8 +39,9 @@ class Bookmark {
                 d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />
             </svg>
             <span>Public bookmarks (0)</span>
-            <h4 class='public-text'>You have no public bookmarks</h4>
+            <div id="public-placeholder"><h4 class='public-text'>You have no public bookmarks</h4>
             <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>
+            </div>
           </div>
           <div class='my-bookmarks'>
             <svg class='caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
@@ -77,7 +78,10 @@ class Bookmark {
       this.render()
     }    
   }
+  
   render () {
+    let publicBookmarks = []
+    let myBookmarks = []
     this.options.app.createSessionObject(
       {
         'qInfo': {
@@ -96,22 +100,29 @@ class Bookmark {
         }
       }
     )
-
-    let publicBookmarks = []
-    let myBookmarks = []
-
       .then((model) => {
         model.getLayout().then(layout => {
           console.log(layout)
-          if (layout.qBookmarkList.qItems[0].qMeta.published === true) {
-            publicBookmarks.push()
-          } 
-          else {
-            myBookmarks.push()
-          }
+          layout.qBookmarkList.qItems.forEach((d) => {
+            if (d.qMeta.published === true) {
+              publicBookmarks.push(d)
+            } 
+            else {
+              myBookmarks.push(d)
+            }
+          })
+          console.log(publicBookmarks)
+          let publicHtml = ''
+          publicBookmarks.forEach(bookmark => {
+            publicHtml += `
+            <div>
+              ${bookmark.qMeta.title}
+            </div>`
+          })
+          const publicPlaceholder = document.getElementById('public-placeholder')
+          publicPlaceholder.innerHTML = publicHtml 
         })
       })
-    console.log('public', publicBookmarks)
   }
 
   handleClick (event) {  
