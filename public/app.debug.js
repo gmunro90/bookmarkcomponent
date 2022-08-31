@@ -40,7 +40,6 @@ class Bookmark {
             </svg>
             <input class='search' type='search'>
           </div>
-    
           <hr>
           <div class='public'>
             <svg class='caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
@@ -60,16 +59,11 @@ class Bookmark {
             </svg>
             <span>My bookmarks (0)</span>
             <div id='bookmarkTester'>
-            
             </div>
           </div>
-        
         </div>
       </div>
-
       <div class='createNewPopup' id='createForm'>
-  
-
     <div class='createTopline'>
       <h2>Create bookmark</h2>
       <hr>
@@ -111,9 +105,14 @@ class Bookmark {
         }
       }
     )
+
+    let publicBookmarks = []
+    let myBookmarks = []
+
       .then((model) => {
         model.getLayout().then(layout => {
-          if (layout.qBookmarkList.qItems.qMeta.published === true) {
+          console.log(layout)
+          if (layout.qBookmarkList.qItems[0].qMeta.published === true) {
             publicBookmarks.push()
           } 
           else {
@@ -121,8 +120,7 @@ class Bookmark {
           }
         })
       })
-    let publicBookmarks = []
-    let myBookmarks = []
+    console.log('public', publicBookmarks)
   }
 
   handleClick (event) {  
