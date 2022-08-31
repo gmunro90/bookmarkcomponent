@@ -39,7 +39,7 @@ class Bookmark {
                 d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />
             </svg>
             <h4>Public bookmarks <span id="publicCount">(0)</span></h4>
-            <div id="public-placeholder"><h4 class='public-text'>You have no public bookmarks</h4>
+            <div id="public-placeholder"><p class='public-text'>You have no public bookmarks</p>
             <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>
             </div>
           </div>
@@ -49,8 +49,9 @@ class Bookmark {
               <path
                 d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />
             </svg>
-            <span>My bookmarks (0)</span>
-            <div id='bookmarkTester'>
+            <h4>My bookmarks <span id="myBookmarkCount">(0)</span></>
+            <div id="mybookmarks-placeholder"><p class='public-text'>You have no public bookmarks</p>
+            <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>
             </div>
           </div>
         </div>
@@ -80,8 +81,11 @@ class Bookmark {
   }
   
   render () {
+    const bookmarkTitle = document.getElementById('bookmarkName')
+    const bookmarkDescription = document.getElementById('bookmarkDescription')
     let publicCount = document.getElementById('publicCount')
     let publicBookmarks = []
+    let myBookmarksCount = document.getElementById('myBookmarkCount')
     let myBookmarks = []
     this.options.app.createSessionObject(
       {
@@ -112,22 +116,34 @@ class Bookmark {
               myBookmarks.push(d)
             }
           })
-          console.log(publicBookmarks)
           let publicHtml = ''
           publicBookmarks.forEach(bookmark => {
             publicHtml += `
             <div>
-              ${bookmark.qMeta.title}
+              <h6>${bookmark.qMeta.title}</h6>
             </div>`
+          })
+          let bookmarkHtml = ''
+          myBookmarks.forEach(bookmark => {
+            bookmarkHtml += `
+              <div>
+               <h6>${bookmarkTitle.value}</h6>
+               <p>${bookmarkDescription.value}</p>
+              </div>
+              `
           })
           const publicPlaceholder = document.getElementById('public-placeholder')
           publicPlaceholder.innerHTML = publicHtml
+          const myBookmarksPlaceholder = document.getElementById('mybookmarks-placeholder')
+          myBookmarksPlaceholder.innerHTML = bookmarkHtml 
           publicCount.textContent = `(` + publicBookmarks.length + `)`
         })
       })
   }
 
   handleClick (event) {  
+    const bookmarkTitle = document.getElementById('bookmarkName')
+    const bookmarkDescription = document.getElementById('bookmarkDescription')
     if (event.target.classList.contains('bookmarkBtn')) {
       openForm() 
     } 
@@ -147,11 +163,12 @@ class Bookmark {
             qType: 'bookmark'
           },
           qMetaDef: {
-            title: `${this.el.target.value}`,
-            description: `${this.el.target.value}`
+            title: `${bookmarkTitle.value}`,
+            description: `${bookmarkDescription.value}`
           }
         }
       )
+      closeBookmark()
     }
   }
 }
