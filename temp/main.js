@@ -31,14 +31,7 @@ class Bookmark {
           <div class='btn'>
           </div>
           <div>
-            <svg class='search-icon' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
-              <title>Search</title>
-              <path d='M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z' fill='none'
-                stroke='currentColor' stroke-miterlimit='10' stroke-width='32' />
-              <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-miterlimit='10' stroke-width='32'
-                d='M338.29 338.29L448 448' />
-            </svg>
-            <input class='search' type='search'>
+            <input class='search' type='search' id="myInput" placeholder="Search" onkeyup">
           </div>
           <hr>
           <div class='public'>
@@ -47,20 +40,22 @@ class Bookmark {
               <path
                 d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />
             </svg>
-            <h4>Public bookmarks <span id="publicCount">(0)</span></h4>
+            <span>Public bookmarks <span id="publicCount">(0)</span></span>
             <div id="public-placeholder"><p class='public-text'>You have no public bookmarks</p>
             <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>
             </div>
           </div>
           <div class='my-bookmarks'>
+            <div class="caret-div">
             <svg class='caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
               <title>Caret Down</title>
               <path
                 d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />
             </svg>
-            <h4>My bookmarks <span id="myBookmarkCount">(0)</span></>
+            <span>My bookmarks <span id="myBookmarkCount">(0)</span></span>
             <div id="mybookmarks-placeholder"><p class='public-text'>You have no public bookmarks</p>
             <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>
+            </div>
             </div>
           </div>
         </div>
@@ -129,15 +124,20 @@ class Bookmark {
           publicBookmarks.forEach(bookmark => {
             publicHtml += `
             <div>
-              <h6>${bookmark.qMeta.title}</h6>
+            <ul id="myUL">
+              <li class="public-li">${bookmark.qMeta.title}</li>
               <hr>
+              </ul>
             </div>`
           })
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {
             bookmarkHtml += `
               <div>
-               <h6>${bookmarkTitle.value}</h6>
+              <ul>
+               <li class="my-bookmarks-li">
+               ${bookmarkTitle.value}
+               </li>
                <p>${bookmarkDescription.value}</p>
               </div>
               `
@@ -154,6 +154,7 @@ class Bookmark {
   handleClick (event) {  
     const bookmarkTitle = document.getElementById('bookmarkName')
     const bookmarkDescription = document.getElementById('bookmarkDescription')
+
     if (event.target.classList.contains('bookmarkBtn')) {
       openForm() 
     } 
@@ -165,6 +166,12 @@ class Bookmark {
     }
     if (event.target.classList.contains('closeCreate')) {
       closeBookmark()
+    }
+    if (event.target.classList.contains('caret')) {
+      closeLi()
+    }
+    if (event.target.classList.contains('caret')) {
+      openLi()
     }
     if (event.target.classList.contains('createSubmit')) {
       this.options.app.createBookmark(
@@ -210,6 +217,34 @@ function createNewBookmark () {
 function closeBookmark () {
   const createNew = document.getElementById('createForm')
   createNew.style.display = 'none'
+}
+function openLi () {
+  const publicListItem = document.getElementById('public-li')
+  publicListItem.style.display = 'block'
+}
+function closeLi () {
+  const publicListItem = document.getElementById('public-li')
+
+  publicListItem.style.display = 'none'
+}
+function searchFunction () {
+  let input, filter, ul, li, a, i, txtValue
+  input = document.getElementById('myInput')
+  filter = input.value.toUpperCase()
+  ul = document.getElementById('myUL')
+  li = ul.getElementsByTagName('li')
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    li = li[i].getElementsByTagName('li')[0]
+    txtValue = li.textContent || li.innerText
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = ''
+    } 
+    else {
+      li[i].style.display = 'none'
+    }
+  }
 }
 
 
