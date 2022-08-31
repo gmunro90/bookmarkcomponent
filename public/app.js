@@ -71,7 +71,7 @@ var Bookmark = /*#__PURE__*/function () {
           });
           var publicHtml = '';
           publicBookmarks.forEach(function (bookmark) {
-            publicHtml += "\n            <div>\n            <ul id=\"myUL\">\n              <li class=\"public-li\">".concat(bookmark.qMeta.title, "</li>\n              <hr>\n              </ul>\n            </div>");
+            publicHtml += "\n            <div>\n            <ul id=\"myUL\">\n              <li class=\"public-li\" id=\"public-li\">".concat(bookmark.qMeta.title, "</li>\n              <hr>\n              </ul>\n            </div>");
           });
           var bookmarkHtml = '';
           myBookmarks.forEach(function (bookmark) {
@@ -110,11 +110,10 @@ var Bookmark = /*#__PURE__*/function () {
 
       if (event.target.classList.contains('caret')) {
         closeLi();
-      }
+      } // if (event.target.classList.contains('caret')) {
+      //   openLi()
+      // }
 
-      if (event.target.classList.contains('caret')) {
-        openLi();
-      }
 
       if (event.target.classList.contains('createSubmit')) {
         this.options.app.createBookmark({
@@ -166,16 +165,14 @@ function createNewBookmark() {
 function closeBookmark() {
   var createNew = document.getElementById('createForm');
   createNew.style.display = 'none';
-}
+} // function openLi () {
+//   const publicListItem = document.getElementById('public-li')
+//   publicListItem.style.display = 'block'
+// }
 
-function openLi() {
-  var publicListItem = document.getElementById('public-li');
-  publicListItem.style.display = 'block';
-}
 
 function closeLi() {
-  var publicListItem = document.getElementById('public-li');
-  publicListItem.style.display = 'none';
+  var publicListItem = document.getElementsByClassName('public-li');
 }
 
 function searchFunction() {
@@ -183,11 +180,11 @@ function searchFunction() {
   input = document.getElementById('myInput');
   filter = input.value.toUpperCase();
   ul = document.getElementById('myUL');
-  li = ul.getElementsByTagName('li'); // Loop through all list items, and hide those who don't match the search query
+  li = ul.getElementsByTagName('li');
 
   for (i = 0; i < li.length; i++) {
-    li = li[i].getElementsByTagName('li')[0];
-    txtValue = li.textContent || li.innerText;
+    a = li[i].getElementsByTagName('li')[0];
+    txtValue = a.textContent || a.innerText;
 
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
       li[i].style.display = '';

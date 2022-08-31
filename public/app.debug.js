@@ -124,7 +124,7 @@ class Bookmark {
             publicHtml += `
             <div>
             <ul id="myUL">
-              <li class="public-li">${bookmark.qMeta.title}</li>
+              <li class="public-li" id="public-li">${bookmark.qMeta.title}</li>
               <hr>
               </ul>
             </div>`
@@ -170,9 +170,9 @@ class Bookmark {
     if (event.target.classList.contains('caret')) {
       closeLi()
     }
-    if (event.target.classList.contains('caret')) {
-      openLi()
-    }
+    // if (event.target.classList.contains('caret')) {
+    //   openLi()
+    // }
     if (event.target.classList.contains('createSubmit')) {
       this.options.app.createBookmark(
         {
@@ -218,14 +218,12 @@ function closeBookmark () {
   const createNew = document.getElementById('createForm')
   createNew.style.display = 'none'
 }
-function openLi () {
-  const publicListItem = document.getElementById('public-li')
-  publicListItem.style.display = 'block'
-}
+// function openLi () {
+//   const publicListItem = document.getElementById('public-li')
+//   publicListItem.style.display = 'block'
+// }
 function closeLi () {
-  const publicListItem = document.getElementById('public-li')
-
-  publicListItem.style.display = 'none'
+  const publicListItem = document.getElementsByClassName('public-li')
 }
 function searchFunction () {
   let input, filter, ul, li, a, i, txtValue
@@ -234,10 +232,9 @@ function searchFunction () {
   ul = document.getElementById('myUL')
   li = ul.getElementsByTagName('li')
 
-  // Loop through all list items, and hide those who don't match the search query
   for (i = 0; i < li.length; i++) {
-    li = li[i].getElementsByTagName('li')[0]
-    txtValue = li.textContent || li.innerText
+    a = li[i].getElementsByTagName('li')[0]
+    txtValue = a.textContent || a.innerText
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
       li[i].style.display = ''
     } 
