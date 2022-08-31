@@ -71,7 +71,7 @@ var Bookmark = /*#__PURE__*/function () {
           });
           var publicHtml = '';
           publicBookmarks.forEach(function (bookmark) {
-            publicHtml += "\n            <div>\n              <h6>".concat(bookmark.qMeta.title, "</h6>\n            </div>");
+            publicHtml += "\n            <div>\n              <h6>".concat(bookmark.qMeta.title, "</h6>\n              <hr>\n            </div>");
           });
           var bookmarkHtml = '';
           myBookmarks.forEach(function (bookmark) {

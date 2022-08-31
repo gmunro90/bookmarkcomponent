@@ -108,7 +108,7 @@ class Bookmark {
       .then((model) => {
         model.getLayout().then(layout => {
           console.log(layout)
-          layout.qBookmarkList.qItems.forEach((d) => {
+          layout.qBookmarkList.qItems.forEach(d => {
             if (d.qMeta.published === true) {
               publicBookmarks.push(d)
             } 
@@ -121,6 +121,7 @@ class Bookmark {
             publicHtml += `
             <div>
               <h6>${bookmark.qMeta.title}</h6>
+              <hr>
             </div>`
           })
           let bookmarkHtml = ''
