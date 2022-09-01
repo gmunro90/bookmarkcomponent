@@ -25,7 +25,7 @@ class Bookmark {
           <div>
             <input class='search' type='search' id="myInput" placeholder="Search" onkeyup"searchFunction()">
           </div>
-          <hr>
+
           <div class='public'>
             <svg class='public-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
               <title>Caret Down</title>
@@ -129,8 +129,13 @@ class Bookmark {
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {
             bookmarkHtml += `
-              <div>
+              <div class="myBookmarks-li">
                   <div class="my-bookmarks-li">${bookmark.qMeta.title}</div>
+                  <svg xmlns='http://www.w3.org/2000/svg' class='delete-icon'
+                  viewBox='0 0 512 512'><title>Close</title><path fill='none'
+                   stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'
+                    stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
+                    </svg>
               </div>
               `
           })
@@ -185,7 +190,16 @@ class Bookmark {
         })
       closeBookmark()
     }
+    if (event.target.classList.contains('delete-icon')) {
+      this.options.app.destroyBookmark(
+        {
+          qSuccess: true
+        }
+      )
+      this.render()
+    }
   }
+ 
   searchFunction () {
     let input, filter
     input = document.getElementById('myInput')
