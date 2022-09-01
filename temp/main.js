@@ -27,21 +27,21 @@ class Bookmark {
         <div class='bookmarkPopup' id='bookmarkPopup'></div>
         <div class='bookmarkContainer' id='bookmarkContainer'>
           <div class='bookmark-topline'>
-            <span>Bookmarks</span><button class='createNew'>Create new bookmark</button>
+            <span class="heading">Bookmarks</span><button class='createNew'>Create new bookmark</button>
           </div>
           <div class='btn'>
           </div>
           <div>
             <input class='search' type='search' id="myInput" placeholder="Search" onkeyup"searchFunction()">
           </div>
-
+          <hr>
           <div class='public'>
             <svg class='public-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
               <title>Caret Down</title>
               <path
                 d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />
             </svg>
-            <span>Public bookmarks <span id="publicCount">(0)</span></span>
+            <span class="heading">Public bookmarks <span id="publicCount">(0)</span></span>
             <div id="public-placeholder" class="active"><p class='public-text'>You have no public bookmarks</p>
             <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>
             </div>
@@ -52,7 +52,7 @@ class Bookmark {
               <path
                 d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />
             </svg>
-            <span>My bookmarks <span id="myBookmarksCount">(0)</span></span>
+            <span class="heading">My bookmarks <span id="myBookmarksCount">(0)</span></span>
             <div id="myBookmarks-placeholder" class="active">
             </div>
           </div>
@@ -129,8 +129,8 @@ class Bookmark {
             publicHtml += `
             <div>
               <div class="public-li" id="public-li">
-              <span>${bookmark.qMeta.title}</span>
-              <span>${bookmark.qMeta.createdDate.slice(0, 10)}</span>
+              <span class="bookmarkText">${bookmark.qMeta.title}</span>
+              <span class="bookmarkText">${bookmark.qMeta.createdDate.slice(0, 10)}</span>
               </div>
               <hr>
             </div>`
@@ -139,13 +139,14 @@ class Bookmark {
           myBookmarks.forEach(bookmark => {
             bookmarkHtml += `
               <div class="myBookmarks-li">
-                  <div class="my-bookmarks-li">${bookmark.qMeta.title}</div>
+                  <span class="bookmarkText">${bookmark.qMeta.title}</span>
                   <svg xmlns='http://www.w3.org/2000/svg' class='delete-icon'
                   viewBox='0 0 512 512'><title>Close</title><path fill='none'
                    stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'
                     stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
                     </svg>
               </div>
+              <hr>
               `
           })
           const publicPlaceholder = document.getElementById('public-placeholder')
