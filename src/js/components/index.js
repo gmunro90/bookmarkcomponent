@@ -118,13 +118,11 @@ class Bookmark {
           publicBookmarks.forEach(bookmark => {
             console.log('boookyyy', bookmark)
             publicHtml += `
-            <div>
               <div class="public-li" id="public-li">
               <span class="bookmarkText">${bookmark.qMeta.title}</span>
               <span class="bookmarkText">${bookmark.qMeta.createdDate.slice(0, 10)}</span>
               </div>
-              <hr>
-            </div>`
+              <hr>`
           })
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {

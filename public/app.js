@@ -77,7 +77,7 @@ var Bookmark = /*#__PURE__*/function () {
           var publicHtml = '';
           publicBookmarks.forEach(function (bookmark) {
             console.log('boookyyy', bookmark);
-            publicHtml += "\n            <div>\n              <div class=\"public-li\" id=\"public-li\">\n              <span class=\"bookmarkText\">".concat(bookmark.qMeta.title, "</span>\n              <span class=\"bookmarkText\">").concat(bookmark.qMeta.createdDate.slice(0, 10), "</span>\n              </div>\n              <hr>\n            </div>");
+            publicHtml += "\n              <div class=\"public-li\" id=\"public-li\">\n              <span class=\"bookmarkText\">".concat(bookmark.qMeta.title, "</span>\n              <span class=\"bookmarkText\">").concat(bookmark.qMeta.createdDate.slice(0, 10), "</span>\n              </div>\n              <hr>");
           });
           var bookmarkHtml = '';
           myBookmarks.forEach(function (bookmark) {
