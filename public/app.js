@@ -30,7 +30,7 @@ var Bookmark = /*#__PURE__*/function () {
     if (el) {
       el.addEventListener('click', this.handleClick.bind(this));
       el.addEventListener('keyup', this.handleKeyUp.bind(this));
-      var html = "<div>\n      <svg xmlns='http://www.w3.org/2000/svg' class='bookmarkBtn' viewBox='0 0 512 512'>\n        <title>Bookmark</title>\n        <path d='M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z' fill='none' stroke='currentColor'\n          stroke-linecap='round' stroke-linejoin='round' stroke-width='32' />\n        </svg>\n        <div class='bookmarkPopup' id='bookmarkPopup'></div>\n        <div class='bookmarkContainer' id='bookmarkContainer'>\n          <div class='bookmark-topline'>\n            <span>Bookmarks</span><button class='createNew'>Create new bookmark</button>\n          </div>\n          <div class='btn'>\n          </div>\n          <div>\n            <input class='search' type='search' id=\"myInput\" placeholder=\"Search\" onkeyup\"searchFunction()\">\n          </div>\n          <hr>\n          <div class='public'>\n            <svg class='caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n              <title>Caret Down</title>\n              <path\n                d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n            </svg>\n            <span>Public bookmarks <span id=\"publicCount\">(0)</span></span>\n            <div id=\"public-placeholder\" class=\"active\"><p class='public-text'>You have no public bookmarks</p>\n            <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>\n            </div>\n          </div>\n          <div class='my-bookmarks'>\n            <svg class='caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n              <title>Caret Down</title>\n              <path\n                d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n            </svg>\n            <span>My bookmarks <span id=\"myBookmarksCount\">(0)</span></span>\n            <div id=\"mybookmarks-placeholder\"><p class='public-text'>You have no public bookmarks</p>\n            <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>\n          \n            </div>\n          </div>\n        </div>\n      </div>\n      <div class='createNewPopup' id='createForm'>\n    <div class='createTopline'>\n      <h2>Create bookmark</h2>\n      <hr>\n      <svg xmlns='http://www.w3.org/2000/svg' class='closeCreate' viewbox='0 0 512 512'>\n        <title>Close</title>\n        <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'\n          d='M368 368L144 144M368 144L144 368' />\n      </svg><br>\n    </div>\n    <div>\n    <label for='bookmarkName'>Title</label><br>\n      <input type='text' id='bookmarkName' name='bookmarkName'>\n      <label for='bookmarkDescription'>Description <span class='optional'>(optional)</span></label><br>\n      <input type='text' id='bookmarkDescription' name='bookmarkDescription'>\n      <button class='createSubmit' id='createSubmit'>Create</button>\n    </div>\n  </div>\n    ";
+      var html = "<div>\n      <svg xmlns='http://www.w3.org/2000/svg' class='bookmarkBtn' viewBox='0 0 512 512'>\n        <title>Bookmark</title>\n        <path d='M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z' fill='none' stroke='currentColor'\n          stroke-linecap='round' stroke-linejoin='round' stroke-width='32' />\n        </svg>\n        <div class='bookmarkPopup' id='bookmarkPopup'></div>\n        <div class='bookmarkContainer' id='bookmarkContainer'>\n          <div class='bookmark-topline'>\n            <span>Bookmarks</span><button class='createNew'>Create new bookmark</button>\n          </div>\n          <div class='btn'>\n          </div>\n          <div>\n            <input class='search' type='search' id=\"myInput\" placeholder=\"Search\" onkeyup\"searchFunction()\">\n          </div>\n          <hr>\n          <div class='public'>\n            <svg class='public-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n              <title>Caret Down</title>\n              <path\n                d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n            </svg>\n            <span>Public bookmarks <span id=\"publicCount\">(0)</span></span>\n            <div id=\"public-placeholder\" class=\"active\"><p class='public-text'>You have no public bookmarks</p>\n            <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>\n            </div>\n          </div>\n          <div class='my-bookmarks'>\n            <svg class='myBookmarks-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n              <title>Caret Down</title>\n              <path\n                d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n            </svg>\n            <span>My bookmarks <span id=\"myBookmarksCount\">(0)</span></span>\n            <div id=\"myBookmarks-placeholder\" class=\"active\">\n            </div>\n          </div>\n        </div>\n      </div>\n      <div class='createNewPopup' id='createForm'>\n    <div class='createTopline'>\n      <h2>Create bookmark</h2>\n      <hr>\n      <svg xmlns='http://www.w3.org/2000/svg' class='closeCreate' viewbox='0 0 512 512'>\n        <title>Close</title>\n        <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'\n          d='M368 368L144 144M368 144L144 368' />\n      </svg><br>\n    </div>\n    <div>\n    <label for='bookmarkName'>Title</label><br>\n      <input type='text' id='bookmarkName' name='bookmarkName'>\n      <label for='bookmarkDescription'>Description <span class='optional'>(optional)</span></label><br>\n      <input type='text' id='bookmarkDescription' name='bookmarkDescription'>\n      <button class='createSubmit' id='createSubmit'>Create</button>\n    </div>\n  </div>\n    ";
       el.innerHTML = html;
       this.render();
     }
@@ -86,7 +86,7 @@ var Bookmark = /*#__PURE__*/function () {
           });
           var publicPlaceholder = document.getElementById('public-placeholder');
           publicPlaceholder.innerHTML = publicHtml;
-          var myBookmarksPlaceholder = document.getElementById('mybookmarks-placeholder');
+          var myBookmarksPlaceholder = document.getElementById('myBookmarks-placeholder');
           myBookmarksPlaceholder.innerHTML = bookmarkHtml;
           publicCount.textContent = "(" + publicBookmarks.length + ")";
           myBookmarksCount.textContent = "(" + myBookmarks.length + ")";
@@ -122,8 +122,12 @@ var Bookmark = /*#__PURE__*/function () {
         closeBookmark();
       }
 
-      if (event.target.classList.contains('caret')) {
-        closeLi();
+      if (event.target.classList.contains('public-caret')) {
+        closePublicUL();
+      }
+
+      if (event.target.classList.contains('myBookmarks-caret')) {
+        closeMyBookmarksUL();
       }
 
       if (event.target.classList.contains('createSubmit')) {
@@ -189,9 +193,14 @@ function closeBookmark() {
   createNew.style.display = 'none';
 }
 
-function closeLi() {
-  var publicListItem = document.getElementById('public-placeholder');
-  publicListItem.classList.toggle('active');
+function closePublicUL() {
+  var publicItem = document.getElementById('public-placeholder');
+  publicItem.classList.toggle('active');
+}
+
+function closeMyBookmarksUL() {
+  var myBookmarksItem = document.getElementById('myBookmarks-placeholder');
+  myBookmarksItem.classList.toggle('active');
 }
 
 var session = enigma.create({

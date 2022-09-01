@@ -6,8 +6,10 @@ html, body {
   width: 27px;
   height: 27px;
   padding: 2px;
-  cursor: pointer;
   border: 1px solid #b8b8b8;
+}
+.bookmarkBtn {
+  cursor: pointer;
 }
 .bookmarkPopup {
   display: none;
@@ -86,6 +88,12 @@ hr {
     display: block;
   }
 }
+#mybookmarks-placeholder {
+  display: none;
+  &.active {
+    display: block;
+  }
+}
 .caret {
   width: 15px;
   * {
@@ -140,11 +148,13 @@ hr {
   display: block;
   list-style: none;
   font-size: .8em;
+  cursor: pointer;
 }
 .my-bookmarks-li {
   display: block;
   list-style: none;
   font-size: .8em;
+  cursor: pointer;
 }
 #myInput {
   background-image: url('../resources/search-outline.svg');

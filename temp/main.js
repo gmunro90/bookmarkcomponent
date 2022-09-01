@@ -36,7 +36,7 @@ class Bookmark {
           </div>
           <hr>
           <div class='public'>
-            <svg class='caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
+            <svg class='public-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
               <title>Caret Down</title>
               <path
                 d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />
@@ -47,15 +47,13 @@ class Bookmark {
             </div>
           </div>
           <div class='my-bookmarks'>
-            <svg class='caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
+            <svg class='myBookmarks-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
               <title>Caret Down</title>
               <path
                 d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />
             </svg>
             <span>My bookmarks <span id="myBookmarksCount">(0)</span></span>
-            <div id="mybookmarks-placeholder"><p class='public-text'>You have no public bookmarks</p>
-            <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>
-          
+            <div id="myBookmarks-placeholder" class="active">
             </div>
           </div>
         </div>
@@ -145,7 +143,7 @@ class Bookmark {
           })
           const publicPlaceholder = document.getElementById('public-placeholder')
           publicPlaceholder.innerHTML = publicHtml
-          const myBookmarksPlaceholder = document.getElementById('mybookmarks-placeholder')
+          const myBookmarksPlaceholder = document.getElementById('myBookmarks-placeholder')
           myBookmarksPlaceholder.innerHTML = bookmarkHtml 
           publicCount.textContent = `(` + publicBookmarks.length + `)`
           myBookmarksCount.textContent = `(` + myBookmarks.length + `)`
@@ -171,8 +169,11 @@ class Bookmark {
     if (event.target.classList.contains('closeCreate')) {
       closeBookmark()
     }
-    if (event.target.classList.contains('caret')) {
-      closeLi()
+    if (event.target.classList.contains('public-caret')) {
+      closePublicUL()
+    }
+    if (event.target.classList.contains('myBookmarks-caret')) {
+      closeMyBookmarksUL()
     }
     if (event.target.classList.contains('createSubmit')) {
       this.options.app.createBookmark(
@@ -226,9 +227,13 @@ function closeBookmark () {
   const createNew = document.getElementById('createForm')
   createNew.style.display = 'none'
 }
-function closeLi () {
-  const publicListItem = document.getElementById('public-placeholder')
-  publicListItem.classList.toggle('active')
+function closePublicUL () {
+  const publicItem = document.getElementById('public-placeholder')
+  publicItem.classList.toggle('active')
+}
+function closeMyBookmarksUL () {
+  const myBookmarksItem = document.getElementById('myBookmarks-placeholder')
+  myBookmarksItem.classList.toggle('active')
 }
 
 
