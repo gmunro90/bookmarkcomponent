@@ -140,7 +140,6 @@ class Bookmark {
             bookmarkHtml += `
               <div>
                   <div class="my-bookmarks-li">${bookmark.qMeta.title}</div>
-                  <hr>
               </div>
               `
           })
@@ -161,7 +160,7 @@ class Bookmark {
     const bookmarkDescription = document.getElementById('bookmarkDescription')
 
     if (event.target.classList.contains('bookmarkBtn')) {
-      openForm() 
+      this.openForm() 
     } 
     if (event.target.classList.contains('bookmarkPopup')) {
       closeForm() 
@@ -194,21 +193,20 @@ class Bookmark {
     }
   }
   searchFunction () {
-    let input, filter, ul, li, a, i, txtValue
+    let input, filter
     input = document.getElementById('myInput')
     filter = input.value.toLowerCase()
     this.render(filter)
   }
-}
-
-function openForm () {
-  const myForm = document.getElementById('bookmarkPopup')
-  if (myForm) { 
-    myForm.style.display = 'block'
-  }
-  const bookmarkContainer = document.getElementById('bookmarkContainer')
-  if (bookmarkContainer) { 
-    bookmarkContainer.style.display = 'block'
+  openForm () {
+    const myForm = document.getElementById('bookmarkPopup')
+    if (myForm) { 
+      myForm.style.display = 'block'
+    }
+    const bookmarkContainer = document.getElementById('bookmarkContainer')
+    if (bookmarkContainer) { 
+      bookmarkContainer.style.display = 'block'
+    }
   }
 }
 function closeForm () {

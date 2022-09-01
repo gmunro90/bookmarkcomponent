@@ -82,7 +82,7 @@ var Bookmark = /*#__PURE__*/function () {
           });
           var bookmarkHtml = '';
           myBookmarks.forEach(function (bookmark) {
-            bookmarkHtml += "\n              <div>\n                  <div class=\"my-bookmarks-li\">".concat(bookmark.qMeta.title, "</div>\n                  <hr>\n              </div>\n              ");
+            bookmarkHtml += "\n              <div>\n                  <div class=\"my-bookmarks-li\">".concat(bookmark.qMeta.title, "</div>\n              </div>\n              ");
           });
           var publicPlaceholder = document.getElementById('public-placeholder');
           publicPlaceholder.innerHTML = publicHtml;
@@ -107,7 +107,7 @@ var Bookmark = /*#__PURE__*/function () {
       var bookmarkDescription = document.getElementById('bookmarkDescription');
 
       if (event.target.classList.contains('bookmarkBtn')) {
-        openForm();
+        this.openForm();
       }
 
       if (event.target.classList.contains('bookmarkPopup')) {
@@ -144,29 +144,30 @@ var Bookmark = /*#__PURE__*/function () {
   }, {
     key: "searchFunction",
     value: function searchFunction() {
-      var input, filter, ul, li, a, i, txtValue;
+      var input, filter;
       input = document.getElementById('myInput');
       filter = input.value.toLowerCase();
       this.render(filter);
+    }
+  }, {
+    key: "openForm",
+    value: function openForm() {
+      var myForm = document.getElementById('bookmarkPopup');
+
+      if (myForm) {
+        myForm.style.display = 'block';
+      }
+
+      var bookmarkContainer = document.getElementById('bookmarkContainer');
+
+      if (bookmarkContainer) {
+        bookmarkContainer.style.display = 'block';
+      }
     }
   }]);
 
   return Bookmark;
 }();
-
-function openForm() {
-  var myForm = document.getElementById('bookmarkPopup');
-
-  if (myForm) {
-    myForm.style.display = 'block';
-  }
-
-  var bookmarkContainer = document.getElementById('bookmarkContainer');
-
-  if (bookmarkContainer) {
-    bookmarkContainer.style.display = 'block';
-  }
-}
 
 function closeForm() {
   var myForm = document.getElementById('bookmarkPopup');
