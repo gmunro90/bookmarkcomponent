@@ -39,8 +39,6 @@ var Bookmark = /*#__PURE__*/function () {
   _createClass(Bookmark, [{
     key: "render",
     value: function render(searchText) {
-      var bookmarkTitle = document.getElementById('bookmarkName');
-      var bookmarkDescription = document.getElementById('bookmarkDescription');
       var publicCount = document.getElementById('publicCount');
       var publicBookmarks = [];
       var myBookmarksCount = document.getElementById('myBookmarksCount');
@@ -78,7 +76,8 @@ var Bookmark = /*#__PURE__*/function () {
           });
           var publicHtml = '';
           publicBookmarks.forEach(function (bookmark) {
-            publicHtml += "\n            <div>\n              <div class=\"public-li\" id=\"public-li\">".concat(bookmark.qMeta.title, "</div>\n              <hr>\n            </div>");
+            console.log('boookyyy', bookmark);
+            publicHtml += "\n            <div>\n              <div class=\"public-li\" id=\"public-li\">\n              <span>".concat(bookmark.qMeta.title, "</span>\n              <span>").concat(bookmark.qMeta.createdDate.slice(0, 10), "</span>\n              </div>\n              <hr>\n            </div>");
           });
           var bookmarkHtml = '';
           myBookmarks.forEach(function (bookmark) {

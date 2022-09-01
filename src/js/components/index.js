@@ -74,8 +74,6 @@ class Bookmark {
   }
   
   render (searchText) {
-    const bookmarkTitle = document.getElementById('bookmarkName')
-    const bookmarkDescription = document.getElementById('bookmarkDescription')
     let publicCount = document.getElementById('publicCount')
     let publicBookmarks = []
     let myBookmarksCount = document.getElementById('myBookmarksCount')
@@ -118,9 +116,13 @@ class Bookmark {
           })
           let publicHtml = ''
           publicBookmarks.forEach(bookmark => {
+            console.log('boookyyy', bookmark)
             publicHtml += `
             <div>
-              <div class="public-li" id="public-li">${bookmark.qMeta.title}</div>
+              <div class="public-li" id="public-li">
+              <span>${bookmark.qMeta.title}</span>
+              <span>${bookmark.qMeta.createdDate.slice(0, 10)}</span>
+              </div>
               <hr>
             </div>`
           })
