@@ -17,6 +17,7 @@ class Bookmark {
     const el = document.getElementById(this.elementId)
     if (el) {
       el.addEventListener('click', this.handleClick.bind(this))
+      el.addEventListener('keyup', this.handleKeyUp.bind(this))
       let html = `<div>
       <svg xmlns='http://www.w3.org/2000/svg' class='bookmarkBtn' viewBox='0 0 512 512'>
         <title>Bookmark</title>
@@ -31,7 +32,7 @@ class Bookmark {
           <div class='btn'>
           </div>
           <div>
-            <input class='search' type='search' id="myInput" placeholder="Search" onkeyup">
+            <input class='search' type='search' id="myInput" placeholder="Search" onkeyup"searchFunction()">
           </div>
           <hr>
           <div class='public'>
@@ -41,7 +42,7 @@ class Bookmark {
                 d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />
             </svg>
             <span>Public bookmarks <span id="publicCount">(0)</span></span>
-            <div id="public-placeholder"><p class='public-text'>You have no public bookmarks</p>
+            <div id="public-placeholder" class="active"><p class='public-text'>You have no public bookmarks</p>
             <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>
             </div>
           </div>
@@ -83,7 +84,7 @@ class Bookmark {
     }    
   }
   
-  render () {
+  render (searchText) {
     const bookmarkTitle = document.getElementById('bookmarkName')
     const bookmarkDescription = document.getElementById('bookmarkDescription')
     let publicCount = document.getElementById('publicCount')
@@ -116,28 +117,30 @@ class Bookmark {
               publicBookmarks.push(d)
             } 
             else {
-              myBookmarks.push(d)
+              if (searchText) {
+                if (d.qMeta.title.toLowerCase().indexOf(searchText.toLowerCase()) !== -1) {
+                  myBookmarks.push(d)
+                }
+              } 
+              else {
+                myBookmarks.push(d)
+              }
             }
           })
           let publicHtml = ''
           publicBookmarks.forEach(bookmark => {
             publicHtml += `
             <div>
-            <ul id="myUL">
-              <li class="public-li" id="public-li">${bookmark.qMeta.title}</li>
+              <div class="public-li" id="public-li">${bookmark.qMeta.title}</div>
               <hr>
-              </ul>
             </div>`
           })
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {
             bookmarkHtml += `
               <div>
-              <ul>
-               <li class="my-bookmarks-li">
-               ${bookmarkTitle.value}
-               </li>
-               <p>${bookmarkDescription.value}</p>
+                  <div class="my-bookmarks-li">${bookmark.qMeta.title}</div>
+                  <hr>
               </div>
               `
           })
@@ -150,7 +153,9 @@ class Bookmark {
         })
       })
   }
-
+  handleKeyUp () {
+    this.searchFunction()
+  }
   handleClick (event) {  
     const bookmarkTitle = document.getElementById('bookmarkName')
     const bookmarkDescription = document.getElementById('bookmarkDescription')
@@ -170,9 +175,6 @@ class Bookmark {
     if (event.target.classList.contains('caret')) {
       closeLi()
     }
-    // if (event.target.classList.contains('caret')) {
-    //   openLi()
-    // }
     if (event.target.classList.contains('createSubmit')) {
       this.options.app.createBookmark(
         {
@@ -185,8 +187,17 @@ class Bookmark {
           }
         }
       )
+        .then(() => {
+          this.render()
+        })
       closeBookmark()
     }
+  }
+  searchFunction () {
+    let input, filter, ul, li, a, i, txtValue
+    input = document.getElementById('myInput')
+    filter = input.value.toLowerCase()
+    this.render(filter)
   }
 }
 
@@ -213,46 +224,24 @@ function createNewBookmark () {
   const createNew = document.getElementById('createForm')
   createNew.style.display = 'flex' 
 }
-
 function closeBookmark () {
   const createNew = document.getElementById('createForm')
   createNew.style.display = 'none'
 }
-// function openLi () {
-//   const publicListItem = document.getElementById('public-li')
-//   publicListItem.style.display = 'block'
-// }
 function closeLi () {
-  const publicListItem = document.getElementsByClassName('public-li')
-}
-function searchFunction () {
-  let input, filter, ul, li, a, i, txtValue
-  input = document.getElementById('myInput')
-  filter = input.value.toUpperCase()
-  ul = document.getElementById('myUL')
-  li = ul.getElementsByTagName('li')
-
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName('li')[0]
-    txtValue = a.textContent || a.innerText
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = ''
-    } 
-    else {
-      li[i].style.display = 'none'
-    }
-  }
+  const publicListItem = document.getElementById('public-placeholder')
+  publicListItem.classList.toggle('active')
 }
 
 
 const session = enigma.create({
   schema, 
-  url: 'wss://ec2-3-92-185-52.compute-1.amazonaws.com/anon/app/af650d53-f31b-476d-b28b-7db3bd2f620f'
+  url: 'wss://ec2-3-86-99-193.compute-1.amazonaws.com/app/cee97e28-59cf-411f-acb5-c3a7f40ee7ac'
 })
 
 session.open().then(global => {
   console.log(global)
-  global.openDoc('af650d53-f31b-476d-b28b-7db3bd2f620f').then(app => {
+  global.openDoc('cee97e28-59cf-411f-acb5-c3a7f40ee7ac').then(app => {
     console.log(app)
     const bookmark = new Bookmark('websy-bookmark', {app})
   })
