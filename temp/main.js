@@ -54,6 +54,7 @@ class Bookmark {
             </svg>
             <span class="heading">My bookmarks <span id="myBookmarksCount">(0)</span></span>
             <div id="myBookmarks-placeholder" class="active">
+            
             </div>
           </div>
         </div>
@@ -136,16 +137,18 @@ class Bookmark {
           myBookmarks.forEach(bookmark => {
             console.log('bookmark2', bookmark)
             bookmarkHtml += `
-              <div id=${bookmark.qInfo.qId}" class="myBookmarks-li">
-                  <span class="bookmarkText">${bookmark.qMeta.title}</span>
-                  <svg xmlns='http://www.w3.org/2000/svg' class='delete-icon'
-                  viewBox='0 0 512 512'><title>Close</title><path fill='none'
-                   stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'
-                    stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
-                    </svg>
-              </div>
-              <hr>
-              `
+              <div class="myBookmarks-li">
+                  <span class="bookmarkText">${bookmark.qMeta.title}</span>`
+            if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
+              bookmarkHtml += ` <svg id=${bookmark.qInfo.qId} xmlns='http://www.w3.org/2000/svg' class='delete-icon'
+              viewBox='0 0 512 512'><title>Close</title><path fill='none'
+              stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'
+                stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
+                </svg>
+                </div>
+                <hr>
+                `
+            }
           })
           const publicPlaceholder = document.getElementById('public-placeholder')
           publicPlaceholder.innerHTML = publicHtml
@@ -199,7 +202,7 @@ class Bookmark {
       closeBookmark()
     }
     if (event.target.classList.contains('delete-icon')) {
-      this.options.app.destroyBookmark(this.elementId)
+      this.options.app.destroyBookmark(event.target.id)
         .then(() => {
           this.render()
         })
