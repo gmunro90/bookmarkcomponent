@@ -9,6 +9,7 @@ class Bookmark {
     if (el) {
       el.addEventListener('click', this.handleClick.bind(this))
       el.addEventListener('keyup', this.handleKeyUp.bind(this))
+      el.addEventListener('change', this.handleChange.bind(this))
       let html = `<div>
       <svg xmlns='http://www.w3.org/2000/svg' class='bookmarkBtn' viewBox='0 0 512 512'>
         <title>Bookmark</title>
@@ -23,7 +24,7 @@ class Bookmark {
           <div class='btn'>
           </div>
           <div>
-            <input class='search' type='search' id="myInput" placeholder="Search" onkeyup"searchFunction()">
+            <input class='search' type='text' id="myInput" placeholder="Search" onkeyup"searchFunction()">
           </div>
           <hr>
           <div class='public'>
@@ -45,7 +46,6 @@ class Bookmark {
             </svg>
             <span class="heading">My bookmarks <span id="myBookmarksCount">(0)</span></span>
             <div id="myBookmarks-placeholder" class="active">
-            
             </div>
           </div>
         </div>
@@ -102,7 +102,14 @@ class Bookmark {
           console.log(layout)
           layout.qBookmarkList.qItems.forEach(d => {
             if (d.qMeta.published === true) {
-              publicBookmarks.push(d)
+              if (searchText) {
+                if (d.qMeta.title.toLowerCase().indexOf(searchText.toLowerCase()) !== -1) {
+                  publicBookmarks.push(d)
+                }
+              } 
+              else {
+                publicBookmarks.push(d)
+              }
             } 
             else {
               if (searchText) {
@@ -120,7 +127,7 @@ class Bookmark {
             publicHtml += `
               <div class="public-li" id="public-li">
               <span class="bookmarkText">${bookmark.qMeta.title}</span>
-              <span class="bookmarkText">${bookmark.qMeta.createdDate.slice(0, 10)}</span>
+              <span class="bookmarkText">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
               </div>
               <hr>`
           })
@@ -156,12 +163,13 @@ class Bookmark {
   handleClick (event) {  
     const bookmarkTitle = document.getElementById('bookmarkName')
     const bookmarkDescription = document.getElementById('bookmarkDescription')
-
+    console.log(event)
     if (event.target.classList.contains('bookmarkBtn')) {
       this.openForm() 
     } 
     if (event.target.classList.contains('bookmarkPopup')) {
-      closeForm() 
+      closeForm()
+      closeBookmark()
     } 
     if (event.target.classList.contains('createNew')) {
       createNewBookmark()
@@ -199,7 +207,11 @@ class Bookmark {
         })
     }
   }
- 
+  handleChange (event) {
+    if (event.target.classList.contains('search')) {
+      this.render(event.target.value)
+    }
+  }
   searchFunction () {
     let input, filter
     input = document.getElementById('myInput')
