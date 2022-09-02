@@ -60,15 +60,17 @@ class Bookmark {
           </div>
         </div>
       </div>
+
       <div class='createNewPopup' id='createForm'>
     <div class='createTopline'>
-      <h2>Create bookmark</h2>
-      <hr>
-      <svg xmlns='http://www.w3.org/2000/svg' class='closeCreate' viewbox='0 0 512 512'>
-        <title>Close</title>
-        <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'
-          d='M368 368L144 144M368 144L144 368' />
-      </svg><br>
+    <span class="heading">Create bookmark</span>
+    <span class='closeCreate'><svg xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>
+    <title>Close</title>
+    <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'
+      d='M368 368L144 144M368 144L144 368' />
+  </svg></span>
+  
+      <br>
     </div>
     <div>
     <label for='bookmarkName'>Title</label><br>
@@ -250,8 +252,10 @@ function closeForm () {
 function createNewBookmark () {
   const createNew = document.getElementById('createForm')
   const bookmarkBackground = document.getElementById('bookmarkPopup')
+  const bookmarkContainer = document.getElementById('bookmarkContainer')
   createNew.style.display = 'flex'
-  bookmarkBackground.style.backgroundColor = '#7F7F7F'
+  bookmarkBackground.style.backgroundColor = '#bdbdbd'
+  bookmarkContainer.style.opacity = '.4'
 }
 function closeBookmark () {
   const createNew = document.getElementById('createForm')
