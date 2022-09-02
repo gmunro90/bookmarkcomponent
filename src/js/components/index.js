@@ -116,7 +116,6 @@ class Bookmark {
           })
           let publicHtml = ''
           publicBookmarks.forEach(bookmark => {
-            console.log('boookyyy', bookmark)
             publicHtml += `
               <div class="public-li" id="public-li">
               <span class="bookmarkText">${bookmark.qMeta.title}</span>
@@ -126,8 +125,9 @@ class Bookmark {
           })
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {
+            console.log('bookmark2', bookmark)
             bookmarkHtml += `
-              <div class="myBookmarks-li">
+              <div id=${bookmark.qInfo.qId} class="myBookmarks-li">
                   <span class="bookmarkText">${bookmark.qMeta.title}</span>
                   <svg xmlns='http://www.w3.org/2000/svg' class='delete-icon'
                   viewBox='0 0 512 512'><title>Close</title><path fill='none'
@@ -190,12 +190,10 @@ class Bookmark {
       closeBookmark()
     }
     if (event.target.classList.contains('delete-icon')) {
-      this.options.app.destroyBookmark(
-        {
-          qSuccess: true
-        }
-      )
-      this.render()
+      this.options.app.destroyBookmark(this.elementId)
+        .then(() => {
+          this.render()
+        })
     }
   }
  

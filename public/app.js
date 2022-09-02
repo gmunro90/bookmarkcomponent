@@ -76,12 +76,12 @@ var Bookmark = /*#__PURE__*/function () {
           });
           var publicHtml = '';
           publicBookmarks.forEach(function (bookmark) {
-            console.log('boookyyy', bookmark);
             publicHtml += "\n              <div class=\"public-li\" id=\"public-li\">\n              <span class=\"bookmarkText\">".concat(bookmark.qMeta.title, "</span>\n              <span class=\"bookmarkText\">").concat(bookmark.qMeta.createdDate.slice(0, 10), "</span>\n              </div>\n              <hr>");
           });
           var bookmarkHtml = '';
           myBookmarks.forEach(function (bookmark) {
-            bookmarkHtml += "\n              <div class=\"myBookmarks-li\">\n                  <span class=\"bookmarkText\">".concat(bookmark.qMeta.title, "</span>\n                  <svg xmlns='http://www.w3.org/2000/svg' class='delete-icon'\n                  viewBox='0 0 512 512'><title>Close</title><path fill='none'\n                   stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'\n                    stroke-width='32' d='M368 368L144 144M368 144L144 368'/>\n                    </svg>\n              </div>\n              <hr>\n              ");
+            console.log('bookmark2', bookmark);
+            bookmarkHtml += "\n              <div id=".concat(bookmark.qInfo.qId, "\" class=\"myBookmarks-li\">\n                  <span class=\"bookmarkText\">").concat(bookmark.qMeta.title, "</span>\n                  <svg xmlns='http://www.w3.org/2000/svg' class='delete-icon'\n                  viewBox='0 0 512 512'><title>Close</title><path fill='none'\n                   stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'\n                    stroke-width='32' d='M368 368L144 144M368 144L144 368'/>\n                    </svg>\n              </div>\n              <hr>\n              ");
           });
           var publicPlaceholder = document.getElementById('public-placeholder');
           publicPlaceholder.innerHTML = publicHtml;
@@ -145,10 +145,9 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('delete-icon')) {
-        this.options.app.destroyBookmark({
-          qSuccess: true
+        this.options.app.destroyBookmark(this.elementId).then(function () {
+          _this.render();
         });
-        this.render();
       }
     }
   }, {
