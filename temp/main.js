@@ -247,10 +247,11 @@ function closeForm () {
     bookmarkContainer.style.display = 'none'
   }
 }
-
 function createNewBookmark () {
   const createNew = document.getElementById('createForm')
-  createNew.style.display = 'flex' 
+  const bookmarkBackground = document.getElementById('bookmarkPopup')
+  createNew.style.display = 'flex'
+  bookmarkBackground.style.backgroundColor = '#7F7F7F'
 }
 function closeBookmark () {
   const createNew = document.getElementById('createForm')

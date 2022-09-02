@@ -210,7 +210,9 @@ function closeForm() {
 
 function createNewBookmark() {
   var createNew = document.getElementById('createForm');
+  var bookmarkBackground = document.getElementById('bookmarkPopup');
   createNew.style.display = 'flex';
+  bookmarkBackground.style.backgroundColor = '#7F7F7F';
 }
 
 function closeBookmark() {
