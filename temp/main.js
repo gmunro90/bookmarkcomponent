@@ -68,16 +68,17 @@ class Bookmark {
     <title>Close</title>
     <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'
       d='M368 368L144 144M368 144L144 368' />
-  </svg></span>
-  
-      <br>
+  </svg></span></br>
+
     </div>
-    <div>
-    <label for='bookmarkName'>Title</label><br>
+    <hr>
+    <div class="create-input">
+    <label for='bookmarkName' class="title">Title</label>
       <input type='text' id='bookmarkName' name='bookmarkName'>
-      <label for='bookmarkDescription'>Description <span class='optional'>(optional)</span></label><br>
+      <label for='bookmarkDescription' class="description">Description <span class='optional'>(optional)</span></label><br>
       <input type='text' id='bookmarkDescription' name='bookmarkDescription'>
-      <button class='createSubmit' id='createSubmit'>Create</button>
+      <div class="create-flex"><button class='createSubmit' id='createSubmit'>Create</button>
+      </div>
     </div>
   </div>
     `
