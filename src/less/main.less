@@ -219,6 +219,9 @@ hr {
 }
 .i-icon {
   width: 13px;
+  * {
+    pointer-events: none;
+  }
 }
 .date-and-i {
   display: flex;
@@ -226,4 +229,14 @@ hr {
   svg {
     margin: 3px 0 0 5px;
   }
+}
+.test {
+  display: flex;
+  align-items: center;
+}
+.info-popup {
+  display: none;
+  width: 600px;
+  height: 700px;
+  background-color: rgb(159, 159, 159);
 }

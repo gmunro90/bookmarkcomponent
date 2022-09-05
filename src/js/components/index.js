@@ -72,6 +72,9 @@ class Bookmark {
       </div>
     </div>
   </div>
+  <div class="info-popup" id="info-popup">
+  <h1>info popup</h1>
+  </div>
     `
       el.innerHTML = html
       this.render()
@@ -103,7 +106,6 @@ class Bookmark {
     )
       .then((model) => {
         model.getLayout().then(layout => {
-          console.log(layout)
           layout.qBookmarkList.qItems.forEach(d => {
             if (d.qMeta.published === true) {
               if (searchText) {
@@ -133,25 +135,29 @@ class Bookmark {
               <span class="bookmarkText">${bookmark.qMeta.title}</span>
               <div class="date-and-i">
               <span class="bookmarkText">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
-              <spanc class="infoBtn">
-              <svg xmlns="http://www.w3.org/2000/svg" class="i-icon" viewBox="0 0 512 512">
+              <span class="infoBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="i-icon" id="i-icon" viewBox="0 0 512 512">
               <title>Information Circle</title>
               <path d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z"
                fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M220 220h32v116"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
                stroke-width="32" d="M208 340h88"/><path d="M248 130a26 26 0 1026 26 26 26 0 00-26-26z"/>
                </svg>
-               </spanc>
+               </span>
                </div>
               </div>
               <hr>`
           })
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {
-            console.log('bookmark2', bookmark)
             bookmarkHtml += `
               <div class="myBookmarks-li">
-                  <span class="bookmarkText">${bookmark.qMeta.title}</span>`
+                  <span class="bookmarkText">${bookmark.qMeta.title}</span>
+                  <div class="date-and-i">
+                  <div class="test">
+                  <span class="bookmarkText">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
+                  <span class="infoBtn">
+            `
             if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
               bookmarkHtml += ` <svg id=${bookmark.qInfo.qId} xmlns='http://www.w3.org/2000/svg' class='delete-icon'
               viewBox='0 0 512 512'><title>Close</title><path fill='none'
@@ -159,9 +165,19 @@ class Bookmark {
                 stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
                 </svg>
                 </div>
-                <hr>
                 `
             }
+            bookmarkHtml += `<svg xmlns="http://www.w3.org/2000/svg" class="i-icon" viewBox="0 0 512 512">
+            <title>Information Circle</title>
+            <path d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z"
+             fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
+              stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M220 220h32v116"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
+             stroke-width="32" d="M208 340h88"/><path d="M248 130a26 26 0 1026 26 26 26 0 00-26-26z"/>
+             </svg>
+             </span>
+             </div>
+             <hr>
+             `
           })
           const publicPlaceholder = document.getElementById('public-placeholder')
           publicPlaceholder.innerHTML = publicHtml
@@ -178,17 +194,15 @@ class Bookmark {
   handleClick (event) {  
     const bookmarkTitle = document.getElementById('bookmarkName')
     const bookmarkDescription = document.getElementById('bookmarkDescription')
-    console.log(event)
     if (event.target.classList.contains('bookmarkBtn')) {
       this.openForm() 
     } 
     if (event.target.classList.contains('bookmarkPopup')) {
       closeForm()
       closeBookmark()
+      closeInfo()
     } 
     if (event.target.classList.contains('createNew')) {
-      const bookmarkBackground = document.getElementById('bookmarkPopup')
-      // bookmarkBackground.style.backgroundColor = 'transparent'
       createNewBookmark()
     }
     if (event.target.classList.contains('closeCreate')) {
@@ -227,6 +241,9 @@ class Bookmark {
           this.render()
         })
     }
+    if (event.target.classList.contains('i-icon')) {
+      openInfo()
+    }
   }
   handleChange (event) {
     if (event.target.classList.contains('search')) {
@@ -249,6 +266,14 @@ class Bookmark {
       bookmarkContainer.style.display = 'block'
     }
   }
+}
+function openInfo () {
+  const infoPopup = document.getElementById('info-popup')
+  infoPopup.style.display = 'block'
+}
+function closeInfo () {
+  const infoPopup = document.getElementById('info-popup')
+  infoPopup.style.display = 'none'
 }
 function closeForm () {
   const myForm = document.getElementById('bookmarkPopup')
