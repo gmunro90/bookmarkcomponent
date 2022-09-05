@@ -152,7 +152,7 @@ class Bookmark {
                </span>
                </div>
               </div>
-              <hr>
+             
               <div class="info-popup-public" id="info-popup-public">
               <h5 class="description-heading">${bookmark.qMeta.description}</h5>
               <h5>Selections: </h5>
@@ -188,7 +188,7 @@ class Bookmark {
              </svg>
              </span>
              </div>
-             <hr>
+            
              <div class="info-popup-my" id="info-popup-my">
              <h5 class="description-heading">${bookmark.qMeta.description}</h5>
              <h5>Selections: </h5>
