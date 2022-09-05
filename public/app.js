@@ -127,10 +127,15 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('createNew')) {
+        var bookmarkBackground = document.getElementById('bookmarkPopup'); // bookmarkBackground.style.backgroundColor = 'transparent'
+
         createNewBookmark();
       }
 
       if (event.target.classList.contains('closeCreate')) {
+        var _bookmarkBackground = document.getElementById('bookmarkPopup');
+
+        _bookmarkBackground.style.backgroundColor = 'white';
         closeBookmark();
       }
 
@@ -143,6 +148,8 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('createSubmit')) {
+        var _bookmarkBackground2 = document.getElementById('bookmarkPopup');
+
         this.options.app.createBookmark({
           qInfo: {
             qType: 'bookmark'
@@ -155,6 +162,7 @@ var Bookmark = /*#__PURE__*/function () {
           _this.render();
         });
         closeBookmark();
+        _bookmarkBackground2.style.backgroundColor = 'white';
       }
 
       if (event.target.classList.contains('delete-icon')) {
@@ -220,6 +228,8 @@ function createNewBookmark() {
 function closeBookmark() {
   var createNew = document.getElementById('createForm');
   createNew.style.display = 'none';
+  var bookmarkContainer = document.getElementById('bookmarkContainer');
+  bookmarkContainer.style.opacity = '1';
 }
 
 function closePublicUL() {

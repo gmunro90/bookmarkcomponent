@@ -185,9 +185,13 @@ class Bookmark {
       closeBookmark()
     } 
     if (event.target.classList.contains('createNew')) {
+      const bookmarkBackground = document.getElementById('bookmarkPopup')
+      // bookmarkBackground.style.backgroundColor = 'transparent'
       createNewBookmark()
     }
     if (event.target.classList.contains('closeCreate')) {
+      const bookmarkBackground = document.getElementById('bookmarkPopup')
+      bookmarkBackground.style.backgroundColor = 'white'
       closeBookmark()
     }
     if (event.target.classList.contains('public-caret')) {
@@ -197,6 +201,7 @@ class Bookmark {
       closeMyBookmarksUL()
     }
     if (event.target.classList.contains('createSubmit')) {
+      const bookmarkBackground = document.getElementById('bookmarkPopup')
       this.options.app.createBookmark(
         {
           qInfo: {
@@ -212,6 +217,7 @@ class Bookmark {
           this.render()
         })
       closeBookmark()
+      bookmarkBackground.style.backgroundColor = 'white'
     }
     if (event.target.classList.contains('delete-icon')) {
       this.options.app.destroyBookmark(event.target.id)
@@ -261,6 +267,8 @@ function createNewBookmark () {
 function closeBookmark () {
   const createNew = document.getElementById('createForm')
   createNew.style.display = 'none'
+  const bookmarkContainer = document.getElementById('bookmarkContainer')
+  bookmarkContainer.style.opacity = '1'
 }
 function closePublicUL () {
   const publicItem = document.getElementById('public-placeholder')
