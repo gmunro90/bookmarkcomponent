@@ -72,9 +72,6 @@ class Bookmark {
       </div>
     </div>
   </div>
-  <div class="info-popup" id="info-popup">
-  <h1>info popup</h1>
-  </div>
     `
       el.innerHTML = html
       this.render()
@@ -136,7 +133,7 @@ class Bookmark {
               <div class="date-and-i">
               <span class="bookmarkText">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
               <span class="infoBtn">
-              <svg xmlns="http://www.w3.org/2000/svg" class="i-icon" id="i-icon" viewBox="0 0 512 512">
+              <svg xmlns="http://www.w3.org/2000/svg" class="i-icon-public" id="i-icon-public" viewBox="0 0 512 512">
               <title>Information Circle</title>
               <path d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z"
                fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
@@ -146,10 +143,16 @@ class Bookmark {
                </span>
                </div>
               </div>
-              <hr>`
+              <hr>
+              <div class="info-popup-public" id="info-popup-public">
+              <h5 class="description-heading">${bookmark.qMeta.description}</h5>
+              <h5>Selections: </h5>
+              </div>
+              `
           })
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {
+            console.log(bookmark)
             bookmarkHtml += `
               <div class="myBookmarks-li">
                   <span class="bookmarkText">${bookmark.qMeta.title}</span>
@@ -167,7 +170,7 @@ class Bookmark {
                 </div>
                 `
             }
-            bookmarkHtml += `<svg xmlns="http://www.w3.org/2000/svg" class="i-icon" viewBox="0 0 512 512">
+            bookmarkHtml += `<svg xmlns="http://www.w3.org/2000/svg" class="i-icon-my" id="i-icon-my" viewBox="0 0 512 512">
             <title>Information Circle</title>
             <path d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z"
              fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
@@ -177,6 +180,10 @@ class Bookmark {
              </span>
              </div>
              <hr>
+             <div class="info-popup-my" id="info-popup-my">
+             <h5 class="description-heading">${bookmark.qMeta.description}</h5>
+             <h5>Selections: </h5>
+             </div>
              `
           })
           const publicPlaceholder = document.getElementById('public-placeholder')
@@ -200,7 +207,6 @@ class Bookmark {
     if (event.target.classList.contains('bookmarkPopup')) {
       closeForm()
       closeBookmark()
-      closeInfo()
     } 
     if (event.target.classList.contains('createNew')) {
       createNewBookmark()
@@ -241,8 +247,11 @@ class Bookmark {
           this.render()
         })
     }
-    if (event.target.classList.contains('i-icon')) {
-      openInfo()
+    if (event.target.classList.contains('i-icon-public')) {
+      openInfoPublic()
+    }
+    if (event.target.classList.contains('i-icon-my')) {
+      openInfoMy()
     }
   }
   handleChange (event) {
@@ -267,13 +276,25 @@ class Bookmark {
     }
   }
 }
-function openInfo () {
-  const infoPopup = document.getElementById('info-popup')
+function openInfoPublic () {
+  const infoPopup = document.getElementById('info-popup-public')
   infoPopup.style.display = 'block'
+  const infoMyPopup = document.getElementById('info-popup-my')
+  infoMyPopup.style.display = 'none'
 }
-function closeInfo () {
-  const infoPopup = document.getElementById('info-popup')
+function closeInfoPublic () {
+  const infoPopup = document.getElementById('info-popup-public')
   infoPopup.style.display = 'none'
+}
+function openInfoMy () {
+  const infoMyPopup = document.getElementById('info-popup-my')
+  infoMyPopup.style.display = 'block'
+  const infoPopup = document.getElementById('info-popup-public')
+  infoPopup.style.display = 'none'
+}
+function closeInfoMy () {
+  const infoMyPopup = document.getElementById('info-popup-my')
+  infoMyPopup.style.display = 'none'
 }
 function closeForm () {
   const myForm = document.getElementById('bookmarkPopup')

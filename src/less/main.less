@@ -217,7 +217,13 @@ hr {
   flex-direction: column;
   margin: 13px;
 }
-.i-icon {
+.i-icon-public {
+  width: 13px;
+  * {
+    pointer-events: none;
+  }
+}
+.i-icon-my {
   width: 13px;
   * {
     pointer-events: none;
@@ -234,9 +240,21 @@ hr {
   display: flex;
   align-items: center;
 }
-.info-popup {
+.info-popup-public {
   display: none;
   width: 600px;
-  height: 700px;
-  background-color: rgb(159, 159, 159);
+  height: 250px;
+  background-color: #595959;
+}
+.info-popup-my {
+  display: none;
+  width: 600px;
+  height: 250px;
+  background-color: #595959;
+}
+.description-heading {
+  color: rgb(255, 255, 255);
+}
+h5 {
+  color: rgb(255, 255, 255);
 }
