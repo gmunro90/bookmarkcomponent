@@ -236,7 +236,7 @@ class Bookmark {
     }
     if (event.target.classList.contains('closeCreate')) {
       const bookmarkBackground = document.getElementById('bookmarkPopup')
-      bookmarkBackground.style.backgroundColor = 'white'
+      bookmarkBackground.style.backgroundColor = 'transparent'
       this.closeBookmark()
     }
     if (event.target.classList.contains('public-heading-caret')) {
@@ -262,7 +262,6 @@ class Bookmark {
           this.render()
         })
       this.closeBookmark()
-      bookmarkBackground.style.backgroundColor = 'white'
     }
     if (event.target.classList.contains('delete-icon')) {
       this.options.app.destroyBookmark(event.target.id)

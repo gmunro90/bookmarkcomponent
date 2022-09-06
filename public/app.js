@@ -132,7 +132,7 @@ var Bookmark = /*#__PURE__*/function () {
 
       if (event.target.classList.contains('closeCreate')) {
         var bookmarkBackground = document.getElementById('bookmarkPopup');
-        bookmarkBackground.style.backgroundColor = 'white';
+        bookmarkBackground.style.backgroundColor = 'transparent';
         this.closeBookmark();
       }
 
@@ -159,7 +159,6 @@ var Bookmark = /*#__PURE__*/function () {
           _this.render();
         });
         this.closeBookmark();
-        _bookmarkBackground.style.backgroundColor = 'white';
       }
 
       if (event.target.classList.contains('delete-icon')) {
