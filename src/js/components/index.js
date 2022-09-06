@@ -261,9 +261,17 @@ class Bookmark {
         })
     }
     if (event.target.classList.contains('i-icon-public')) {
+      const closeMyIfOpen = document.getElementById('info-popup-my')
+      if (closeMyIfOpen.classList.contains('active')) {
+        this.toggleInfoMy()
+      }
       this.toggleInfoPublic()
     }
     if (event.target.classList.contains('i-icon-my')) {
+      const closePublicIfOpen = document.getElementById('info-popup-public')
+      if (closePublicIfOpen.classList.contains('active')) {
+        this.toggleInfoPublic()
+      }
       this.toggleInfoMy()
     }
   }

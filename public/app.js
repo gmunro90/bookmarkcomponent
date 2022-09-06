@@ -168,10 +168,22 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('i-icon-public')) {
+        var closeMyIfOpen = document.getElementById('info-popup-my');
+
+        if (closeMyIfOpen.classList.contains('active')) {
+          this.toggleInfoMy();
+        }
+
         this.toggleInfoPublic();
       }
 
       if (event.target.classList.contains('i-icon-my')) {
+        var closePublicIfOpen = document.getElementById('info-popup-public');
+
+        if (closePublicIfOpen.classList.contains('active')) {
+          this.toggleInfoPublic();
+        }
+
         this.toggleInfoMy();
       }
     }
