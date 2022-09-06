@@ -169,7 +169,7 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('i-icon-public')) {
-        this.openInfoPublic();
+        this.testingInfo();
       }
 
       if (event.target.classList.contains('i-icon-my')) {
@@ -274,6 +274,12 @@ var Bookmark = /*#__PURE__*/function () {
     value: function closeMyBookmarksUL() {
       var myBookmarksItem = document.getElementById('myBookmarks-placeholder');
       myBookmarksItem.classList.toggle('active');
+    }
+  }, {
+    key: "testingInfo",
+    value: function testingInfo() {
+      var testingInfo = document.getElementById('info-popup-public');
+      testingInfo.classList.toggle('active');
     }
   }]);
 

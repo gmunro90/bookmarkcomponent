@@ -262,7 +262,7 @@ class Bookmark {
         })
     }
     if (event.target.classList.contains('i-icon-public')) {
-      this.openInfoPublic()
+      this.testingInfo()
     }
     if (event.target.classList.contains('i-icon-my')) {
       this.openInfoMy()
@@ -338,5 +338,9 @@ class Bookmark {
   closeMyBookmarksUL () {
     const myBookmarksItem = document.getElementById('myBookmarks-placeholder')
     myBookmarksItem.classList.toggle('active')
+  }
+  testingInfo () {
+    const testingInfo = document.getElementById('info-popup-public')
+    testingInfo.classList.toggle('active')
   }
 }
