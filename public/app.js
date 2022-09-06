@@ -31,7 +31,7 @@ var Bookmark = /*#__PURE__*/function () {
       el.addEventListener('click', this.handleClick.bind(this));
       el.addEventListener('keyup', this.handleKeyUp.bind(this));
       el.addEventListener('change', this.handleChange.bind(this));
-      var html = "<div>\n      <svg xmlns='http://www.w3.org/2000/svg' class='bookmarkBtn' viewBox='0 0 512 512'>\n        <title>Bookmark</title>\n        <path d='M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z' fill='none' stroke='currentColor'\n          stroke-linecap='round' stroke-linejoin='round' stroke-width='32' />\n        </svg>\n        <div class='bookmarkPopup' id='bookmarkPopup'></div>\n        <div class='bookmarkContainer' id='bookmarkContainer'>\n          <div class='bookmark-topline'>\n            <span class=\"heading\">Bookmarks</span><button class='createNew'>Create new bookmark</button>\n          </div>\n          <div class='btn'>\n          </div>\n          <div>\n            <input class='search' type='text' id=\"myInput\" placeholder=\"Search\" onkeyup\"searchFunction()\">\n          </div>\n          <hr>\n          <div class='public'>\n          <div class=\"public-heading-caret\">\n              <svg class='public-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n                <title>Caret Down</title>\n                <path d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n              </svg>\n\n              <span class=\"heading\">Public bookmarks <span id=\"publicCount\">(0)</span></span>\n              </div>\n              <div id=\"public-placeholder\" class=\"active\"><p class='public-text'>You have no public bookmarks</p>\n              <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>\n            \n          </div>\n        </div>\n          <div class='my-bookmarks'>\n\n          <div class=\"heading-caret\">\n            <svg class='myBookmarks-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n              <title>Caret Down</title>\n              <path\n                d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n            </svg>\n            <span class=\"heading\">My bookmarks <span id=\"myBookmarksCount\">(0)</span></span>\n            </div>\n\n            <div id=\"myBookmarks-placeholder\" class=\"active\">\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class='createNewPopup' id='createForm'>\n    <div class='createTopline'>\n    <span class=\"heading\">Create bookmark</span>\n    <span class='closeCreate'><svg xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n    <title>Close</title>\n    <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'\n      d='M368 368L144 144M368 144L144 368' />\n  </svg></span></br>\n\n    </div>\n    <hr>\n    <div class=\"create-input\">\n    <label for='bookmarkName' class=\"title\">Title</label>\n      <input type='text' id='bookmarkName' name='bookmarkName'>\n      <label for='bookmarkDescription' class=\"description\">Description <span class='optional'>(optional)</span></label><br>\n      <input type='text' id='bookmarkDescription' name='bookmarkDescription'>\n      <div class=\"create-flex\"><button class='createSubmit' id='createSubmit'>Create</button>\n      </div>\n    </div>\n  </div>\n    ";
+      var html = "<div>\n      <svg xmlns='http://www.w3.org/2000/svg' class='bookmarkBtn' viewBox='0 0 512 512'>\n        <title>Bookmark</title>\n        <path d='M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z' fill='none' stroke='currentColor'\n          stroke-linecap='round' stroke-linejoin='round' stroke-width='32' />\n        </svg>\n        <div class='bookmarkPopup' id='bookmarkPopup'></div>\n        <div class='bookmarkContainer' id='bookmarkContainer'>\n          <div class='bookmark-topline'>\n            <span class=\"heading\">Bookmarks</span><button class='createNew'>Create new bookmark</button>\n          </div>\n          <div class='btn'>\n          </div>\n          <div>\n            <input class='search' type='text' id=\"myInput\" placeholder=\"Search\" onkeyup\"searchFunction()\">\n            <div><svg class=\"close\" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>\n            <title>Close</title><path fill='none' stroke='currentColor' stroke-linecap='round' \n            stroke-linejoin='round' stroke-width='32' d='M368 368L144 144M368 144L144 368'/>\n            </svg></div>\n            \n          </div>\n          <hr>\n          <div class='public'>\n          <div class=\"public-heading-caret\">\n              <svg class='public-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n                <title>Caret Down</title>\n                <path d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n              </svg>\n\n              <span class=\"heading\">Public bookmarks <span id=\"publicCount\">(0)</span></span>\n              </div>\n              <div id=\"public-placeholder\" class=\"active\"><p class='public-text'>You have no public bookmarks</p>\n              <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>\n            \n          </div>\n        </div>\n          <div class='my-bookmarks'>\n\n          <div class=\"heading-caret\">\n            <svg class='myBookmarks-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n              <title>Caret Down</title>\n              <path\n                d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n            </svg>\n            <span class=\"heading\">My bookmarks <span id=\"myBookmarksCount\">(0)</span></span>\n            </div>\n\n            <div id=\"myBookmarks-placeholder\" class=\"active\">\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class='createNewPopup' id='createForm'>\n    <div class='createTopline'>\n    <span class=\"heading\">Create bookmark</span>\n    <span class='closeCreate'><svg xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n    <title>Close</title>\n    <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'\n      d='M368 368L144 144M368 144L144 368' />\n  </svg></span></br>\n\n    </div>\n    <hr>\n    <div class=\"create-input\">\n    <label for='bookmarkName' class=\"title\">Title</label>\n      <input type='text' id='bookmarkName' name='bookmarkName'>\n      <label for='bookmarkDescription' class=\"description\">Description <span class='optional'>(optional)</span></label><br>\n      <input type='text' id='bookmarkDescription' name='bookmarkDescription'>\n      <div class=\"create-flex\"><button class='createSubmit' id='createSubmit'>Create</button>\n      </div>\n    </div>\n  </div>\n    ";
       el.innerHTML = html;
       this.render();
     }
@@ -122,26 +122,26 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('bookmarkPopup')) {
-        closeForm();
-        closeBookmark();
+        this.closeForm();
+        this.closeBookmark();
       }
 
       if (event.target.classList.contains('createNew')) {
-        createNewBookmark();
+        this.createNewBookmark();
       }
 
       if (event.target.classList.contains('closeCreate')) {
         var bookmarkBackground = document.getElementById('bookmarkPopup');
         bookmarkBackground.style.backgroundColor = 'white';
-        closeBookmark();
+        this.closeBookmark();
       }
 
       if (event.target.classList.contains('public-heading-caret')) {
-        closePublicUL();
+        this.closePublicUL();
       }
 
       if (event.target.classList.contains('heading-caret')) {
-        closeMyBookmarksUL();
+        this.closeMyBookmarksUL();
       }
 
       if (event.target.classList.contains('createSubmit')) {
@@ -158,7 +158,7 @@ var Bookmark = /*#__PURE__*/function () {
         }).then(function () {
           _this.render();
         });
-        closeBookmark();
+        this.closeBookmark();
         _bookmarkBackground.style.backgroundColor = 'white';
       }
 
@@ -169,11 +169,11 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('i-icon-public')) {
-        openInfoPublic();
+        this.openInfoPublic();
       }
 
       if (event.target.classList.contains('i-icon-my')) {
-        openInfoMy();
+        this.openInfoMy();
       }
     }
   }, {
@@ -206,70 +206,79 @@ var Bookmark = /*#__PURE__*/function () {
         bookmarkContainer.style.display = 'block';
       }
     }
+  }, {
+    key: "openInfoPublic",
+    value: function openInfoPublic() {
+      var infoPopup = document.getElementById('info-popup-public');
+      infoPopup.style.display = 'block';
+      var infoMyPopup = document.getElementById('info-popup-my');
+      infoMyPopup.style.display = 'none';
+    }
+  }, {
+    key: "closeInfoPublic",
+    value: function closeInfoPublic() {
+      var infoPopup = document.getElementById('info-popup-public');
+      infoPopup.style.display = 'none';
+    }
+  }, {
+    key: "openInfoMy",
+    value: function openInfoMy() {
+      var infoMyPopup = document.getElementById('info-popup-my');
+      infoMyPopup.style.display = 'block';
+      var infoPopup = document.getElementById('info-popup-public');
+      infoPopup.style.display = 'none';
+    }
+  }, {
+    key: "closeInfoMy",
+    value: function closeInfoMy() {
+      var infoMyPopup = document.getElementById('info-popup-my');
+      infoMyPopup.style.display = 'none';
+    }
+  }, {
+    key: "closeForm",
+    value: function closeForm() {
+      var myForm = document.getElementById('bookmarkPopup');
+      myForm.style.display = 'none';
+      var bookmarkContainer = document.getElementById('bookmarkContainer');
+
+      if (bookmarkContainer) {
+        bookmarkContainer.style.display = 'none';
+      }
+    }
+  }, {
+    key: "createNewBookmark",
+    value: function createNewBookmark() {
+      var createNew = document.getElementById('createForm');
+      var bookmarkBackground = document.getElementById('bookmarkPopup');
+      var bookmarkContainer = document.getElementById('bookmarkContainer');
+      createNew.style.display = 'flex';
+      bookmarkBackground.style.backgroundColor = '#bdbdbd';
+      bookmarkContainer.style.opacity = '.4';
+    }
+  }, {
+    key: "closeBookmark",
+    value: function closeBookmark() {
+      var createNew = document.getElementById('createForm');
+      createNew.style.display = 'none';
+      var bookmarkContainer = document.getElementById('bookmarkContainer');
+      bookmarkContainer.style.opacity = '1';
+    }
+  }, {
+    key: "closePublicUL",
+    value: function closePublicUL() {
+      var publicItem = document.getElementById('public-placeholder');
+      publicItem.classList.toggle('active');
+    }
+  }, {
+    key: "closeMyBookmarksUL",
+    value: function closeMyBookmarksUL() {
+      var myBookmarksItem = document.getElementById('myBookmarks-placeholder');
+      myBookmarksItem.classList.toggle('active');
+    }
   }]);
 
   return Bookmark;
 }();
-
-function openInfoPublic() {
-  var infoPopup = document.getElementById('info-popup-public');
-  infoPopup.style.display = 'block';
-  var infoMyPopup = document.getElementById('info-popup-my');
-  infoMyPopup.style.display = 'none';
-}
-
-function closeInfoPublic() {
-  var infoPopup = document.getElementById('info-popup-public');
-  infoPopup.style.display = 'none';
-}
-
-function openInfoMy() {
-  var infoMyPopup = document.getElementById('info-popup-my');
-  infoMyPopup.style.display = 'block';
-  var infoPopup = document.getElementById('info-popup-public');
-  infoPopup.style.display = 'none';
-}
-
-function closeInfoMy() {
-  var infoMyPopup = document.getElementById('info-popup-my');
-  infoMyPopup.style.display = 'none';
-}
-
-function closeForm() {
-  var myForm = document.getElementById('bookmarkPopup');
-  myForm.style.display = 'none';
-  var bookmarkContainer = document.getElementById('bookmarkContainer');
-
-  if (bookmarkContainer) {
-    bookmarkContainer.style.display = 'none';
-  }
-}
-
-function createNewBookmark() {
-  var createNew = document.getElementById('createForm');
-  var bookmarkBackground = document.getElementById('bookmarkPopup');
-  var bookmarkContainer = document.getElementById('bookmarkContainer');
-  createNew.style.display = 'flex';
-  bookmarkBackground.style.backgroundColor = '#bdbdbd';
-  bookmarkContainer.style.opacity = '.4';
-}
-
-function closeBookmark() {
-  var createNew = document.getElementById('createForm');
-  createNew.style.display = 'none';
-  var bookmarkContainer = document.getElementById('bookmarkContainer');
-  bookmarkContainer.style.opacity = '1';
-}
-
-function closePublicUL() {
-  var publicItem = document.getElementById('public-placeholder');
-  publicItem.classList.toggle('active');
-}
-
-function closeMyBookmarksUL() {
-  var myBookmarksItem = document.getElementById('myBookmarks-placeholder');
-  myBookmarksItem.classList.toggle('active');
-}
 
 var session = enigma.create({
   schema: schema,

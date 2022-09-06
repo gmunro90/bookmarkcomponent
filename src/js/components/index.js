@@ -25,6 +25,11 @@ class Bookmark {
           </div>
           <div>
             <input class='search' type='text' id="myInput" placeholder="Search" onkeyup"searchFunction()">
+            <div><svg class="close" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+            <title>Close</title><path fill='none' stroke='currentColor' stroke-linecap='round' 
+            stroke-linejoin='round' stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
+            </svg></div>
+            
           </div>
           <hr>
           <div class='public'>
@@ -214,22 +219,22 @@ class Bookmark {
       this.openForm() 
     } 
     if (event.target.classList.contains('bookmarkPopup')) {
-      closeForm()
-      closeBookmark()
+      this.closeForm()
+      this.closeBookmark()
     } 
     if (event.target.classList.contains('createNew')) {
-      createNewBookmark()
+      this.createNewBookmark()
     }
     if (event.target.classList.contains('closeCreate')) {
       const bookmarkBackground = document.getElementById('bookmarkPopup')
       bookmarkBackground.style.backgroundColor = 'white'
-      closeBookmark()
+      this.closeBookmark()
     }
     if (event.target.classList.contains('public-heading-caret')) {
-      closePublicUL()
+      this.closePublicUL()
     }
     if (event.target.classList.contains('heading-caret')) {
-      closeMyBookmarksUL()
+      this.closeMyBookmarksUL()
     }
     if (event.target.classList.contains('createSubmit')) {
       const bookmarkBackground = document.getElementById('bookmarkPopup')
@@ -247,7 +252,7 @@ class Bookmark {
         .then(() => {
           this.render()
         })
-      closeBookmark()
+      this.closeBookmark()
       bookmarkBackground.style.backgroundColor = 'white'
     }
     if (event.target.classList.contains('delete-icon')) {
@@ -257,10 +262,10 @@ class Bookmark {
         })
     }
     if (event.target.classList.contains('i-icon-public')) {
-      openInfoPublic()
+      this.openInfoPublic()
     }
     if (event.target.classList.contains('i-icon-my')) {
-      openInfoMy()
+      this.openInfoMy()
     }
   }
   handleChange (event) {
@@ -284,54 +289,54 @@ class Bookmark {
       bookmarkContainer.style.display = 'block'
     }
   }
-}
-function openInfoPublic () {
-  const infoPopup = document.getElementById('info-popup-public')
-  infoPopup.style.display = 'block'
-  const infoMyPopup = document.getElementById('info-popup-my')
-  infoMyPopup.style.display = 'none'
-}
-function closeInfoPublic () {
-  const infoPopup = document.getElementById('info-popup-public')
-  infoPopup.style.display = 'none'
-}
-function openInfoMy () {
-  const infoMyPopup = document.getElementById('info-popup-my')
-  infoMyPopup.style.display = 'block'
-  const infoPopup = document.getElementById('info-popup-public')
-  infoPopup.style.display = 'none'
-}
-function closeInfoMy () {
-  const infoMyPopup = document.getElementById('info-popup-my')
-  infoMyPopup.style.display = 'none'
-}
-function closeForm () {
-  const myForm = document.getElementById('bookmarkPopup')
-  myForm.style.display = 'none'
-  const bookmarkContainer = document.getElementById('bookmarkContainer')
-  if (bookmarkContainer) { 
-    bookmarkContainer.style.display = 'none'
+  openInfoPublic () {
+    const infoPopup = document.getElementById('info-popup-public')
+    infoPopup.style.display = 'block'
+    const infoMyPopup = document.getElementById('info-popup-my')
+    infoMyPopup.style.display = 'none'
   }
-}
-function createNewBookmark () {
-  const createNew = document.getElementById('createForm')
-  const bookmarkBackground = document.getElementById('bookmarkPopup')
-  const bookmarkContainer = document.getElementById('bookmarkContainer')
-  createNew.style.display = 'flex'
-  bookmarkBackground.style.backgroundColor = '#bdbdbd'
-  bookmarkContainer.style.opacity = '.4'
-}
-function closeBookmark () {
-  const createNew = document.getElementById('createForm')
-  createNew.style.display = 'none'
-  const bookmarkContainer = document.getElementById('bookmarkContainer')
-  bookmarkContainer.style.opacity = '1'
-}
-function closePublicUL () {
-  const publicItem = document.getElementById('public-placeholder')
-  publicItem.classList.toggle('active')
-}
-function closeMyBookmarksUL () {
-  const myBookmarksItem = document.getElementById('myBookmarks-placeholder')
-  myBookmarksItem.classList.toggle('active')
+  closeInfoPublic () {
+    const infoPopup = document.getElementById('info-popup-public')
+    infoPopup.style.display = 'none'
+  }
+  openInfoMy () {
+    const infoMyPopup = document.getElementById('info-popup-my')
+    infoMyPopup.style.display = 'block'
+    const infoPopup = document.getElementById('info-popup-public')
+    infoPopup.style.display = 'none'
+  }
+  closeInfoMy () {
+    const infoMyPopup = document.getElementById('info-popup-my')
+    infoMyPopup.style.display = 'none'
+  }
+  closeForm () {
+    const myForm = document.getElementById('bookmarkPopup')
+    myForm.style.display = 'none'
+    const bookmarkContainer = document.getElementById('bookmarkContainer')
+    if (bookmarkContainer) { 
+      bookmarkContainer.style.display = 'none'
+    }
+  }
+  createNewBookmark () {
+    const createNew = document.getElementById('createForm')
+    const bookmarkBackground = document.getElementById('bookmarkPopup')
+    const bookmarkContainer = document.getElementById('bookmarkContainer')
+    createNew.style.display = 'flex'
+    bookmarkBackground.style.backgroundColor = '#bdbdbd'
+    bookmarkContainer.style.opacity = '.4'
+  }
+  closeBookmark () {
+    const createNew = document.getElementById('createForm')
+    createNew.style.display = 'none'
+    const bookmarkContainer = document.getElementById('bookmarkContainer')
+    bookmarkContainer.style.opacity = '1'
+  }
+  closePublicUL () {
+    const publicItem = document.getElementById('public-placeholder')
+    publicItem.classList.toggle('active')
+  }
+  closeMyBookmarksUL () {
+    const myBookmarksItem = document.getElementById('myBookmarks-placeholder')
+    myBookmarksItem.classList.toggle('active')
+  }
 }
