@@ -16,6 +16,7 @@ class Bookmark {
         <path d='M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z' fill='none' stroke='currentColor'
           stroke-linecap='round' stroke-linejoin='round' stroke-width='32' />
         </svg>
+
         <div class='bookmarkPopup' id='bookmarkPopup'></div>
         <div class='bookmarkContainer' id='bookmarkContainer'>
           <div class='bookmark-topline'>
@@ -138,6 +139,7 @@ class Bookmark {
           })
           let publicHtml = ''
           publicBookmarks.forEach(bookmark => {
+            console.log('bookmark', bookmark)
             publicHtml += `
               <div class="public-li" id="public-li">
               <span class="bookmarkText">${bookmark.qMeta.title}</span>
@@ -157,7 +159,10 @@ class Bookmark {
              
               <div class="info-popup-public" id="info-popup-public">
               <h5 class="description-heading">${bookmark.qMeta.description}</h5>
-              <h5>Selections: </h5>
+              <h5>Selections: ${bookmark.qData.selectionFields} </h5>
+              <p>Set expression</p>
+              <input type="text" READONLY/>
+              <button class="copy">Copy</button>
               </div>
               `
           })
