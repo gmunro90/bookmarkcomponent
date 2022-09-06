@@ -262,10 +262,10 @@ class Bookmark {
         })
     }
     if (event.target.classList.contains('i-icon-public')) {
-      this.testingInfo()
+      this.toggleInfoPublic()
     }
     if (event.target.classList.contains('i-icon-my')) {
-      this.openInfoMy()
+      this.toggleInfoMy()
     }
   }
   handleChange (event) {
@@ -288,26 +288,6 @@ class Bookmark {
     if (bookmarkContainer) { 
       bookmarkContainer.style.display = 'block'
     }
-  }
-  openInfoPublic () {
-    const infoPopup = document.getElementById('info-popup-public')
-    infoPopup.style.display = 'block'
-    const infoMyPopup = document.getElementById('info-popup-my')
-    infoMyPopup.style.display = 'none'
-  }
-  closeInfoPublic () {
-    const infoPopup = document.getElementById('info-popup-public')
-    infoPopup.style.display = 'none'
-  }
-  openInfoMy () {
-    const infoMyPopup = document.getElementById('info-popup-my')
-    infoMyPopup.style.display = 'block'
-    const infoPopup = document.getElementById('info-popup-public')
-    infoPopup.style.display = 'none'
-  }
-  closeInfoMy () {
-    const infoMyPopup = document.getElementById('info-popup-my')
-    infoMyPopup.style.display = 'none'
   }
   closeForm () {
     const myForm = document.getElementById('bookmarkPopup')
@@ -339,8 +319,12 @@ class Bookmark {
     const myBookmarksItem = document.getElementById('myBookmarks-placeholder')
     myBookmarksItem.classList.toggle('active')
   }
-  testingInfo () {
-    const testingInfo = document.getElementById('info-popup-public')
-    testingInfo.classList.toggle('active')
+  toggleInfoPublic () {
+    const toggleInfo = document.getElementById('info-popup-public')
+    toggleInfo.classList.toggle('active')
+  }
+  toggleInfoMy () {
+    const toggleInfo = document.getElementById('info-popup-my')
+    toggleInfo.classList.toggle('active')
   }
 }

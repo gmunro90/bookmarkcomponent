@@ -169,11 +169,11 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('i-icon-public')) {
-        this.testingInfo();
+        this.toggleInfoPublic();
       }
 
       if (event.target.classList.contains('i-icon-my')) {
-        this.openInfoMy();
+        this.toggleInfoMy();
       }
     }
   }, {
@@ -205,34 +205,6 @@ var Bookmark = /*#__PURE__*/function () {
       if (bookmarkContainer) {
         bookmarkContainer.style.display = 'block';
       }
-    }
-  }, {
-    key: "openInfoPublic",
-    value: function openInfoPublic() {
-      var infoPopup = document.getElementById('info-popup-public');
-      infoPopup.style.display = 'block';
-      var infoMyPopup = document.getElementById('info-popup-my');
-      infoMyPopup.style.display = 'none';
-    }
-  }, {
-    key: "closeInfoPublic",
-    value: function closeInfoPublic() {
-      var infoPopup = document.getElementById('info-popup-public');
-      infoPopup.style.display = 'none';
-    }
-  }, {
-    key: "openInfoMy",
-    value: function openInfoMy() {
-      var infoMyPopup = document.getElementById('info-popup-my');
-      infoMyPopup.style.display = 'block';
-      var infoPopup = document.getElementById('info-popup-public');
-      infoPopup.style.display = 'none';
-    }
-  }, {
-    key: "closeInfoMy",
-    value: function closeInfoMy() {
-      var infoMyPopup = document.getElementById('info-popup-my');
-      infoMyPopup.style.display = 'none';
     }
   }, {
     key: "closeForm",
@@ -276,10 +248,16 @@ var Bookmark = /*#__PURE__*/function () {
       myBookmarksItem.classList.toggle('active');
     }
   }, {
-    key: "testingInfo",
-    value: function testingInfo() {
-      var testingInfo = document.getElementById('info-popup-public');
-      testingInfo.classList.toggle('active');
+    key: "toggleInfoPublic",
+    value: function toggleInfoPublic() {
+      var toggleInfo = document.getElementById('info-popup-public');
+      toggleInfo.classList.toggle('active');
+    }
+  }, {
+    key: "toggleInfoMy",
+    value: function toggleInfoMy() {
+      var toggleInfo = document.getElementById('info-popup-my');
+      toggleInfo.classList.toggle('active');
     }
   }]);
 
