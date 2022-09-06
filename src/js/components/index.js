@@ -160,6 +160,8 @@ class Bookmark {
                   <div class="test">
                   <span class="bookmarkText">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
                   <span class="infoBtn">
+                  </div>
+                  
             `
             if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
               bookmarkHtml += ` <svg id=${bookmark.qInfo.qId} xmlns='http://www.w3.org/2000/svg' class='delete-icon'
@@ -167,7 +169,7 @@ class Bookmark {
               stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'
                 stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
                 </svg>
-                </div>
+                
                 `
             }
             bookmarkHtml += `<svg xmlns="http://www.w3.org/2000/svg" class="i-icon-my" id="i-icon-my" viewBox="0 0 512 512">
@@ -183,6 +185,7 @@ class Bookmark {
              <div class="info-popup-my" id="info-popup-my">
              <h5 class="description-heading">${bookmark.qMeta.description}</h5>
              <h5>Selections: </h5>
+             </div>
              </div>
              `
           })
