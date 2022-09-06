@@ -158,7 +158,8 @@ class Bookmark {
               </div>
              
               <div class="info-popup-public" id="info-popup-public">
-              <h5 class="description-heading">${bookmark.qMeta.description}</h5>
+              <div class="info-topline">
+              <p class="description-heading">${bookmark.qMeta.description}</p>
               <svg xmlns="http://www.w3.org/2000/svg" class="edit-info" viewBox="0 0 512 512">
               <title>Create</title><path d="M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48"
                fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
@@ -166,10 +167,15 @@ class Bookmark {
                 0l12.06-12c6.1-6.09 6.67-16.01.85-22.38zM399.34 90L218.82 270.2a9 9 0 00-2.31 3.93L208.16 299a3.91 3.91
                  0 004.86 4.86l24.85-8.35a9 9 0 003.93-2.31L422 112.66a9 9 0 000-12.66l-9.95-10a9 9 0 00-12.71 0z"/>
                  </svg>
-              <h5>Selections: ${bookmark.qData.selectionFields} </h5>
-              <p>Set expression</p>
-              <input type="text" READONLY/>
+                 </div>
+              <h6>Selections: ${bookmark.qData.selectionFields} </h6>
+              <h6>Set expression</h6>
+              <div class="info-copy">
+              <input type="text" READONLY class="info-input" ${bookmark.qData.selectionFields} />
+              
               <button class="copy">Copy</button>
+            
+              </div>
               </div>
               `
           })

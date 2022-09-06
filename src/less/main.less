@@ -251,11 +251,12 @@ hr {
   align-items: center;
 }
 .info-popup-public {
+  color: rgb(255, 255, 255);
   display: none;
   width: auto;
-  height: 225px;
+  height: auto;
   background-color: #595959;
-  border: 2px solid rgb(169, 207, 246);
+  border: 3px solid rgb(169, 207, 246);
   border-radius: 10px;
   padding: 10px;
   &.active {
@@ -263,6 +264,7 @@ hr {
   }
 }
 .info-popup-my {
+  color: rgb(255, 255, 255);
   display: none;
   width: auto;
   height: 225px;
@@ -273,12 +275,6 @@ hr {
   &.active {
     display: block;
   }
-}
-.description-heading {
-  color: rgb(255, 255, 255);
-}
-h5 {
-  color: rgb(255, 255, 255);
 }
 .public-heading-caret {
   user-select: none;
@@ -294,4 +290,28 @@ h5 {
 }
 .edit-info {
   width: 24px;
+}
+.info-topline {
+  display: flex;
+  justify-content: space-between;
+}
+.info-input {
+  background-color: #d2d2d2;
+  width: 400px;
+  height: 50px;
+  border-radius: 6px;
+}
+.info-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  button {
+    float: right;
+    color: rgb(255, 255, 255);
+    border: .5px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    width: 50px;
+    background-color: transparent;
+    padding: 5px;
+  }
 }
