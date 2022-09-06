@@ -238,6 +238,7 @@ class Bookmark {
     }
     if (event.target.classList.contains('createSubmit')) {
       const bookmarkBackground = document.getElementById('bookmarkPopup')
+      bookmarkBackground.style.backgroundColor = 'transparent'
       this.options.app.createBookmark(
         {
           qInfo: {

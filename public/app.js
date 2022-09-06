@@ -147,6 +147,7 @@ var Bookmark = /*#__PURE__*/function () {
       if (event.target.classList.contains('createSubmit')) {
         var _bookmarkBackground = document.getElementById('bookmarkPopup');
 
+        _bookmarkBackground.style.backgroundColor = 'transparent';
         this.options.app.createBookmark({
           qInfo: {
             qType: 'bookmark'
