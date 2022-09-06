@@ -220,6 +220,14 @@ hr {
   margin: 13px;
 }
 .i-icon-public {
+  visibility: hidden;
+  width: 13px;
+  * {
+    pointer-events: none;
+  }
+}
+.i-icon-public:hover {
+  visibility: visible;
   width: 13px;
   * {
     pointer-events: none;
