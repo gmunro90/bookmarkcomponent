@@ -168,7 +168,7 @@ class Bookmark {
              
               <div class="info-popup-public" id="info-popup-public">
               <div class="info-topline">
-              <p class="description-heading">${bookmark.qMeta.description}</p>
+              <span class="description-heading">${bookmark.qMeta.description}</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="edit-info" viewBox="0 0 512 512">
               <title>Create</title><path d="M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48"
                fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
@@ -177,9 +177,10 @@ class Bookmark {
                  0 004.86 4.86l24.85-8.35a9 9 0 003.93-2.31L422 112.66a9 9 0 000-12.66l-9.95-10a9 9 0 00-12.71 0z"/>
                  </svg>
                  </div>
-              <h6>Selections: ${bookmark.qData.selectionFields} </h6>
-              <h6>Set expression</h6>
+              <span class="selections"><b>Selections:</b> ${bookmark.qData.selectionFields} </span>
+              
               <div class="info-copy">
+              <span class="set-expression">Set expression</span>
               <input type="text" READONLY class="info-input" ${bookmark.qData.selectionFields} />
               
               <button class="copy">Copy</button>
@@ -282,22 +283,29 @@ class Bookmark {
     }
     if (event.target.classList.contains('createSubmit')) {
       const bookmarkBackground = document.getElementById('bookmarkPopup')
+      const bookmarkName = document.getElementById('bookmarkName')
       bookmarkBackground.style.backgroundColor = 'transparent'
-      this.options.app.createBookmark(
-        {
-          qInfo: {
-            qType: 'bookmark'
-          },
-          qMetaDef: {
-            title: `${bookmarkTitle.value}`,
-            description: `${bookmarkDescription.value}`
+
+      if (bookmarkName.length === 0) {
+        document.getElementById('createSubmit').disabled = true
+      } 
+      else {
+        this.options.app.createBookmark(
+          {
+            qInfo: {
+              qType: 'bookmark'
+            },
+            qMetaDef: {
+              title: `${bookmarkTitle.value}`,
+              description: `${bookmarkDescription.value}`
+            }
           }
-        }
-      )
-        .then(() => {
-          this.render()
-        })
-      this.closeBookmark()
+        )
+          .then(() => {
+            this.render()
+          })
+        this.closeBookmark()
+      }
     }
     if (event.target.classList.contains('delete-icon')) {
       this.options.app.destroyBookmark(event.target.id)
@@ -306,17 +314,9 @@ class Bookmark {
         })
     }
     if (event.target.classList.contains('i-icon-public')) {
-      const closeMyIfOpen = document.getElementById('info-popup-my')
-      if (closeMyIfOpen.classList.contains('active')) {
-        this.toggleInfoMy()
-      }
       this.toggleInfoPublic()
     }
     if (event.target.classList.contains('i-icon-my')) {
-      const closePublicIfOpen = document.getElementById('info-popup-public')
-      if (closePublicIfOpen.classList.contains('active')) {
-        this.toggleInfoPublic()
-      }
       this.toggleInfoMy()
     }
   }
