@@ -34,7 +34,7 @@ class Bookmark {
           <div class='btn'>
           </div>
           <div>
-            <input class='search' type='text' id="myInput" placeholder="Search" onkeyup"searchFunction()">
+            <input class='search' type='text' id="myInput" placeholder="Search">
             <div class="close"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
             <title>Close</title><path fill='none' stroke='currentColor' stroke-linecap='round' 
             stroke-linejoin='round' stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
@@ -89,7 +89,7 @@ class Bookmark {
       <input type='text' id='bookmarkName' name='bookmarkName'>
       <label for='bookmarkDescription' class="description">Description <span class='optional'>(optional)</span></label><br>
       <input type='text' id='bookmarkDescription' name='bookmarkDescription'>
-      <div class="create-flex"><button class='createSubmit' id='createSubmit'>Create</button>
+      <div class="create-flex"><button type="button" disabled class='createSubmit' id='createSubmit'>Create</button>
       </div>
     </div>
   </div>
@@ -178,13 +178,13 @@ class Bookmark {
                  </svg>
                  </div>
               <span class="selections"><b>Selections:</b> ${bookmark.qData.selectionFields} </span>
-              
+            
               <div class="info-copy">
               <span class="set-expression">Set expression</span>
               <input type="text" READONLY class="info-input" ${bookmark.qData.selectionFields} />
-              
+              <div class="flex">
               <button class="copy">Copy</button>
-            
+              </div>
               </div>
               </div>
               `
@@ -223,8 +223,7 @@ class Bookmark {
             
              <div class="info-popup-my" id="info-popup-my">
              <div class="info-topline">
-             <p class="description-heading">${bookmark.qMeta.description}</p>
-          
+             <span class="description-heading">${bookmark.qMeta.description}</span>
              <svg xmlns="http://www.w3.org/2000/svg" class="edit-info" viewBox="0 0 512 512">
              <title>Create</title><path d="M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48"
               fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
@@ -234,8 +233,10 @@ class Bookmark {
                 </svg>
              
                 </div>
-                <h6>Set expression</h6>
+                <span class="selections"><b>Selections:</b> ${bookmark.qData.selectionFields} </span>
                 <div class="info-copy">
+                <span class=""set-expression>Set expression</span>
+
                 <input type="text" READONLY class="info-input" ${bookmark.qData.selectionFields} />
                 
                 <button class="copy">Copy</button>
@@ -255,7 +256,14 @@ class Bookmark {
       })
   }
   handleKeyUp () {
+    const bookmarkName = document.getElementById('bookmarkName')
     this.searchFunction()
+    if (bookmarkName.length === 0) {
+      this.disableCreate()
+    }
+    else {
+      this.enableCreate()
+    }
   }
   handleClick (event) {  
     const bookmarkTitle = document.getElementById('bookmarkName')
@@ -283,29 +291,22 @@ class Bookmark {
     }
     if (event.target.classList.contains('createSubmit')) {
       const bookmarkBackground = document.getElementById('bookmarkPopup')
-      const bookmarkName = document.getElementById('bookmarkName')
       bookmarkBackground.style.backgroundColor = 'transparent'
-
-      if (bookmarkName.length === 0) {
-        document.getElementById('createSubmit').disabled = true
-      } 
-      else {
-        this.options.app.createBookmark(
-          {
-            qInfo: {
-              qType: 'bookmark'
-            },
-            qMetaDef: {
-              title: `${bookmarkTitle.value}`,
-              description: `${bookmarkDescription.value}`
-            }
+      this.options.app.createBookmark(
+        {
+          qInfo: {
+            qType: 'bookmark'
+          },
+          qMetaDef: {
+            title: `${bookmarkTitle.value}`,
+            description: `${bookmarkDescription.value}`
           }
-        )
-          .then(() => {
-            this.render()
-          })
-        this.closeBookmark()
-      }
+        }
+      )
+        .then(() => {
+          this.render()
+        })
+      this.closeBookmark()
     }
     if (event.target.classList.contains('delete-icon')) {
       this.options.app.destroyBookmark(event.target.id)
@@ -378,6 +379,12 @@ class Bookmark {
   toggleInfoMy () {
     const toggleInfo = document.getElementById('info-popup-my')
     toggleInfo.classList.toggle('active')
+  }
+  enableCreate () {
+    document.getElementById('createSubmit').disabled = false
+  }
+  disableCreate () {
+    document.getElementById('createSubmit').disabled = true
   }
 }
 
