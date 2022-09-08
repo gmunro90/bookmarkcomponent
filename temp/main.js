@@ -188,6 +188,14 @@ class Bookmark {
               </div>
               </div>
               `
+            if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
+              bookmarkHtml += ` <svg id=${bookmark.qInfo.qId} xmlns='http://www.w3.org/2000/svg' class='delete-icon'
+                viewBox='0 0 512 512'><title>Close</title><path fill='none'
+                stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'
+                  stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
+                  </svg>
+                  `
+            }
           })
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {
@@ -212,7 +220,6 @@ class Bookmark {
               stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'
                 stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
                 </svg>
-                
                 `
             }
             bookmarkHtml += `<svg data-bookmark="${bookmark.qInfo.qId}"xmlns="http://www.w3.org/2000/svg" class="i-icon-my" id="i-icon-my" viewBox="0 0 512 512">

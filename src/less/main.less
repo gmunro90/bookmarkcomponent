@@ -106,10 +106,6 @@ hr {
     display: block;
   }
 }
-.delete-icon {
-  width: 13px;
-  cursor: pointer;
-}
 .caret {
   width: 15px;
   * {
@@ -123,7 +119,7 @@ hr {
   border: 1px solid #000000;
   border-radius: 5px;
   z-index: 3;
-  width: 67vw;
+  width: 37vw;
   background-color: rgba(255, 255, 255, .7);
   padding: 6px;
   margin: 40px 0 0 74px;
@@ -222,13 +218,27 @@ hr {
 }
 .i-icon-public {
   width: 15px;
-  display: none;
+  visibility: hidden;
   * {
     pointer-events: none;
   }
 }
 .public-li:hover .i-icon-public {
-  display: block;
+  visibility: visible;
+  * {
+    pointer-events: none;
+  }
+}
+.delete-icon {
+  width: 13px;
+  cursor: pointer;
+  visibility: hidden;
+  * {
+    pointer-events: none;
+  }
+}
+.myBookmarks-li:hover .delete-icon {
+  visibility: visible;
   * {
     pointer-events: none;
   }
