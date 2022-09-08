@@ -222,12 +222,13 @@ hr {
 }
 .i-icon-public {
   width: 15px;
+  display: none;
   * {
     pointer-events: none;
   }
 }
-.i-icon-public:hover {
-  visibility: visible;
+.public-li:hover .i-icon-public {
+  display: block;
   * {
     pointer-events: none;
   }
@@ -249,19 +250,7 @@ hr {
   display: flex;
   align-items: center;
 }
-.info-popup-public {
-  color: rgb(255, 255, 255);
-  display: none;
-  width: auto;
-  height: auto;
-  background-color: #595959;
-  border: 3px solid rgb(169, 207, 246);
-  border-radius: 5px;
-  padding: 10px;
-  &.active {
-    display: block;
-  }
-}
+
 .info-popup-my {
   color: rgb(255, 255, 255);
   display: none;
@@ -299,11 +288,13 @@ hr {
   width: 400px;
   height: 50px;
   border-radius: 3px;
+  box-sizing: border-box;
 }
 .info-copy {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  width: 400px;
   button {
     float: right;
     color: rgb(255, 255, 255);
@@ -313,6 +304,7 @@ hr {
     background-color: transparent;
     padding: 5px;
     margin-top: 11px;
+    box-sizing: border-box;
   }
 }
 .description-heading {
@@ -327,4 +319,31 @@ hr {
   font-size: 14px;
   font-weight: 400;
   padding: 10px 0;
+}
+.info-popup-public {
+  color: rgb(255, 255, 255);
+  display: none;
+  width: auto;
+  height: auto;
+  background-color: #595959;
+  border: 3px solid rgb(169, 207, 246);
+  border-radius: 5px;
+  padding: 10px;
+  &.active {
+    display: block;
+    z-index: 2;
+    position: relative;
+  }
+}
+.info-popup-mask {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  &.active {
+    display: block;
+    z-index: 1;
+  }
 }

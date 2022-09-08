@@ -31,7 +31,7 @@ var Bookmark = /*#__PURE__*/function () {
       el.addEventListener('click', this.handleClick.bind(this));
       el.addEventListener('keyup', this.handleKeyUp.bind(this));
       el.addEventListener('change', this.handleChange.bind(this));
-      var html = "<div>\n      <svg xmlns='http://www.w3.org/2000/svg' class='bookmarkBtn' viewBox='0 0 512 512'>\n        <title>Bookmark</title>\n        <path d='M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z' fill='none' stroke='currentColor'\n          stroke-linecap='round' stroke-linejoin='round' stroke-width='32' />\n        </svg>\n\n        <div class='bookmarkPopup' id='bookmarkPopup'></div>\n        <div class='bookmarkContainer' id='bookmarkContainer'>\n          <div class='bookmark-topline'>\n            <span class=\"heading\">Bookmarks</span><button class='createNew'>Create new bookmark</button>\n          </div>\n          <div class='btn'>\n          </div>\n          <div>\n            <input class='search' type='text' id=\"myInput\" placeholder=\"Search\">\n            <div class=\"close\"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>\n            <title>Close</title><path fill='none' stroke='currentColor' stroke-linecap='round' \n            stroke-linejoin='round' stroke-width='32' d='M368 368L144 144M368 144L144 368'/>\n            </svg></div>\n            \n          </div>\n          <hr>\n          <div class='public'>\n          <div class=\"public-heading-caret\">\n              <svg class='public-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n                <title>Caret Down</title>\n                <path d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n              </svg>\n\n              <span class=\"heading\">Public bookmarks <span id=\"publicCount\">(0)</span></span>\n              </div>\n              <div id=\"public-placeholder\" class=\"active\"><p class='public-text'>You have no public bookmarks</p>\n              <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>\n            \n          </div>\n        </div>\n          <div class='my-bookmarks'>\n\n          <div class=\"heading-caret\">\n            <svg class='myBookmarks-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n              <title>Caret Down</title>\n              <path\n                d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n            </svg>\n            <span class=\"heading\">My bookmarks <span id=\"myBookmarksCount\">(0)</span></span>\n            </div>\n\n            <div id=\"myBookmarks-placeholder\" class=\"active\">\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class='createNewPopup' id='createForm'>\n    <div class='createTopline'>\n    <span class=\"heading\">Create bookmark</span>\n    <span class='closeCreate'><svg xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n    <title>Close</title>\n    <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'\n      d='M368 368L144 144M368 144L144 368' />\n  </svg></span></br>\n\n    </div>\n    <hr>\n    <div class=\"create-input\">\n    <label for='bookmarkName' class=\"title\">Title</label>\n      <input type='text' id='bookmarkName' name='bookmarkName'>\n      <label for='bookmarkDescription' class=\"description\">Description <span class='optional'>(optional)</span></label><br>\n      <input type='text' id='bookmarkDescription' name='bookmarkDescription'>\n      <div class=\"create-flex\"><button type=\"button\" disabled class='createSubmit' id='createSubmit'>Create</button>\n      </div>\n    </div>\n  </div>\n    ";
+      var html = "<div>\n      <svg xmlns='http://www.w3.org/2000/svg' class='bookmarkBtn' viewBox='0 0 512 512'>\n        <title>Bookmark</title>\n        <path d='M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z' fill='none' stroke='currentColor'\n          stroke-linecap='round' stroke-linejoin='round' stroke-width='32' />\n        </svg>\n\n        <div class='bookmarkPopup' id='bookmarkPopup'></div>\n        <div class='bookmarkContainer' id='bookmarkContainer'>\n          <div class='bookmark-topline'>\n            <span class=\"heading\">Bookmarks</span><button class='createNew'>Create new bookmark</button>\n          </div>\n          <div class='btn'>\n          </div>\n          <div>\n            <input class='search' type='text' id=\"myInput\" placeholder=\"Search\">\n            <div class=\"close\"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>\n            <title>Close</title><path fill='none' stroke='currentColor' stroke-linecap='round' \n            stroke-linejoin='round' stroke-width='32' d='M368 368L144 144M368 144L144 368'/>\n            </svg></div>\n            \n          </div>\n          <hr>\n          <div class='public'>\n          <div class=\"public-heading-caret\">\n              <svg class='public-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n                <title>Caret Down</title>\n                <path d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n              </svg>\n\n              <span class=\"heading\">Public bookmarks <span id=\"publicCount\">(0)</span></span>\n              </div>\n              <div id=\"public-placeholder\" class=\"active\"><p class='public-text'>You have no public bookmarks</p>\n              <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>\n            \n          </div>\n        </div>\n          <div class='my-bookmarks'>\n\n          <div class=\"heading-caret\">\n            <svg class='myBookmarks-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n              <title>Caret Down</title>\n              <path\n                d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n            </svg>\n            <span class=\"heading\">My bookmarks <span id=\"myBookmarksCount\">(0)</span></span>\n            </div>\n\n            <div id=\"myBookmarks-placeholder\" class=\"active\">\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class='createNewPopup' id='createForm'>\n    <div class='createTopline'>\n    <span class=\"heading\">Create bookmark</span>\n    <span class='closeCreate'><svg xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n    <title>Close</title>\n    <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'\n      d='M368 368L144 144M368 144L144 368' />\n  </svg></span>\n\n    </div>\n    <hr>\n    <div class=\"create-input\">\n    <label for='bookmarkName' class=\"title\">Title</label>\n      <input type='text' id='bookmarkName' name='bookmarkName'>\n      <label for='bookmarkDescription' class=\"description\">Description <span class='optional'>(optional)</span></label><br>\n      <input type='text' id='bookmarkDescription' name='bookmarkDescription'>\n      <div class=\"create-flex\"><button type=\"button\" disabled class='createSubmit' id='createSubmit'>Create</button>\n      </div>\n    </div>\n  </div>\n    ";
       el.innerHTML = html;
       this.render();
     }
@@ -80,21 +80,27 @@ var Bookmark = /*#__PURE__*/function () {
               }
             }
           });
-          var publicHtml = '';
+          var publicHtml = "<div id=\"info-popup-mask\" class=\"info-popup-mask\"></div>";
           publicBookmarks.forEach(function (bookmark) {
             console.log('bookmark', bookmark);
-            publicHtml += "\n              <div class=\"public-li\" id=\"public-li\">\n              <span class=\"bookmarkText\">".concat(bookmark.qMeta.title, "</span>\n              <div class=\"date-and-i\">\n              <span class=\"bookmarkText\">").concat(new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10), "</span>\n              <span class=\"infoBtn\">\n              <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"i-icon-public\" id=\"i-icon-public\" viewBox=\"0 0 512 512\">\n              <title>Information Circle</title>\n              <path d=\"M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z\"\n               fill=\"none\" stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"32\"/><path fill=\"none\"\n                stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\" d=\"M220 220h32v116\"/><path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-miterlimit=\"10\"\n               stroke-width=\"32\" d=\"M208 340h88\"/><path d=\"M248 130a26 26 0 1026 26 26 26 0 00-26-26z\"/>\n               </svg>\n               </span>\n               </div>\n              </div>\n             \n              <div class=\"info-popup-public\" id=\"info-popup-public\">\n              <div class=\"info-topline\">\n              <span class=\"description-heading\">").concat(bookmark.qMeta.description, "</span>\n              <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"edit-info\" viewBox=\"0 0 512 512\">\n              <title>Create</title><path d=\"M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48\"\n               fill=\"none\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"/>\n               <path d=\"M459.94 53.25a16.06 16.06 0 00-23.22-.56L424.35 65a8 8 0 000 11.31l11.34 11.32a8 8 0 0011.34\n                0l12.06-12c6.1-6.09 6.67-16.01.85-22.38zM399.34 90L218.82 270.2a9 9 0 00-2.31 3.93L208.16 299a3.91 3.91\n                 0 004.86 4.86l24.85-8.35a9 9 0 003.93-2.31L422 112.66a9 9 0 000-12.66l-9.95-10a9 9 0 00-12.71 0z\"/>\n                 </svg>\n                 </div>\n              <span class=\"selections\"><b>Selections:</b> ").concat(bookmark.qData.selectionFields, " </span>\n            \n              <div class=\"info-copy\">\n              <span class=\"set-expression\">Set expression</span>\n              <input type=\"text\" READONLY class=\"info-input\" ").concat(bookmark.qData.selectionFields, " />\n              <div class=\"flex\">\n              <button class=\"copy\">Copy</button>\n              </div>\n              </div>\n              </div>\n              ");
+            publicHtml += "\n              <div class=\"public-li\" id=\"public-li\">\n              <span class=\"bookmarkText\">".concat(bookmark.qMeta.title, "</span>\n              <div class=\"date-and-i\">\n              <span class=\"bookmarkText\">").concat(new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10), "</span>\n              <span class=\"infoBtn\">\n              <svg data-bookmark=\"").concat(bookmark.qInfo.qId, "\" xmlns=\"http://www.w3.org/2000/svg\" class=\"i-icon-public\" id=\"i-icon-public\" viewBox=\"0 0 512 512\">\n              <title>Information Circle</title>\n              <path d=\"M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z\"\n               fill=\"none\" stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"32\"/><path fill=\"none\"\n                stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\" d=\"M220 220h32v116\"/><path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-miterlimit=\"10\"\n               stroke-width=\"32\" d=\"M208 340h88\"/><path d=\"M248 130a26 26 0 1026 26 26 26 0 00-26-26z\"/>\n               </svg>\n               </span>\n               </div>\n              </div>\n             \n              <div class=\"info-popup-public\" id=\"info-popup-").concat(bookmark.qInfo.qId, "\">\n              <div class=\"info-topline\">\n              <span class=\"description-heading\">").concat(bookmark.qMeta.description, "</span>\n              <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"edit-info\" viewBox=\"0 0 512 512\">\n              <title>Create</title><path d=\"M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48\"\n               fill=\"none\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"/>\n               <path d=\"M459.94 53.25a16.06 16.06 0 00-23.22-.56L424.35 65a8 8 0 000 11.31l11.34 11.32a8 8 0 0011.34\n                0l12.06-12c6.1-6.09 6.67-16.01.85-22.38zM399.34 90L218.82 270.2a9 9 0 00-2.31 3.93L208.16 299a3.91 3.91\n                 0 004.86 4.86l24.85-8.35a9 9 0 003.93-2.31L422 112.66a9 9 0 000-12.66l-9.95-10a9 9 0 00-12.71 0z\"/>\n                 </svg>\n                 </div>\n              <span class=\"selections\"><b>Selections:</b> ").concat(bookmark.qData.selectionFields, " </span>\n            \n              <div class=\"info-copy\">\n              <span class=\"set-expression\">Set expression</span>\n              <input type=\"text\" READONLY class=\"info-input\" value=\"").concat(bookmark.qData.selectionFields, "\" />\n              <div class=\"flex\">\n              <button class=\"copy\">Copy</button>\n              </div>\n              </div>\n              </div>\n              ");
           });
           var bookmarkHtml = '';
           myBookmarks.forEach(function (bookmark) {
-            console.log(bookmark);
-            bookmarkHtml += "\n              <div class=\"myBookmarks-li\">\n                  <span class=\"bookmarkText\">".concat(bookmark.qMeta.title, "</span>\n                  <div class=\"date-and-i\">\n                  <div class=\"date\">\n                  <span class=\"bookmarkText\">").concat(new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10), "</span>\n                  <span class=\"infoBtn\">\n                  </div>\n                  \n            ");
+            console.log('new bookmark', bookmark);
+            var createDate = new Date();
+
+            if (bookmark.qMeta.createdDate) {
+              createDate = new Date(bookmark.qMeta.createdDate);
+            }
+
+            bookmarkHtml += "\n              <div class=\"myBookmarks-li\">\n                  <span class=\"bookmarkText\">".concat(bookmark.qMeta.title, "</span>\n                  <div class=\"date-and-i\">\n                  <div class=\"date\">\n                  <span class=\"bookmarkText\">").concat(createDate.toLocaleString().slice(0, 10), "</span>\n                  <span class=\"infoBtn\">\n                  </div>\n                  \n            ");
 
             if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
               bookmarkHtml += " <svg id=".concat(bookmark.qInfo.qId, " xmlns='http://www.w3.org/2000/svg' class='delete-icon'\n              viewBox='0 0 512 512'><title>Close</title><path fill='none'\n              stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'\n                stroke-width='32' d='M368 368L144 144M368 144L144 368'/>\n                </svg>\n                \n                ");
             }
 
-            bookmarkHtml += "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"i-icon-my\" id=\"i-icon-my\" viewBox=\"0 0 512 512\">\n            <title>Information Circle</title>\n            <path d=\"M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z\"\n             fill=\"none\" stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"32\"/><path fill=\"none\"\n              stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\" d=\"M220 220h32v116\"/><path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-miterlimit=\"10\"\n             stroke-width=\"32\" d=\"M208 340h88\"/><path d=\"M248 130a26 26 0 1026 26 26 26 0 00-26-26z\"/>\n             </svg>\n             </span>\n             </div>\n            \n             <div class=\"info-popup-my\" id=\"info-popup-my\">\n             <div class=\"info-topline\">\n             <span class=\"description-heading\">".concat(bookmark.qMeta.description, "</span>\n             <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"edit-info\" viewBox=\"0 0 512 512\">\n             <title>Create</title><path d=\"M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48\"\n              fill=\"none\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"/>\n              <path d=\"M459.94 53.25a16.06 16.06 0 00-23.22-.56L424.35 65a8 8 0 000 11.31l11.34 11.32a8 8 0 0011.34\n               0l12.06-12c6.1-6.09 6.67-16.01.85-22.38zM399.34 90L218.82 270.2a9 9 0 00-2.31 3.93L208.16 299a3.91 3.91\n                0 004.86 4.86l24.85-8.35a9 9 0 003.93-2.31L422 112.66a9 9 0 000-12.66l-9.95-10a9 9 0 00-12.71 0z\"/>\n                </svg>\n             \n                </div>\n                <span class=\"selections\"><b>Selections:</b> ").concat(bookmark.qData.selectionFields, " </span>\n                <div class=\"info-copy\">\n                <span class=\"\"set-expression>Set expression</span>\n\n                <input type=\"text\" READONLY class=\"info-input\" ").concat(bookmark.qData.selectionFields, " />\n                \n                <button class=\"copy\">Copy</button>\n              \n                </div>\n             </div>\n             </div>\n             ");
+            bookmarkHtml += "<svg data-bookmark=\"".concat(bookmark.qInfo.qId, "\"xmlns=\"http://www.w3.org/2000/svg\" class=\"i-icon-my\" id=\"i-icon-my\" viewBox=\"0 0 512 512\">\n            <title>Information Circle</title>\n            <path d=\"M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z\"\n             fill=\"none\" stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"32\"/><path fill=\"none\"\n              stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\" d=\"M220 220h32v116\"/><path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-miterlimit=\"10\"\n             stroke-width=\"32\" d=\"M208 340h88\"/><path d=\"M248 130a26 26 0 1026 26 26 26 0 00-26-26z\"/>\n             </svg>\n             </span>\n             </div>\n            \n             <div class=\"info-popup-my\" id=\"info-popup-").concat(bookmark.qInfo.qId, "\">\n             <div class=\"info-topline\">\n             <span class=\"description-heading\">").concat(bookmark.qMeta.description, "</span>\n             <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"edit-info\" viewBox=\"0 0 512 512\">\n             <title>Create</title><path d=\"M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48\"\n              fill=\"none\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"/>\n              <path d=\"M459.94 53.25a16.06 16.06 0 00-23.22-.56L424.35 65a8 8 0 000 11.31l11.34 11.32a8 8 0 0011.34\n               0l12.06-12c6.1-6.09 6.67-16.01.85-22.38zM399.34 90L218.82 270.2a9 9 0 00-2.31 3.93L208.16 299a3.91 3.91\n                0 004.86 4.86l24.85-8.35a9 9 0 003.93-2.31L422 112.66a9 9 0 000-12.66l-9.95-10a9 9 0 00-12.71 0z\"/>\n                </svg>\n             \n                </div>\n                <span class=\"selections\"><b>Selections:</b> ").concat(bookmark.qData.selectionFields, " </span>\n                <div class=\"info-copy\">\n                <span class=\"\"set-expression>Set expression</span>\n\n                <input type=\"text\" READONLY class=\"info-input\" ").concat(bookmark.qData.selectionFields, " />\n                \n                <button class=\"copy\">Copy</button>\n              \n                </div>\n             </div>\n             </div>\n             ");
           });
           var publicPlaceholder = document.getElementById('public-placeholder');
           publicPlaceholder.innerHTML = publicHtml;
@@ -108,7 +114,7 @@ var Bookmark = /*#__PURE__*/function () {
   }, {
     key: "handleKeyUp",
     value: function handleKeyUp() {
-      var bookmarkName = document.getElementById('bookmarkName');
+      var bookmarkName = document.getElementById('bookmarkName').value;
       this.searchFunction();
 
       if (bookmarkName.length === 0) {
@@ -132,6 +138,12 @@ var Bookmark = /*#__PURE__*/function () {
       if (event.target.classList.contains('bookmarkPopup')) {
         this.closeForm();
         this.closeBookmark();
+        var infoList = Array.from(document.getElementsByClassName('info-popup-public'));
+        infoList.forEach(function (e) {
+          e.classList.remove('active');
+        });
+        var mask = document.getElementById('info-popup-mask');
+        mask.classList.remove('active');
       }
 
       if (event.target.classList.contains('createNew')) {
@@ -165,6 +177,8 @@ var Bookmark = /*#__PURE__*/function () {
             description: "".concat(bookmarkDescription.value)
           }
         }).then(function () {
+          document.getElementById('bookmarkName').value = '';
+
           _this.render();
         });
         this.closeBookmark();
@@ -177,11 +191,23 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('i-icon-public')) {
-        this.toggleInfoPublic();
+        this.toggleInfoPublic(event);
       }
 
       if (event.target.classList.contains('i-icon-my')) {
-        this.toggleInfoMy();
+        this.toggleInfoMy(event);
+      }
+
+      if (event.target.classList.contains('info-popup-mask')) {
+        var _infoList = Array.from(document.getElementsByClassName('info-popup-public'));
+
+        _infoList.forEach(function (e) {
+          e.classList.remove('active');
+        });
+
+        var _mask = document.getElementById('info-popup-mask');
+
+        _mask.classList.remove('active');
       }
     }
   }, {
@@ -257,9 +283,16 @@ var Bookmark = /*#__PURE__*/function () {
     }
   }, {
     key: "toggleInfoPublic",
-    value: function toggleInfoPublic() {
-      var toggleInfo = document.getElementById('info-popup-public');
-      toggleInfo.classList.toggle('active');
+    value: function toggleInfoPublic(event) {
+      var infoList = Array.from(document.getElementsByClassName('info-popup-public'));
+      infoList.forEach(function (e) {
+        e.classList.remove('active');
+      });
+      var bookmarkId = event.target.getAttribute('data-bookmark');
+      var toggleInfo = document.getElementById("info-popup-".concat(bookmarkId));
+      var mask = document.getElementById('info-popup-mask');
+      toggleInfo.classList.add('active');
+      mask.classList.add('active');
     }
   }, {
     key: "toggleInfoMy",

@@ -80,7 +80,7 @@ class Bookmark {
     <title>Close</title>
     <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'
       d='M368 368L144 144M368 144L144 368' />
-  </svg></span></br>
+  </svg></span>
 
     </div>
     <hr>
@@ -146,7 +146,7 @@ class Bookmark {
               }
             }
           })
-          let publicHtml = ''
+          let publicHtml = `<div id="info-popup-mask" class="info-popup-mask"></div>`
           publicBookmarks.forEach(bookmark => {
             console.log('bookmark', bookmark)
             publicHtml += `
@@ -155,7 +155,7 @@ class Bookmark {
               <div class="date-and-i">
               <span class="bookmarkText">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
               <span class="infoBtn">
-              <svg xmlns="http://www.w3.org/2000/svg" class="i-icon-public" id="i-icon-public" viewBox="0 0 512 512">
+              <svg data-bookmark="${bookmark.qInfo.qId}" xmlns="http://www.w3.org/2000/svg" class="i-icon-public" id="i-icon-public" viewBox="0 0 512 512">
               <title>Information Circle</title>
               <path d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z"
                fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
@@ -166,7 +166,7 @@ class Bookmark {
                </div>
               </div>
              
-              <div class="info-popup-public" id="info-popup-public">
+              <div class="info-popup-public" id="info-popup-${bookmark.qInfo.qId}">
               <div class="info-topline">
               <span class="description-heading">${bookmark.qMeta.description}</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="edit-info" viewBox="0 0 512 512">
@@ -181,7 +181,7 @@ class Bookmark {
             
               <div class="info-copy">
               <span class="set-expression">Set expression</span>
-              <input type="text" READONLY class="info-input" ${bookmark.qData.selectionFields} />
+              <input type="text" READONLY class="info-input" value="${bookmark.qData.selectionFields}" />
               <div class="flex">
               <button class="copy">Copy</button>
               </div>
@@ -191,13 +191,17 @@ class Bookmark {
           })
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {
-            console.log(bookmark)
+            console.log('new bookmark', bookmark)
+            let createDate = new Date()
+            if (bookmark.qMeta.createdDate) {
+              createDate = new Date(bookmark.qMeta.createdDate)
+            }
             bookmarkHtml += `
               <div class="myBookmarks-li">
                   <span class="bookmarkText">${bookmark.qMeta.title}</span>
                   <div class="date-and-i">
                   <div class="date">
-                  <span class="bookmarkText">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
+                  <span class="bookmarkText">${createDate.toLocaleString().slice(0, 10)}</span>
                   <span class="infoBtn">
                   </div>
                   
@@ -211,7 +215,7 @@ class Bookmark {
                 
                 `
             }
-            bookmarkHtml += `<svg xmlns="http://www.w3.org/2000/svg" class="i-icon-my" id="i-icon-my" viewBox="0 0 512 512">
+            bookmarkHtml += `<svg data-bookmark="${bookmark.qInfo.qId}"xmlns="http://www.w3.org/2000/svg" class="i-icon-my" id="i-icon-my" viewBox="0 0 512 512">
             <title>Information Circle</title>
             <path d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z"
              fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
@@ -221,7 +225,7 @@ class Bookmark {
              </span>
              </div>
             
-             <div class="info-popup-my" id="info-popup-my">
+             <div class="info-popup-my" id="info-popup-${bookmark.qInfo.qId}">
              <div class="info-topline">
              <span class="description-heading">${bookmark.qMeta.description}</span>
              <svg xmlns="http://www.w3.org/2000/svg" class="edit-info" viewBox="0 0 512 512">
@@ -256,7 +260,7 @@ class Bookmark {
       })
   }
   handleKeyUp () {
-    const bookmarkName = document.getElementById('bookmarkName')
+    const bookmarkName = document.getElementById('bookmarkName').value
     this.searchFunction()
     if (bookmarkName.length === 0) {
       this.disableCreate()
@@ -274,6 +278,12 @@ class Bookmark {
     if (event.target.classList.contains('bookmarkPopup')) {
       this.closeForm()
       this.closeBookmark()
+      const infoList = Array.from(document.getElementsByClassName('info-popup-public'))
+      infoList.forEach(e => {
+        e.classList.remove('active')
+      })
+      const mask = document.getElementById('info-popup-mask')
+      mask.classList.remove('active')
     } 
     if (event.target.classList.contains('createNew')) {
       this.createNewBookmark()
@@ -304,6 +314,7 @@ class Bookmark {
         }
       )
         .then(() => {
+          document.getElementById('bookmarkName').value = ''
           this.render()
         })
       this.closeBookmark()
@@ -315,10 +326,18 @@ class Bookmark {
         })
     }
     if (event.target.classList.contains('i-icon-public')) {
-      this.toggleInfoPublic()
+      this.toggleInfoPublic(event)
     }
     if (event.target.classList.contains('i-icon-my')) {
-      this.toggleInfoMy()
+      this.toggleInfoMy(event)
+    }
+    if (event.target.classList.contains('info-popup-mask')) {
+      const infoList = Array.from(document.getElementsByClassName('info-popup-public'))
+      infoList.forEach(e => {
+        e.classList.remove('active')
+      })
+      const mask = document.getElementById('info-popup-mask')
+      mask.classList.remove('active')
     }
   }
   handleChange (event) {
@@ -354,6 +373,7 @@ class Bookmark {
     const createNew = document.getElementById('createForm')
     const bookmarkBackground = document.getElementById('bookmarkPopup')
     const bookmarkContainer = document.getElementById('bookmarkContainer')
+    
     createNew.style.display = 'flex'
     bookmarkBackground.style.backgroundColor = '#bdbdbd'
     bookmarkContainer.style.opacity = '.4'
@@ -372,9 +392,16 @@ class Bookmark {
     const myBookmarksItem = document.getElementById('myBookmarks-placeholder')
     myBookmarksItem.classList.toggle('active')
   }
-  toggleInfoPublic () {
-    const toggleInfo = document.getElementById('info-popup-public')
-    toggleInfo.classList.toggle('active')
+  toggleInfoPublic (event) {
+    const infoList = Array.from(document.getElementsByClassName('info-popup-public'))
+    infoList.forEach(e => {
+      e.classList.remove('active')
+    })
+    const bookmarkId = event.target.getAttribute('data-bookmark')
+    const toggleInfo = document.getElementById(`info-popup-${bookmarkId}`)
+    const mask = document.getElementById('info-popup-mask')
+    toggleInfo.classList.add('active')
+    mask.classList.add('active')
   }
   toggleInfoMy () {
     const toggleInfo = document.getElementById('info-popup-my')
