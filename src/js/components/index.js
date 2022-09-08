@@ -335,6 +335,9 @@ class Bookmark {
       const mask = document.getElementById('info-popup-mask')
       mask.classList.remove('active')
     }
+    if (event.target.classList.contains('edit-info')) {
+      this.editInfo()
+    }
   }
   handleChange (event) {
     if (event.target.classList.contains('search')) {
@@ -408,5 +411,9 @@ class Bookmark {
   }
   disableCreate () {
     document.getElementById('createSubmit').disabled = true
+  }
+  editInfo () {
+    const editInputs = document.getElementById('edit-inputs')
+    editInputs.classList.toggle('active')
   }
 }

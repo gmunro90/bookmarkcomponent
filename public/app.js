@@ -213,6 +213,10 @@ var Bookmark = /*#__PURE__*/function () {
 
         _mask.classList.remove('active');
       }
+
+      if (event.target.classList.contains('edit-info')) {
+        this.editInfo();
+      }
     }
   }, {
     key: "handleChange",
@@ -313,6 +317,12 @@ var Bookmark = /*#__PURE__*/function () {
     key: "disableCreate",
     value: function disableCreate() {
       document.getElementById('createSubmit').disabled = true;
+    }
+  }, {
+    key: "editInfo",
+    value: function editInfo() {
+      var editInputs = document.getElementById('edit-inputs');
+      editInputs.classList.toggle('active');
     }
   }]);
 
