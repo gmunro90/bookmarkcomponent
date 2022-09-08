@@ -225,15 +225,25 @@ hr {
 }
 .public-li:hover .i-icon-public {
   visibility: visible;
+}
+.delete-icon {
+  visibility: hidden;
   * {
     pointer-events: none;
   }
 }
+.myBookmarks-li:hover .delete-icon {
+  visibility: visible;
+}
 .i-icon-my {
   width: 15px;
+  visibility: hidden;
   * {
     pointer-events: none;
   }
+}
+.myBookmarks-li:hover .i-icon-my {
+  visibility: visible;
 }
 .date-and-i {
   display: flex;
@@ -342,4 +352,9 @@ hr {
     display: block;
     z-index: 1;
   }
+}
+.edit-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
 }

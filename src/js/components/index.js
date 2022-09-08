@@ -26,11 +26,6 @@ class Bookmark {
           </div>
           <div>
             <input class='search' type='text' id="myInput" placeholder="Search">
-            <div class="close"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
-            <title>Close</title><path fill='none' stroke='currentColor' stroke-linecap='round' 
-            stroke-linejoin='round' stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
-            </svg></div>
-            
           </div>
           <hr>
           <div class='public'>
@@ -169,7 +164,10 @@ class Bookmark {
                  </svg>
                  </div>
               <span class="selections"><b>Selections:</b> ${bookmark.qData.selectionFields} </span>
-            
+              <div id="edit-inputs" class="edit-inputs">
+            <input type="text" id="edit-title"  value="${bookmark.qMeta.title}"/>
+            <input type="text" id="edit-description" value="${bookmark.qMeta.description}"  />
+            </div>
               <div class="info-copy">
               <span class="set-expression">Set expression</span>
               <input type="text" READONLY class="info-input" value="${bookmark.qData.selectionFields}" />
