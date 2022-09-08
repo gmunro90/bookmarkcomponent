@@ -285,6 +285,9 @@ hr {
 .info-topline {
   display: flex;
   justify-content: space-between;
+  &.active {
+    display: none;
+  }
 }
 .info-input {
   background-color: #d2d2d2;
@@ -312,7 +315,6 @@ hr {
 }
 .description-heading {
   font-size: 14px;
-  font-weight: 400;
 }
 .selections {
   font-size: 14px;
@@ -363,5 +365,16 @@ hr {
   cursor: pointer;
   * {
     pointer-events: none;
+  }
+}
+.tick-icon {
+  display: none;
+  width: 24px;
+  * {
+    pointer-events: none;
+  }
+  &.active {
+    display: block;
+    z-index: 1;
   }
 }
