@@ -195,11 +195,11 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('i-icon-public')) {
-        this.toggleInfoPublic(event);
+        this.toggleInfo(event);
       }
 
       if (event.target.classList.contains('i-icon-my')) {
-        this.toggleInfoPublic(event);
+        this.toggleInfo(event);
       }
 
       if (event.target.classList.contains('info-popup-mask')) {
@@ -292,8 +292,8 @@ var Bookmark = /*#__PURE__*/function () {
       myBookmarksItem.classList.toggle('active');
     }
   }, {
-    key: "toggleInfoPublic",
-    value: function toggleInfoPublic(event) {
+    key: "toggleInfo",
+    value: function toggleInfo(event) {
       var infoList = Array.from(document.getElementsByClassName('info-popup'));
       infoList.forEach(function (e) {
         e.classList.remove('active');
@@ -303,12 +303,6 @@ var Bookmark = /*#__PURE__*/function () {
       var mask = document.getElementById('info-popup-mask');
       toggleInfo.classList.add('active');
       mask.classList.add('active');
-    }
-  }, {
-    key: "toggleInfoMy",
-    value: function toggleInfoMy() {
-      var toggleInfo = document.getElementById('info-popup');
-      toggleInfo.classList.toggle('active');
     }
   }, {
     key: "enableCreate",

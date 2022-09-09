@@ -327,10 +327,10 @@ class Bookmark {
         })
     }
     if (event.target.classList.contains('i-icon-public')) {
-      this.toggleInfoPublic(event)
+      this.toggleInfo(event)
     }
     if (event.target.classList.contains('i-icon-my')) {
-      this.toggleInfoPublic(event)
+      this.toggleInfo(event)
     }
     if (event.target.classList.contains('info-popup-mask')) {
       const infoList = Array.from(document.getElementsByClassName('info-popup'))
@@ -398,7 +398,7 @@ class Bookmark {
     const myBookmarksItem = document.getElementById('myBookmarks-placeholder')
     myBookmarksItem.classList.toggle('active')
   }
-  toggleInfoPublic (event) {
+  toggleInfo (event) {
     const infoList = Array.from(document.getElementsByClassName('info-popup'))
     infoList.forEach(e => {
       e.classList.remove('active')
@@ -408,10 +408,6 @@ class Bookmark {
     const mask = document.getElementById('info-popup-mask')
     toggleInfo.classList.add('active')
     mask.classList.add('active')
-  }
-  toggleInfoMy () {
-    const toggleInfo = document.getElementById('info-popup')
-    toggleInfo.classList.toggle('active')
   }
   enableCreate () {
     document.getElementById('createSubmit').disabled = false
