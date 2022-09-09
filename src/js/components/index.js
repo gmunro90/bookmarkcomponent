@@ -141,12 +141,10 @@ class Bookmark {
               <div class="date-and-i">
               <span class="bookmarkText">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
               <span class="infoBtn">
-              <svg data-bookmark="${bookmark.qInfo.qId}" xmlns="http://www.w3.org/2000/svg" class="i-icon-public" id="i-icon-public" viewBox="0 0 512 512">
-              <title>Information Circle</title>
-              <path d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z"
-               fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M220 220h32v116"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
-               stroke-width="32" d="M208 340h88"/><path d="M248 130a26 26 0 1026 26 26 26 0 00-26-26z"/>
+               <svg data-bookmark="${bookmark.qInfo.qId}" class="i-icon-public" id="i-icon-public" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+               <title>Information Circle</title><path d="M256 56C145.72 56 56 145.72 56 256s89.72 200 200 200 200-89.72 200-200S366.28 
+               56 256 56zm0 82a26 26 0 11-26 26 26 26 0 0126-26zm48 226h-88a16 16 0 010-32h28v-88h-16a16 16 0 010-32h32a16 16 0 0116 
+               16v104h28a16 16 0 010 32z"/>
                </svg>
                </span>
                </div>
@@ -216,12 +214,12 @@ class Bookmark {
                 </svg>
                 `
             }
-            bookmarkHtml += `<svg data-bookmark="${bookmark.qInfo.qId}"xmlns="http://www.w3.org/2000/svg" class="i-icon-my" id="i-icon-my" viewBox="0 0 512 512">
-            <title>Information Circle</title>
-            <path d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z"
-             fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
-              stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M220 220h32v116"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
-             stroke-width="32" d="M208 340h88"/><path d="M248 130a26 26 0 1026 26 26 26 0 00-26-26z"/>
+            bookmarkHtml += `
+             <span class="infoBtn">
+             <svg data-bookmark="${bookmark.qInfo.qId}" class="i-icon-my" id="i-icon-my" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+             <title>Information Circle</title><path d="M256 56C145.72 56 56 145.72 56 256s89.72 200 200 200 200-89.72 200-200S366.28 
+             56 256 56zm0 82a26 26 0 11-26 26 26 26 0 0126-26zm48 226h-88a16 16 0 010-32h28v-88h-16a16 16 0 010-32h32a16 16 0 0116 
+             16v104h28a16 16 0 010 32z"/>
              </svg>
              </span>
              </div>
