@@ -227,6 +227,7 @@ hr {
   visibility: visible;
 }
 .delete-icon {
+  width: 15px;
   visibility: hidden;
   * {
     pointer-events: none;
@@ -255,20 +256,6 @@ hr {
 .date {
   display: flex;
   align-items: center;
-}
-
-.info-popup-my {
-  color: rgb(255, 255, 255);
-  display: none;
-  width: auto;
-  height: autopx;
-  background-color: #595959;
-  border: 2px solid rgb(169, 207, 246);
-  border-radius: 10px;
-  padding: 10px;
-  &.active {
-    display: block;
-  }
 }
 .public-heading-caret {
   user-select: none;
@@ -325,7 +312,7 @@ hr {
   font-weight: 400;
   padding: 10px 0;
 }
-.info-popup-public {
+.info-popup {
   color: rgb(255, 255, 255);
   display: none;
   width: auto;
@@ -375,6 +362,5 @@ hr {
   }
   &.active {
     display: block;
-    z-index: 1;
   }
 }
