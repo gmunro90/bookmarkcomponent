@@ -202,18 +202,16 @@ class Bookmark {
           })
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {
-            console.log('new bookmark', bookmark)
             let createDate = new Date()
             if (bookmark.qMeta.createdDate) {
               createDate = new Date(bookmark.qMeta.createdDate)
             }
             bookmarkHtml += `
               <div class="myBookmarks-li">
-                  <span class="bookmarkText">${bookmark.qMeta.title}</span>
+                <span class="bookmarkText">${bookmark.qMeta.title}</span>
                   <div class="date-and-i">
                   <div class="date">
-                  <span class="bookmarkText">${createDate.toLocaleString().slice(0, 10)}</span>
-                  <span class="infoBtn">
+                <span class="bookmarkText">${createDate.toLocaleString().slice(0, 10)}</span>
                   </div>
                   
             `
@@ -236,10 +234,10 @@ class Bookmark {
              </svg>
              </span>
              </div>
-            
+
              <div class="info-popup" id="info-popup-${bookmark.qInfo.qId}">
-             <div class="info-topline">
-             <span class="description-heading">${bookmark.qMeta.description}</span>
+             <div class="info-topline" id="info-topline">
+             <span class="description-heading" id="description-heading">${bookmark.qMeta.description}</span>
              <svg xmlns="http://www.w3.org/2000/svg" class="edit-info" viewBox="0 0 512 512">
              <title>Create</title><path d="M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48"
               fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
@@ -247,17 +245,25 @@ class Bookmark {
                0l12.06-12c6.1-6.09 6.67-16.01.85-22.38zM399.34 90L218.82 270.2a9 9 0 00-2.31 3.93L208.16 299a3.91 3.91
                 0 004.86 4.86l24.85-8.35a9 9 0 003.93-2.31L422 112.66a9 9 0 000-12.66l-9.95-10a9 9 0 00-12.71 0z"/>
                 </svg>
-             
                 </div>
-                <span class="selections"><b>Selections:</b> ${bookmark.qData.selectionFields} </span>
-                <div class="info-copy">
-                <span class=""set-expression>Set expression</span>
-
-                <input type="text" READONLY class="info-input" ${bookmark.qData.selectionFields} />
-                
-                <button class="copy">Copy</button>
-              
+                <div class="edit-topline">
+                <svg xmlns="http://www.w3.org/2000/svg" class="tick-icon" id="tick-icon" viewBox="0 0 512 512">
+                <title>Checkmark Circle</title><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
+                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
+                 stroke-width="32" d="M352 176L217.6 336 160 272"/>
+                 </svg>
+                 </div>
+                <div id="edit-inputs" class="edit-inputs">
+                <input type="text" id="edit-title"  value="${bookmark.qMeta.title}"/>
+                <input type="text" id="edit-description" value="${bookmark.qMeta.description}" />
                 </div>
+             <span class="selections"><b>Selections:</b> ${bookmark.qData.selectionFields} </span>
+             <div class="info-copy">
+             <span class="set-expression">Set expression</span>
+             <input type="text" READONLY class="info-input" value="${bookmark.qData.selectionFields}" />
+             <div class="flex">
+             <button class="copy">Copy</button>
+             </div>
              </div>
              </div>
              `
@@ -271,9 +277,11 @@ class Bookmark {
         })
       })
   }
-  handleKeyUp () {
+  handleKeyUp (event) {
     const bookmarkName = document.getElementById('bookmarkName').value
-    this.searchFunction()
+    if (event.target.classList.contains('search')) {
+      this.searchFunction()
+    }
     if (bookmarkName.length === 0) {
       this.disableCreate()
     }
