@@ -72,7 +72,7 @@ class Bookmark {
     <hr>
     <div class="create-input">
     <label for='bookmarkName' class="title">Title</label>
-      <input type='text' id='bookmarkName' name='bookmarkName'>
+      <input type='text' class="bookmark-name" id='bookmarkName' name='bookmarkName'>
       <label for='bookmarkDescription' class="description">Description <span class='optional'>(optional)</span></label><br>
       <input type='text' id='bookmarkDescription' name='bookmarkDescription'>
       <div class="create-flex"><button type="button" disabled class='createSubmit' id='createSubmit'>Create</button>
@@ -273,12 +273,14 @@ class Bookmark {
     if (event.target.classList.contains('search')) {
       this.searchFunction()
     }
-    if (bookmarkName.length === 0) {
-      this.disableCreate()
-    }
-    else {
-      this.enableCreate()
-    }
+    if (event.target.classList.contains('bookmark-name')) {
+      if (bookmarkName.length === 0) {
+        this.disableCreate()
+      }
+      else {
+        this.enableCreate()
+      }
+    } 
   }
   handleClick (event) {  
     const bookmarkTitle = document.getElementById('bookmarkName')
