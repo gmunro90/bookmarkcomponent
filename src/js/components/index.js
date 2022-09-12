@@ -161,11 +161,13 @@ class Bookmark {
                  0 004.86 4.86l24.85-8.35a9 9 0 003.93-2.31L422 112.66a9 9 0 000-12.66l-9.95-10a9 9 0 00-12.71 0z"/>
                  </svg>
                  </div>
+                 <div class="edit-topline">
                  <svg xmlns="http://www.w3.org/2000/svg" class="tick-icon" id="tick-icon" viewBox="0 0 512 512">
                  <title>Checkmark Circle</title><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
                   stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
                   stroke-width="32" d="M352 176L217.6 336 160 272"/>
                   </svg>
+                  </div>
                  <div id="edit-inputs" class="edit-inputs">
                  <input type="text" id="edit-title"  value="${bookmark.qMeta.title}"/>
                  <input type="text" id="edit-description" value="${bookmark.qMeta.description}"  />
