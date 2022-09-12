@@ -357,15 +357,29 @@ hr {
 .tick-icon {
   display: none;
   width: 24px;
-  * {
-    pointer-events: none;
-  }
   &.active {
     display: block;
     color: rgb(7, 190, 7);
+    cursor: pointer;
+    * {
+      pointer-events: none;
+    }
   }
 }
 .edit-topline {
   display: flex;
   justify-content: flex-end;
+}
+.trash-icon {
+  display: none;
+  width: 22px;
+  &.active {
+    display: block;
+    fill: rgb(255, 255, 255);
+    margin: 0 0 0 5px;
+    cursor: pointer;
+    * {
+      pointer-events: none;
+    }
+  }
 }
