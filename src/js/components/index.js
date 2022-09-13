@@ -189,7 +189,7 @@ class Bookmark {
               <span class="selections"><b>Selections:</b> ${bookmark.qData.selectionFields} </span>
               <div class="info-copy">
               <span class="set-expression">Set expression</span>
-              <input type="text" READONLY class="info-input" value="${bookmark.qData.selectionFields}" />
+              <input type="text" READONLY class="info-input" id="infoInput" value="${bookmark.qData.selectionFields}" />
               <div class="flex">
               <button class="copy">Copy</button>
               </div>
@@ -384,11 +384,15 @@ class Bookmark {
     if (event.target.classList.contains('tick-icon')) {
       // const editTitle = document.getElementById('edit-title')
       // const editDescription = document.getElementById('edit-description')
-      const getBookmark = this.options.app.getBookmark(event.target.id)
+      const bookmarkId = event.target.getAttribute('data-bookmark')
+      const getBookmark = this.options.app.getBookmark(bookmarkId)
         .then(() => {
           const properties = getBookmark.getProperties()
           console.log(properties)
         })
+    }
+    if (event.target.classList.contains('copy')) {
+      this.copyToClipboard()
     }
   }
   handleChange (event) {
@@ -428,6 +432,13 @@ class Bookmark {
     createNew.style.display = 'flex'
     bookmarkBackground.style.backgroundColor = '#bdbdbd'
     bookmarkContainer.style.opacity = '.4'
+  }
+  copyToClipboard (event) {
+    // const bookmarkId = event.target.getAttribute('data-bookmark')
+    const copyText = document.getElementById('infoInput')
+    copyText.select()
+    copyText.setSelectionRange(0, 99999)
+    navigator.clipboard.writeText(copyText.value)
   }
   closeBookmark () {
     const createNew = document.getElementById('createForm')
