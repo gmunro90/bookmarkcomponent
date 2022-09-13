@@ -134,6 +134,7 @@ class Bookmark {
           })
           let publicHtml = `<div id="info-popup-mask" class="info-popup-mask"></div>`
           publicBookmarks.forEach(bookmark => {
+            console.log('public bookmark', bookmark)
             publicHtml += `
               <div class="public-li" id="public-li">
               <span class="bookmarkText">${bookmark.qMeta.title}</span>
@@ -151,7 +152,9 @@ class Bookmark {
              
               <div class="info-popup" id="info-popup-${bookmark.qInfo.qId}">
               <div class="info-topline" id="info-topline">
-              <span class="description-heading" id="description-heading">${bookmark.qMeta.description}</span>
+              <span class="description-heading" id="description-heading">${bookmark.qMeta.description}</span>`
+            if (bookmark.qMeta.privileges.indexOf('update') !== -1) { 
+              publicHtml += `
               <svg xmlns="http://www.w3.org/2000/svg" class="edit-info" viewBox="0 0 512 512">
               <title>Create</title><path d="M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48"
                fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
@@ -178,7 +181,9 @@ class Bookmark {
                  <div id="edit-inputs" class="edit-inputs">
                  <input type="text" id="edit-title"  value="${bookmark.qMeta.title}"/>
                  <input type="text" id="edit-description" value="${bookmark.qMeta.description}"  />
-                 </div>
+                 </div>`
+            }
+            publicHtml += `
               <span class="selections"><b>Selections:</b> ${bookmark.qData.selectionFields} </span>
               <div class="info-copy">
               <span class="set-expression">Set expression</span>
@@ -190,7 +195,7 @@ class Bookmark {
               </div>
               `
             if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
-              bookmarkHtml += ` <svg id=${bookmark.qInfo.qId} xmlns='http://www.w3.org/2000/svg' class='delete-icon'
+              publicHtml += ` <svg id=${bookmark.qInfo.qId} xmlns='http://www.w3.org/2000/svg' class='delete-icon'
                 viewBox='0 0 512 512'><title>Close</title><path fill='none'
                 stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'
                   stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
