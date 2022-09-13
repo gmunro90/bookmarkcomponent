@@ -161,7 +161,9 @@ class Bookmark {
              
               <div class="info-popup" id="info-popup-${bookmark.qInfo.qId}">
               <div class="info-topline" id="info-topline">
-              <span class="description-heading" id="description-heading">${bookmark.qMeta.description}</span>`
+              <span class="description-heading" id="description-heading">${bookmark.qMeta.description}</span>
+              </div>`
+              
             if (bookmark.qMeta.privileges.indexOf('update') !== -1) { 
               publicHtml += `
               <svg xmlns="http://www.w3.org/2000/svg" class="edit-info" viewBox="0 0 512 512">
