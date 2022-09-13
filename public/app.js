@@ -306,7 +306,6 @@ var Bookmark = /*#__PURE__*/function () {
       // const bookmarkId = event.target.getAttribute('data-bookmark')
       var copyText = document.getElementById('infoInput');
       copyText.select();
-      copyText.setSelectionRange(0, 99999);
       navigator.clipboard.writeText(copyText.value);
     }
   }, {
