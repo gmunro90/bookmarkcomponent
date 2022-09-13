@@ -468,6 +468,7 @@ class Bookmark {
   editInfo () {
     const editInputs = document.getElementById('edit-inputs')
     editInputs.classList.toggle('active')
+    this.hideInfoTopline()
   }
   hideInfoTopline () {
     const hideInfoTop = document.getElementById('info-topline')

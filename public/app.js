@@ -340,6 +340,7 @@ var Bookmark = /*#__PURE__*/function () {
     value: function editInfo() {
       var editInputs = document.getElementById('edit-inputs');
       editInputs.classList.toggle('active');
+      this.hideInfoTopline();
     }
   }, {
     key: "hideInfoTopline",
