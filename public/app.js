@@ -236,9 +236,12 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('tick-icon')) {
-        var editTitle = document.getElementById('edit-title');
-        var editDescription = document.getElementById('edit-description');
-        console.log('tick success');
+        // const editTitle = document.getElementById('edit-title')
+        // const editDescription = document.getElementById('edit-description')
+        var getBookmark = this.options.app.getBookmark(event.target.id).then(function () {
+          var properties = getBookmark.getProperties();
+          console.log(properties);
+        });
       }
     }
   }, {

@@ -391,9 +391,13 @@ class Bookmark {
       this.showTrashIcon()
     }
     if (event.target.classList.contains('tick-icon')) {
-      const editTitle = document.getElementById('edit-title')
-      const editDescription = document.getElementById('edit-description')
-      console.log('tick success')
+      // const editTitle = document.getElementById('edit-title')
+      // const editDescription = document.getElementById('edit-description')
+      const getBookmark = this.options.app.getBookmark(event.target.id)
+        .then(() => {
+          const properties = getBookmark.getProperties()
+          console.log(properties)
+        })
     }
   }
   handleChange (event) {
