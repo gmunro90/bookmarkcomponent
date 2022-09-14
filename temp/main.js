@@ -199,11 +199,15 @@ class Bookmark {
               <div class="info-copy">
               <span class="set-expression">Set expression</span>
               <input type="text" READONLY class="info-input" id="infoInput" value="${bookmark.qData.selectionFields}" />
+            
               <div class="flex">
+              <div class="copied" id="copied"><h5>copied to clipboard</h5></div>
               <button class="copy">Copy</button>
               </div>
+              
               </div>
               </div>
+             
               `
             if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
               publicHtml += ` <svg id=${bookmark.qInfo.qId} xmlns='http://www.w3.org/2000/svg' class='delete-icon'
@@ -276,6 +280,13 @@ class Bookmark {
               <input type="text" READONLY class="info-input" value="${bookmark.qData.selectionFields}" />
               <div class="flex">
               <button class="copy">Copy</button>
+
+            	<div class="ui action input">
+                            <input type="text" class="copyInput" value="http://kushy.net/confirm/58493-2847593-3849?token=58349$3959$$8393038848">
+                            <button type="button" name="copyToken" value="copy" class="copyToken ui right icon button">
+                                <i class="clipboard icon"></i>
+                            </button>
+                        </div>
               </div>
               </div>
               </div>
@@ -402,6 +413,7 @@ class Bookmark {
     }
     if (event.target.classList.contains('copy')) {
       this.copyToClipboard()
+      this.toggleCopied()
     }
   }
   handleChange (event) {
@@ -495,6 +507,14 @@ class Bookmark {
   showTrashIcon () {
     const showTrash = document.getElementById('trashIcon')
     showTrash.classList.add('active')
+  }
+  toggleCopied () {
+    const inputBox = document.getElementById('copied')
+    inputBox.classList.toggle('active')
+    this.copiedTimeout()
+  }
+  copiedTimeout () {
+    setTimeout(this.toggleCopied, 3000)
   }
 }
 

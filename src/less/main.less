@@ -283,6 +283,21 @@ hr {
   border-radius: 3px;
   box-sizing: border-box;
 }
+.copied {
+  display: none;
+  position: absolute;
+  width: 140px;
+  height: 34px;
+  border: .5px solid rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
+  opacity: .8;
+  color: rgb(95, 167, 245);
+  padding: 1px;
+  z-index: 1;
+  &.active {
+    display: flex;
+  }
+}
 .info-copy {
   display: flex;
   flex-direction: column;
@@ -298,6 +313,7 @@ hr {
     padding: 5px;
     margin-top: 11px;
     box-sizing: border-box;
+    cursor: pointer;
   }
 }
 .description-heading {
