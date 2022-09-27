@@ -236,12 +236,18 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('tick-icon')) {
-        // const editTitle = document.getElementById('edit-title')
-        // const editDescription = document.getElementById('edit-description')
+        var editTitle = document.getElementById('edit-title');
+        var editDescription = document.getElementById('edit-description');
         var bookmarkId = event.target.getAttribute('data-bookmark');
         this.options.app.getBookmark(bookmarkId).then(function (result) {
           result.getProperties().then(function (props) {
-            console.log('props', props);
+            var qMetaDefTitle = props.qMetaDef.title;
+            var qMetaDefDescription = props.qMetaDef.description;
+            console.log('title', qMetaDefTitle, 'description', qMetaDefDescription);
+            editTitle.setProperties(qMetaDefTitle);
+            editDescription.setProperties(qMetaDefDescription);
+
+            _this.render();
           });
         }); //     const properties = getBookmark.getProperties()
         //     console.log('bookmark props', properties)

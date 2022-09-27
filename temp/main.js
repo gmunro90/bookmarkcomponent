@@ -396,14 +396,19 @@ class Bookmark {
       this.showTrashIcon()
     }
     if (event.target.classList.contains('tick-icon')) {
-      // const editTitle = document.getElementById('edit-title')
-      // const editDescription = document.getElementById('edit-description')
+      const editTitle = document.getElementById('edit-title')
+      const editDescription = document.getElementById('edit-description')
       const bookmarkId = event.target.getAttribute('data-bookmark')
       this.options.app.getBookmark(bookmarkId)
         .then((result) => { 
           result.getProperties()
             .then((props) => {
-              console.log('props', props)
+              const qMetaDefTitle = props.qMetaDef.title
+              const qMetaDefDescription = props.qMetaDef.description
+              console.log('title', qMetaDefTitle, 'description', qMetaDefDescription)
+              editTitle.setProperties(qMetaDefTitle)
+              editDescription.setProperties(qMetaDefDescription)
+              this.render()
             })
         })
       
