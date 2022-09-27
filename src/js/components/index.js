@@ -245,7 +245,7 @@ class Bookmark {
                    </svg>
                    </div>
                    <div class="edit-topline">
-                   <svg xmlns="http://www.w3.org/2000/svg" class="tick-icon" id="tick-icon" viewBox="0 0 512 512">
+                   <svg xmlns="http://www.w3.org/2000/svg" data-bookmark="${bookmark.qInfo.qId}" class="tick-icon" id="tick-icon" viewBox="0 0 512 512">
                    <title>Checkmark Circle</title><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
                     stroke-width="32" d="M352 176L217.6 336 160 272"/>
@@ -390,11 +390,17 @@ class Bookmark {
       // const editTitle = document.getElementById('edit-title')
       // const editDescription = document.getElementById('edit-description')
       const bookmarkId = event.target.getAttribute('data-bookmark')
-      const getBookmark = this.options.app.getBookmark(bookmarkId)
-        .then(() => {
-          const properties = getBookmark.getProperties()
-          console.log(properties)
+      this.options.app.getBookmark(bookmarkId)
+        .then((result) => { 
+          result.getProperties()
+            .then((props) => {
+              console.log('props', props)
+            })
         })
+      
+      //     const properties = getBookmark.getProperties()
+      //     console.log('bookmark props', properties)
+      //   })
     }
     if (event.target.classList.contains('copy')) {
       this.copyToClipboard()
