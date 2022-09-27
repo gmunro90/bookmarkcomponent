@@ -259,7 +259,7 @@ class Bookmark {
                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
                     stroke-width="32" d="M352 176L217.6 336 160 272"/>
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="trash-icon" id="trashIcon" viewBox="0 0 512 512"><title>Trash</title>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="trash-icon" id="${bookmark.qInfo.qId}" viewBox="0 0 512 512"><title>Trash</title>
                     <path d="M296 64h-80a7.91 7.91 0 00-8 8v24h96V72a7.91 7.91 0 00-8-8z" fill="none"/>
                     <path d="M432 96h-96V72a40 40 0 00-40-40h-80a40 40 0 00-40 40v24H80a16 16 0 000 32h17l19 304.92c1.42
                      26.85 22 47.08 48 47.08h184c26.13 0 46.3-19.78 48-47l19-305h17a16 16 0 000-32zM192.57 416H192a16 16 0 
@@ -369,7 +369,7 @@ class Bookmark {
         })
       this.closeBookmark()
     }
-    if (event.target.classList.contains('delete-icon')) {
+    if (event.target.classList.contains('trash-icon')) {
       this.options.app.destroyBookmark(event.target.id)
         .then(() => {
           this.render()
@@ -499,7 +499,7 @@ class Bookmark {
     showTick.classList.add('active')
   }
   showTrashIcon () {
-    const showTrash = document.getElementById('trashIcon')
+    const showTrash = document.querySelector('.trash-icon')
     showTrash.classList.add('active')
   }
   toggleCopied () {
