@@ -236,22 +236,18 @@ var Bookmark = /*#__PURE__*/function () {
       }
 
       if (event.target.classList.contains('tick-icon')) {
-        var editTitle = document.getElementById('edit-title').innerText;
-        var editDescription = document.getElementById('edit-description').innerText;
+        var editTitle = document.getElementById('edit-title');
+        var editDescription = document.getElementById('edit-description');
         var bookmarkId = event.target.getAttribute('data-bookmark');
         this.options.app.getBookmark(bookmarkId).then(function (result) {
           result.getProperties().then(function (props) {
-            var qMetaDefTitle = props.qMetaDef.title;
-            var qMetaDefDescription = props.qMetaDef.description;
-            console.log('title', qMetaDefTitle, 'description', qMetaDefDescription);
-            qMetaDefTitle.setProperties(editTitle);
-            editDescription.setProperties(qMetaDefDescription);
+            props.qMetaDef.title = editTitle.value;
+            props.qMetaDef.description = editDescription.value;
+            result.setProperties(props);
 
             _this.render();
           });
-        }); //     const properties = getBookmark.getProperties()
-        //     console.log('bookmark props', properties)
-        //   })
+        });
       }
 
       if (event.target.classList.contains('copy')) {

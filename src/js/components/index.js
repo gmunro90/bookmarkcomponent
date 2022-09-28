@@ -387,25 +387,18 @@ class Bookmark {
       this.showTrashIcon()
     }
     if (event.target.classList.contains('tick-icon')) {
-      const editTitle = document.getElementById('edit-title').innerText
-      const editDescription = document.getElementById('edit-description').innerText
+      const editTitle = document.getElementById('edit-title')
+      const editDescription = document.getElementById('edit-description')
       const bookmarkId = event.target.getAttribute('data-bookmark')
       this.options.app.getBookmark(bookmarkId)
         .then((result) => { 
-          result.getProperties()
-            .then((props) => {
-              let qMetaDefTitle = props.qMetaDef.title
-              let qMetaDefDescription = props.qMetaDef.description
-              console.log('title', qMetaDefTitle, 'description', qMetaDefDescription)
-              qMetaDefTitle.setProperties(editTitle)
-              editDescription.setProperties(qMetaDefDescription)
-              this.render()
-            })
+          result.getProperties().then((props) => {
+            props.qMetaDef.title = editTitle.value
+            props.qMetaDef.description = editDescription.value
+            result.setProperties(props)
+            this.render()
+          })
         })
-      
-      //     const properties = getBookmark.getProperties()
-      //     console.log('bookmark props', properties)
-      //   })
     }
     if (event.target.classList.contains('copy')) {
       this.copyToClipboard()
