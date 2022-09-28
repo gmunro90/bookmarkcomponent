@@ -181,8 +181,8 @@ class Bookmark {
                     </svg>
                   </div>
                  <div id="edit-inputs" class="edit-inputs">
-                 <input type="text" id="edit-title"  value="${bookmark.qMeta.title}"/>
-                 <input type="text" id="edit-description" value="${bookmark.qMeta.description}"  />
+                 <input type="text" id="edit-title" placeholder="Bookmark title"  value="${bookmark.qMeta.title}"/>
+                 <input type="text" id="edit-description" placeholder="Bookmark description" value="${bookmark.qMeta.description}"  />
                  </div>`
             }
             publicHtml += `
@@ -260,8 +260,8 @@ class Bookmark {
                       </svg>
                     </div>
                    <div id="edit-inputs" class="edit-inputs">
-                   <input type="text" id="edit-title"  value="${bookmark.qMeta.title}"/>
-                   <input type="text" id="edit-description" value="${bookmark.qMeta.description}"  />
+                   <input type="text" id="edit-title" placeholder="Bookmark title" value="${bookmark.qMeta.title}"/>
+                   <input type="text" id="edit-description" placeholder="Bookmark description" value="${bookmark.qMeta.description}"  />
                    </div>`
             }
             bookmarkHtml += `
@@ -387,17 +387,17 @@ class Bookmark {
       this.showTrashIcon()
     }
     if (event.target.classList.contains('tick-icon')) {
-      const editTitle = document.getElementById('edit-title')
-      const editDescription = document.getElementById('edit-description')
+      const editTitle = document.getElementById('edit-title').innerText
+      const editDescription = document.getElementById('edit-description').innerText
       const bookmarkId = event.target.getAttribute('data-bookmark')
       this.options.app.getBookmark(bookmarkId)
         .then((result) => { 
           result.getProperties()
             .then((props) => {
-              const qMetaDefTitle = props.qMetaDef.title
-              const qMetaDefDescription = props.qMetaDef.description
+              let qMetaDefTitle = props.qMetaDef.title
+              let qMetaDefDescription = props.qMetaDef.description
               console.log('title', qMetaDefTitle, 'description', qMetaDefDescription)
-              editTitle.setProperties(qMetaDefTitle)
+              qMetaDefTitle.setProperties(editTitle)
               editDescription.setProperties(qMetaDefDescription)
               this.render()
             })
