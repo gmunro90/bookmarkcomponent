@@ -143,12 +143,11 @@ class Bookmark {
           })
           let publicHtml = `<div id="info-popup-mask" class="info-popup-mask"></div>`
           publicBookmarks.forEach(bookmark => {
-            console.log('public bookmark', bookmark)
             publicHtml += `
               <div class="public-li" id="public-li">
-              <span class="bookmarkText">${bookmark.qMeta.title}</span>
+              <span class="bookmark-text" data-bookmark="${bookmark.qInfo.qId}">${bookmark.qMeta.title}</span>
               <div class="date-and-i">
-              <span class="bookmarkText">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
+              <span class="bookmark-text">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
               <span class="infoBtn">
                <svg data-bookmark="${bookmark.qInfo.qId}" class="i-icon-public" id="i-icon-public" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                <title>Information Circle</title><path d="M256 56C145.72 56 56 145.72 56 256s89.72 200 200 200 200-89.72 200-200S366.28 
@@ -160,7 +159,7 @@ class Bookmark {
               </div>
              
               <div class="info-popup" id="info-popup-${bookmark.qInfo.qId}">
-              <div class="info-topline" id="info-topline">
+              <div class="info-topline" id="info-topline-${bookmark.qInfo.qId}">
               <span class="description-heading" id="description-heading">${bookmark.qMeta.description}</span>
               </div>`
               
@@ -226,9 +225,9 @@ class Bookmark {
             }
             bookmarkHtml += `
               <div class="myBookmarks-li" id="myBookmarks-li>
-                <span class="bookmarkText">${bookmark.qMeta.title}</span>
+                <span class="bookmark-text data-bookmark="${bookmark.qInfo.qId}">${bookmark.qMeta.title}</span>
                 <div class="date-and-i">
-                <span class="bookmarkText">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
+                <span class="bookmark-text">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
                 <span class="infoBtn">
                 <svg data-bookmark="${bookmark.qInfo.qId}" class="i-icon-my" id="i-icon-my" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <title>Information Circle</title><path d="M256 56C145.72 56 56 145.72 56 256s89.72 200 200 200 200-89.72 200-200S366.28 
@@ -245,7 +244,7 @@ class Bookmark {
             if (bookmark.qMeta.privileges.indexOf('update') !== -1) {
               bookmarkHtml += 
                 `
-                <svg xmlns="http://www.w3.org/2000/svg" class="edit-info" viewBox="0 0 512 512">
+                <svg xmlns="http://www.w3.org/2000/svg" class="edit-info" id="edit-info-${bookmark.qInfo.qId}" viewBox="0 0 512 512">
                 <title>Create</title><path d="M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48"
                  fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
                  <path d="M459.94 53.25a16.06 16.06 0 00-23.22-.56L424.35 65a8 8 0 000 11.31l11.34 11.32a8 8 0 0011.34
@@ -413,6 +412,14 @@ class Bookmark {
       this.copyToClipboard()
       this.toggleCopied()
     }
+    if (event.target.classList.contains('bookmark-text')) {
+      const bookmarkId = event.target.getAttribute('data-bookmark')
+      this.options.app.applyBookmark(bookmarkId)
+        .then((result) => {
+          // console.log('apply result', result)
+          this.render()
+        })
+    }
   }
   handleChange (event) {
     if (event.target.classList.contains('search')) {
@@ -479,8 +486,8 @@ class Bookmark {
     })
     const bookmarkId = event.target.getAttribute('data-bookmark')
     const toggleInfo = document.getElementById(`info-popup-${bookmarkId}`)
-    const mask = document.getElementById('info-popup-mask')
     toggleInfo.classList.add('active')
+    const mask = document.getElementById('info-popup-mask')
     mask.classList.add('active')
   }
   enableCreate () {
@@ -489,8 +496,11 @@ class Bookmark {
   disableCreate () {
     document.getElementById('createSubmit').disabled = true
   }
-  editInfo () {
+  editInfo (event) {
     const editInputs = document.getElementById('edit-inputs')
+    // const bookmarkId = event.target.getAttribute('data-bookmark')
+    // const toggleEdit = document.getElementById(`edit-info-${bookmarkId}`)
+    // toggleEdit.classList.add('active')
     editInputs.classList.toggle('active')
     this.hideInfoTopline()
   }
