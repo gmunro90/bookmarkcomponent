@@ -249,6 +249,9 @@ class Bookmark {
                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
                     stroke-width="32" d="M352 176L217.6 336 160 272"/>
                     </svg>
+                
+
+
                     <svg xmlns="http://www.w3.org/2000/svg" class="trash-icon" id="${bookmark.qInfo.qId}" viewBox="0 0 512 512"><title>Trash</title>
                     <path d="M296 64h-80a7.91 7.91 0 00-8 8v24h96V72a7.91 7.91 0 00-8-8z" fill="none"/>
                     <path d="M432 96h-96V72a40 40 0 00-40-40h-80a40 40 0 00-40 40v24H80a16 16 0 000 32h17l19 304.92c1.42
@@ -275,16 +278,6 @@ class Bookmark {
               </div>
               </div>
               `
-            if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
-              bookmarkHtml += ` 
-              <svg id=${bookmark.qInfo.qId} xmlns='http://www.w3.org/2000/svg' class='delete-icon'
-                viewBox='0 0 512 512'><title>Close</title><path fill='none'
-                stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'
-                  stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
-              </svg>
-            </div>
-                  `
-            }
           })
           const publicPlaceholder = document.getElementById('public-placeholder')
           publicPlaceholder.innerHTML = publicHtml
