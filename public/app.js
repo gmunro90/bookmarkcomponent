@@ -385,13 +385,13 @@ var Bookmark = /*#__PURE__*/function () {
     key: "showTickIcon",
     value: function showTickIcon() {
       var showTick = document.getElementById('tick-icon');
-      showTick.classList.add('active');
+      showTick.classList.toggle('active');
     }
   }, {
     key: "showTrashIcon",
     value: function showTrashIcon() {
       var showTrash = document.querySelector('.trash-icon');
-      showTrash.classList.add('active');
+      showTrash.classList.toggle('active');
     }
   }, {
     key: "toggleCopied",

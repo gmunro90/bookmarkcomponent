@@ -510,11 +510,11 @@ class Bookmark {
   }
   showTickIcon () {
     const showTick = document.getElementById('tick-icon')
-    showTick.classList.add('active')
+    showTick.classList.toggle('active')
   }
   showTrashIcon () {
     const showTrash = document.querySelector('.trash-icon')
-    showTrash.classList.add('active')
+    showTrash.classList.toggle('active')
   }
   toggleCopied () {
     const inputBox = document.getElementById('copied')
