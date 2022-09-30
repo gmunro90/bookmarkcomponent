@@ -151,13 +151,13 @@ class Bookmark {
               </div>
              
               <div class="info-popup" id="info-popup-${bookmark.qInfo.qId}">
-              <div class="info-topline" id="info-topline-${bookmark.qInfo.qId}">
+              <div class="info-topline" id="info-topline-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
               <span class="description-heading" id="description-heading">${bookmark.qMeta.description}</span>
               </div>`
               
             if (bookmark.qMeta.privileges.indexOf('update') !== -1) { 
               publicHtml += `
-              <svg xmlns="http://www.w3.org/2000/svg" data-bookmark="${bookmark.qInfo.qId}" class="edit-info" viewBox="0 0 512 512">
+              <svg xmlns="http://www.w3.org/2000/svg" data-bookmark="${bookmark.qInfo.qId}" class="edit-info" id="edit-info-${bookmark.qInfo.qId}" viewBox="0 0 512 512">
               <title>Create</title><path d="M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48"
                fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
                <path d="M459.94 53.25a16.06 16.06 0 00-23.22-.56L424.35 65a8 8 0 000 11.31l11.34 11.32a8 8 0 0011.34
@@ -170,8 +170,11 @@ class Bookmark {
                  <title>Checkmark Circle</title><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none"
                   stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
                   stroke-width="32" d="M352 176L217.6 336 160 272"/>
-                  </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="trash-icon" id="trashIcon" viewBox="0 0 512 512"><title>Trash</title>
+                  </svg>`
+
+              if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
+                publicHtml += `
+                  <svg xmlns="http://www.w3.org/2000/svg" class="trash-icon" data-bookmark="${bookmark.qInfo.qId}" id="trashIcon-${bookmark.qInfo.qId}" viewBox="0 0 512 512"><title>Trash</title>
                   <path d="M296 64h-80a7.91 7.91 0 00-8 8v24h96V72a7.91 7.91 0 00-8-8z" fill="none"/>
                   <path d="M432 96h-96V72a40 40 0 00-40-40h-80a40 40 0 00-40 40v24H80a16 16 0 000 32h17l19 304.92c1.42
                    26.85 22 47.08 48 47.08h184c26.13 0 46.3-19.78 48-47l19-305h17a16 16 0 000-32zM192.57 416H192a16 16 0 
@@ -180,9 +183,12 @@ class Bookmark {
                     399.43l8-224a16 16 0 1132 1.14z"/>
                     </svg>
                   </div>
-                 <div id="edit-inputs" class="edit-inputs">
-                 <input type="text" id="edit-title" placeholder="Bookmark title"  value="${bookmark.qMeta.title}"/>
-                 <input type="text" id="edit-description" placeholder="Bookmark description" value="${bookmark.qMeta.description}"  />
+                  `
+              }
+              publicHtml += `
+                 <div id="edit-inputs-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}" class="edit-inputs">
+                 <input type="text" id="edit-title-${bookmark.qInfo.qId}" placeholder="Bookmark title"  value="${bookmark.qMeta.title}"/>
+                 <input type="text" id="edit-description-${bookmark.qInfo.qId}" placeholder="Bookmark description" value="${bookmark.qMeta.description}"  />
                  </div>`
             }
             publicHtml += `
@@ -193,21 +199,12 @@ class Bookmark {
             
               <div class="flex">
               <div class="copied" id="copied"><h5>copied to clipboard</h5></div>
-              <button class="copy">Copy</button>
+              <button class="copy" data-bookmark="${bookmark.qInfo.qId}" id="copyBtn-${bookmark.qInfo.qId}" >Copy</button>
               </div>
-              
               </div>
               </div>
              
               `
-            if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
-              publicHtml += ` <svg id=${bookmark.qInfo.qId} xmlns='http://www.w3.org/2000/svg' class='delete-icon'
-                viewBox='0 0 512 512'><title>Close</title><path fill='none'
-                stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'
-                  stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
-                  </svg>
-                  `
-            }
           })
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {
@@ -217,7 +214,7 @@ class Bookmark {
               createDate = new Date(bookmark.qMeta.createdDate)
             }
             bookmarkHtml += `
-              <div class="myBookmarks-li" id="myBookmarks-li>
+              <div class="myBookmarks-li" id="myBookmarks-li >
                 <span class="bookmark-text data-bookmark="${bookmark.qInfo.qId}">${bookmark.qMeta.title}</span>
                 <div class="date-and-i">
                 <span class="bookmark-text">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
@@ -278,7 +275,7 @@ class Bookmark {
               <input type="text" READONLY class="info-input" value="${bookmark.qData.selectionFields}" />
               <div class="flex">
               <div class="copied" id="copied"><h5>copied to clipboard</h5></div>
-              <button class="copy">Copy</button>
+              <button class="copy" data-bookmark="${bookmark.qInfo.qId}" id="copyBtn-${bookmark.qInfo.qId}" >Copy</button>
               </div>
               </div>
               </div>
@@ -358,7 +355,9 @@ class Bookmark {
       this.closeBookmark()
     }
     if (event.target.classList.contains('trash-icon')) {
-      this.options.app.destroyBookmark(event.target.id)
+      const bookmarkId = event.target.getAttribute('data-bookmark')
+      const deleteThis = document.getElementById(`trashIcon-${bookmarkId}`)
+      this.options.app.destroyBookmark(deleteThis)
         .then(() => {
           this.render()
         })
@@ -397,10 +396,6 @@ class Bookmark {
           })
         })
     }
-    if (event.target.classList.contains('copy')) {
-      this.copyToClipboard()
-      this.toggleCopied()
-    }
     if (event.target.classList.contains('public-li') || (event.target.classList.contains('myBookmarks-li'))) {
       const bookmarkId = event.target.getAttribute('data-bookmark')
       this.options.app.applyBookmark(bookmarkId)
@@ -408,6 +403,10 @@ class Bookmark {
           console.log('apply result', result)
           /* add closing function */
         })
+    }
+    if (event.target.classList.contains('copy')) {
+      this.copyToClipboard(event)
+      this.toggleCopied(event)
     }
   }
   handleChange (event) {
@@ -449,8 +448,9 @@ class Bookmark {
     bookmarkContainer.style.opacity = '.4'
   }
   copyToClipboard (event) {
-    // const bookmarkId = event.target.getAttribute('data-bookmark')
+    const bookmarkId = event.target.getAttribute('data-bookmark')
     const copyText = document.getElementById('infoInput')
+    const copyBtn = document.getElementById(`copyBtn-${bookmarkId}`)
     copyText.select()
     navigator.clipboard.writeText(copyText.value)
   }
