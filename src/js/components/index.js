@@ -198,7 +198,7 @@ class Bookmark {
               <input type="text" READONLY class="info-input" id="infoInput" value="${bookmark.qData.selectionFields}" />
             
               <div class="flex">
-              <div class="copied" id="copied"><h5>copied to clipboard</h5></div>
+              <div class="copied" data-bookmark="${bookmark.qInfo.qId}" id="copied-${bookmark.qInfo.qId}"><h5>copied to clipboard</h5></div>
               <button class="copy" data-bookmark="${bookmark.qInfo.qId}" id="copyBtn-${bookmark.qInfo.qId}" >Copy</button>
               </div>
               </div>
@@ -274,7 +274,7 @@ class Bookmark {
               <span class="set-expression">Set expression</span>
               <input type="text" READONLY class="info-input" value="${bookmark.qData.selectionFields}" />
               <div class="flex">
-              <div class="copied" id="copied"><h5>copied to clipboard</h5></div>
+              <div class="copied" data-bookmark="${bookmark.qInfo.qId}" id="copied"><h5>copied to clipboard</h5></div>
               <button class="copy" data-bookmark="${bookmark.qInfo.qId}" id="copyBtn-${bookmark.qInfo.qId}" >Copy</button>
               </div>
               </div>
@@ -454,6 +454,13 @@ class Bookmark {
     copyText.select()
     navigator.clipboard.writeText(copyText.value)
   }
+  toggleCopied (event) {
+    const bookmarkId = event.target.getAttribute('data-bookmark')
+    const inputBox = document.getElementById(`copied-${bookmarkId}`)
+    console.log('what is it', inputBox)
+    inputBox.classList.toggle('active')
+    setTimeout(this.toggleCopied, 3000)
+  }
   closeBookmark () {
     const createNew = document.getElementById('createForm')
     createNew.style.display = 'none'
@@ -507,10 +514,5 @@ class Bookmark {
     const bookmarkId = event.target.getAttribute('data-bookmark')
     const showTrash = document.getElementById(`trashIcon-${bookmarkId}`)
     showTrash.classList.toggle('active')
-  }
-  toggleCopied () {
-    const inputBox = document.getElementById('copied')
-    inputBox.classList.toggle('active')
-    setTimeout(this.toggleCopied, 3000)
   }
 }

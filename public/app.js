@@ -95,7 +95,7 @@ var Bookmark = /*#__PURE__*/function () {
               publicHtml += "\n                 <div id=\"edit-inputs-".concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" class=\"edit-inputs\">\n                 <input type=\"text\" id=\"edit-title-").concat(bookmark.qInfo.qId, "\" placeholder=\"Bookmark title\"  value=\"").concat(bookmark.qMeta.title, "\"/>\n                 <input type=\"text\" id=\"edit-description-").concat(bookmark.qInfo.qId, "\" placeholder=\"Bookmark description\" value=\"").concat(bookmark.qMeta.description, "\"  />\n                 </div>");
             }
 
-            publicHtml += "\n              <span class=\"selections\"><b>Selections:</b> ".concat(bookmark.qData.selectionFields, " </span>\n              <div class=\"info-copy\">\n              <span class=\"set-expression\">Set expression</span>\n              <input type=\"text\" READONLY class=\"info-input\" id=\"infoInput\" value=\"").concat(bookmark.qData.selectionFields, "\" />\n            \n              <div class=\"flex\">\n              <div class=\"copied\" id=\"copied\"><h5>copied to clipboard</h5></div>\n              <button class=\"copy\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copyBtn-").concat(bookmark.qInfo.qId, "\" >Copy</button>\n              </div>\n              </div>\n              </div>\n             \n              ");
+            publicHtml += "\n              <span class=\"selections\"><b>Selections:</b> ".concat(bookmark.qData.selectionFields, " </span>\n              <div class=\"info-copy\">\n              <span class=\"set-expression\">Set expression</span>\n              <input type=\"text\" READONLY class=\"info-input\" id=\"infoInput\" value=\"").concat(bookmark.qData.selectionFields, "\" />\n            \n              <div class=\"flex\">\n              <div class=\"copied\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copied-").concat(bookmark.qInfo.qId, "\"><h5>copied to clipboard</h5></div>\n              <button class=\"copy\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copyBtn-").concat(bookmark.qInfo.qId, "\" >Copy</button>\n              </div>\n              </div>\n              </div>\n             \n              ");
           });
           var bookmarkHtml = '';
           myBookmarks.forEach(function (bookmark) {
@@ -118,7 +118,7 @@ var Bookmark = /*#__PURE__*/function () {
               bookmarkHtml += "\n                   <div id=\"edit-inputs-".concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" class=\"edit-inputs\">\n                   <input type=\"text\" id=\"edit-title-").concat(bookmark.qInfo.qId, "\" placeholder=\"Bookmark title\" value=\"").concat(bookmark.qMeta.title, "\"/>\n                   <input type=\"text\" id=\"edit-description-").concat(bookmark.qInfo.qId, "\" placeholder=\"Bookmark description\" value=\"").concat(bookmark.qMeta.description, "\"  />\n                   </div>");
             }
 
-            bookmarkHtml += "\n              <span class=\"selections\"><b>Selections:</b> ".concat(bookmark.qData.selectionFields, " </span>\n              <div class=\"info-copy\">\n              <span class=\"set-expression\">Set expression</span>\n              <input type=\"text\" READONLY class=\"info-input\" value=\"").concat(bookmark.qData.selectionFields, "\" />\n              <div class=\"flex\">\n              <div class=\"copied\" id=\"copied\"><h5>copied to clipboard</h5></div>\n              <button class=\"copy\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copyBtn-").concat(bookmark.qInfo.qId, "\" >Copy</button>\n              </div>\n              </div>\n              </div>\n              ");
+            bookmarkHtml += "\n              <span class=\"selections\"><b>Selections:</b> ".concat(bookmark.qData.selectionFields, " </span>\n              <div class=\"info-copy\">\n              <span class=\"set-expression\">Set expression</span>\n              <input type=\"text\" READONLY class=\"info-input\" value=\"").concat(bookmark.qData.selectionFields, "\" />\n              <div class=\"flex\">\n              <div class=\"copied\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copied\"><h5>copied to clipboard</h5></div>\n              <button class=\"copy\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copyBtn-").concat(bookmark.qInfo.qId, "\" >Copy</button>\n              </div>\n              </div>\n              </div>\n              ");
           });
           var publicPlaceholder = document.getElementById('public-placeholder');
           publicPlaceholder.innerHTML = publicHtml;
@@ -333,6 +333,15 @@ var Bookmark = /*#__PURE__*/function () {
       navigator.clipboard.writeText(copyText.value);
     }
   }, {
+    key: "toggleCopied",
+    value: function toggleCopied(event) {
+      var bookmarkId = event.target.getAttribute('data-bookmark');
+      var inputBox = document.getElementById("copied-".concat(bookmarkId));
+      console.log('what is it', inputBox);
+      inputBox.classList.toggle('active');
+      setTimeout(this.toggleCopied, 3000);
+    }
+  }, {
     key: "closeBookmark",
     value: function closeBookmark() {
       var createNew = document.getElementById('createForm');
@@ -405,13 +414,6 @@ var Bookmark = /*#__PURE__*/function () {
       var bookmarkId = event.target.getAttribute('data-bookmark');
       var showTrash = document.getElementById("trashIcon-".concat(bookmarkId));
       showTrash.classList.toggle('active');
-    }
-  }, {
-    key: "toggleCopied",
-    value: function toggleCopied() {
-      var inputBox = document.getElementById('copied');
-      inputBox.classList.toggle('active');
-      setTimeout(this.toggleCopied, 3000);
     }
   }]);
 
