@@ -261,10 +261,8 @@ var Bookmark = /*#__PURE__*/function () {
       if (event.target.classList.contains('public-li') || event.target.classList.contains('myBookmarks-li')) {
         var _bookmarkId2 = event.target.getAttribute('data-bookmark');
 
-        this.options.app.applyBookmark(_bookmarkId2).then(function (result) {
-          console.log('apply result', result);
-          /* add closing function */
-        });
+        this.options.app.applyBookmark(_bookmarkId2).then();
+        this.closeForm();
       }
 
       if (event.target.classList.contains('copy')) {
@@ -337,7 +335,6 @@ var Bookmark = /*#__PURE__*/function () {
     value: function toggleCopied(event) {
       var bookmarkId = event.target.getAttribute('data-bookmark');
       var inputBox = document.getElementById("copied-".concat(bookmarkId));
-      console.log('what is it', inputBox);
       inputBox.classList.toggle('active');
       setTimeout(this.toggleCopied, 3000);
     }

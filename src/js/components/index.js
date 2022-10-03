@@ -399,10 +399,8 @@ class Bookmark {
     if (event.target.classList.contains('public-li') || (event.target.classList.contains('myBookmarks-li'))) {
       const bookmarkId = event.target.getAttribute('data-bookmark')
       this.options.app.applyBookmark(bookmarkId)
-        .then((result) => {
-          console.log('apply result', result)
-          /* add closing function */
-        })
+        .then()
+      this.closeForm()
     }
     if (event.target.classList.contains('copy')) {
       this.copyToClipboard(event)
@@ -457,7 +455,6 @@ class Bookmark {
   toggleCopied (event) {
     const bookmarkId = event.target.getAttribute('data-bookmark')
     const inputBox = document.getElementById(`copied-${bookmarkId}`)
-    console.log('what is it', inputBox)
     inputBox.classList.toggle('active')
     setTimeout(this.toggleCopied, 3000)
   }
