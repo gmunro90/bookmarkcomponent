@@ -19,6 +19,7 @@ class Bookmark {
       el.addEventListener('click', this.handleClick.bind(this))
       el.addEventListener('keyup', this.handleKeyUp.bind(this))
       el.addEventListener('change', this.handleChange.bind(this))
+      el.addEventListener('contextmenu', this.handleContextMenu.bind(this))
       let html = `<div>
       <svg xmlns='http://www.w3.org/2000/svg' class='bookmarkBtn' viewBox='0 0 512 512'>
         <title>Bookmark</title>
@@ -93,7 +94,6 @@ class Bookmark {
       this.render()
     }    
   }
-  
   render (searchText) {
     let publicCount = document.getElementById('publicCount')
     let publicBookmarks = []
@@ -180,6 +180,13 @@ class Bookmark {
                   stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
                   stroke-width="32" d="M352 176L217.6 336 160 272"/>
                   </svg>`
+              if (bookmark.qMeta.privileges.indexOf('publish') !== -1) {
+                publicHtml += `
+                <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
+                <span>testing</span>
+                </div>
+                `
+              }
 
               if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
                 publicHtml += `
@@ -223,7 +230,7 @@ class Bookmark {
               createDate = new Date(bookmark.qMeta.createdDate)
             }
             bookmarkHtml += `
-              <div class="myBookmarks-li" id="myBookmarks-li >
+              <div class="myBookmarks-li" id="myBookmarks-li data-bookmark="${bookmark.qInfo.qId} >
                 <span class="bookmark-text data-bookmark="${bookmark.qInfo.qId}">${bookmark.qMeta.title}</span>
                 <div class="date-and-i">
                 <span class="bookmark-text">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
@@ -257,6 +264,14 @@ class Bookmark {
                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
                     stroke-width="32" d="M352 176L217.6 336 160 272"/>
                     </svg>`
+
+              if (bookmark.qMeta.privileges.indexOf('publish') !== -1) {
+                bookmarkHtml += `
+                      <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
+                      <span>testing</span>
+                      </div>
+                      `
+              }
 
               if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
                 bookmarkHtml += `
@@ -521,11 +536,15 @@ class Bookmark {
     const showTrash = document.getElementById(`trashIcon-${bookmarkId}`)
     showTrash.classList.toggle('active')
   }
-}
-
-window.oncontextmenu = (event) => {
-  event.preventDefault()
-  console.log('success')
+  handleContextMenu (event) {
+    if (event.target.classList.contains('public-li') || (event.target.classList.contains('myBookmarks-li'))) {
+      event.preventDefault()
+      const bookmarkId = event.target.getAttribute('data-bookmark')
+      const rightClickMenu = document.getElementById(`rightClickPopup-${bookmarkId}`)
+      console.log(rightClickMenu)
+      // rightClickMenu.classList.toggle('active')
+    }
+  }
 }
 
 

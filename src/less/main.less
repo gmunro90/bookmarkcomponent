@@ -405,3 +405,17 @@ hr {
   position: relative;
   display: inline-block;
 }
+.right-click-popup {
+  color: rgb(172, 36, 36);
+  display: none;
+  width: 100px;
+  height: 100px;
+  border: 3px solid rgb(169, 207, 246);
+  border-radius: 5px;
+  padding: 10px;
+  &.active {
+    display: block;
+    z-index: 2;
+    position: relative;
+  }
+}
