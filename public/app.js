@@ -417,6 +417,11 @@ var Bookmark = /*#__PURE__*/function () {
   return Bookmark;
 }();
 
+window.oncontextmenu = function (event) {
+  event.preventDefault();
+  console.log('success');
+};
+
 var session = enigma.create({
   schema: schema,
   url: 'wss://ec2-3-86-99-193.compute-1.amazonaws.com/app//d077bbca-1fa2-4564-83d5-88f801899a5c'

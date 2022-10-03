@@ -513,3 +513,8 @@ class Bookmark {
     showTrash.classList.toggle('active')
   }
 }
+
+window.oncontextmenu = (event) => {
+  event.preventDefault()
+  console.log('success')
+}

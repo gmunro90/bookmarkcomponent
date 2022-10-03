@@ -523,6 +523,11 @@ class Bookmark {
   }
 }
 
+window.oncontextmenu = (event) => {
+  event.preventDefault()
+  console.log('success')
+}
+
 
 const session = enigma.create({
   schema, 
