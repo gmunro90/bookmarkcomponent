@@ -171,14 +171,6 @@ class Bookmark {
                   stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
                   stroke-width="32" d="M352 176L217.6 336 160 272"/>
                   </svg>`
-              if (bookmark.qMeta.privileges.indexOf('publish') !== -1) {
-                publicHtml += `
-                <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
-                <span>testing</span>
-                </div>
-                `
-              }
-
               if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
                 publicHtml += `
                   <svg xmlns="http://www.w3.org/2000/svg" class="trash-icon" data-bookmark="${bookmark.qInfo.qId}" id="trashIcon-${bookmark.qInfo.qId}" viewBox="0 0 512 512"><title>Trash</title>
@@ -210,8 +202,18 @@ class Bookmark {
               </div>
               </div>
               </div>
-             
               `
+            if (bookmark.qMeta.privileges.indexOf('publish') !== -1) {
+              publicHtml += `
+                <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
+                <ul class="right-click-menu">
+                  <li class="li-item">Apply bookmark</li>
+                  <li class="li-item">Publish</li>
+                  <li class="li-item">Delete</li>
+                </ul>
+                </div>
+                `
+            }
           })
           let bookmarkHtml = ''
           myBookmarks.forEach(bookmark => {
@@ -256,14 +258,6 @@ class Bookmark {
                     stroke-width="32" d="M352 176L217.6 336 160 272"/>
                     </svg>`
 
-              if (bookmark.qMeta.privileges.indexOf('publish') !== -1) {
-                bookmarkHtml += `
-                      <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
-                      <span>testing</span>
-                      </div>
-                      `
-              }
-
               if (bookmark.qMeta.privileges.indexOf('delete') !== -1) {
                 bookmarkHtml += `
                     <svg xmlns="http://www.w3.org/2000/svg" class="trash-icon" data-bookmark="${bookmark.qInfo.qId}" id="trashIcon-${bookmark.qInfo.qId}" viewBox="0 0 512 512"><title>Trash</title>
@@ -295,6 +289,17 @@ class Bookmark {
               </div>
               </div>
               `
+            if (bookmark.qMeta.privileges.indexOf('publish') !== -1) {
+              bookmarkHtml += `
+                      <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
+                      <ul class="right-click-menu">
+                        <li class="li-item">Apply bookmark</li>
+                        <li class="li-item">Publish</li>
+                        <li class="li-item">Delete</li>
+                      </ul>
+                      </div>
+                      `
+            }
           })
           const publicPlaceholder = document.getElementById('public-placeholder')
           publicPlaceholder.innerHTML = publicHtml
@@ -531,7 +536,10 @@ class Bookmark {
       event.preventDefault()
       const bookmarkId = event.target.getAttribute('data-bookmark')
       const rightClickMenu = document.getElementById(`rightClickPopup-${bookmarkId}`)
+      console.log(rightClickMenu)
       rightClickMenu.classList.toggle('active')
+
+      // this.options.app.publish('')
     }
   }
 }
