@@ -411,9 +411,10 @@ hr {
 .right-click-popup {
   color: #595959;
   display: none;
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: auto;
   border: 1px solid #595959;
+  box-shadow: #595959;
   &.active {
     display: block;
     list-style: none;
@@ -421,4 +422,11 @@ hr {
 }
 .li-item {
   list-style: none;
+  font-weight: 400;
+  font-size: .9em;
+  cursor: pointer;
+  padding: 0 5px;
+}
+.li-item:hover {
+  background-color: #f0f0f0;
 }

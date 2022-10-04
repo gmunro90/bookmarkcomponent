@@ -292,11 +292,11 @@ class Bookmark {
             if (bookmark.qMeta.privileges.indexOf('publish') !== -1) {
               bookmarkHtml += `
                       <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
-                      <ul class="right-click-menu">
-                        <li class="li-item">Apply bookmark</li>
-                        <li class="li-item">Publish</li>
-                        <li class="li-item">Delete</li>
-                      </ul>
+                      <div class="right-click-menu">
+                        <p class="li-item">Apply bookmark</p>
+                        <p class="li-item">Publish</p>
+                        <p class="li-item">Delete</p>
+                      </div>
                       </div>
                       `
             }
@@ -536,9 +536,7 @@ class Bookmark {
       event.preventDefault()
       const bookmarkId = event.target.getAttribute('data-bookmark')
       const rightClickMenu = document.getElementById(`rightClickPopup-${bookmarkId}`)
-      console.log(rightClickMenu)
       rightClickMenu.classList.toggle('active')
-
       // this.options.app.publish('')
     }
   }

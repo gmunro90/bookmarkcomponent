@@ -126,7 +126,7 @@ var Bookmark = /*#__PURE__*/function () {
             bookmarkHtml += "\n              <span class=\"selections\"><b>Selections:</b> ".concat(bookmark.qData.selectionFields, " </span>\n              <div class=\"info-copy\">\n              <span class=\"set-expression\">Set expression</span>\n              <input type=\"text\" READONLY class=\"info-input\" value=\"").concat(bookmark.qData.selectionFields, "\" />\n              <div class=\"flex\">\n              <div class=\"copied\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copied\"><h5>copied to clipboard</h5></div>\n              <button class=\"copy\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copyBtn-").concat(bookmark.qInfo.qId, "\" >Copy</button>\n              </div>\n              </div>\n              </div>\n              ");
 
             if (bookmark.qMeta.privileges.indexOf('publish') !== -1) {
-              bookmarkHtml += "\n                      <div class=\"right-click-popup\" id=\"rightClickPopup-".concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">\n                      <ul class=\"right-click-menu\">\n                        <li class=\"li-item\">Apply bookmark</li>\n                        <li class=\"li-item\">Publish</li>\n                        <li class=\"li-item\">Delete</li>\n                      </ul>\n                      </div>\n                      ");
+              bookmarkHtml += "\n                      <div class=\"right-click-popup\" id=\"rightClickPopup-".concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">\n                      <div class=\"right-click-menu\">\n                        <p class=\"li-item\">Apply bookmark</p>\n                        <p class=\"li-item\">Publish</p>\n                        <p class=\"li-item\">Delete</p>\n                      </div>\n                      </div>\n                      ");
             }
           });
           var publicPlaceholder = document.getElementById('public-placeholder');
@@ -429,7 +429,6 @@ var Bookmark = /*#__PURE__*/function () {
         event.preventDefault();
         var bookmarkId = event.target.getAttribute('data-bookmark');
         var rightClickMenu = document.getElementById("rightClickPopup-".concat(bookmarkId));
-        console.log(rightClickMenu);
         rightClickMenu.classList.toggle('active'); // this.options.app.publish('')
       }
     }
