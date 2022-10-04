@@ -218,8 +218,7 @@ var Bookmark = /*#__PURE__*/function () {
 
       if (event.target.classList.contains('trash-icon')) {
         var bookmarkId = event.target.getAttribute('data-bookmark');
-        var deleteThis = document.getElementById("trashIcon-".concat(bookmarkId));
-        this.options.app.destroyBookmark(deleteThis).then(function () {
+        this.options.app.destroyBookmark(bookmarkId).then(function () {
           _this.render();
         });
       }
@@ -441,9 +440,7 @@ var session = enigma.create({
   url: 'wss://ec2-3-86-99-193.compute-1.amazonaws.com/app//d077bbca-1fa2-4564-83d5-88f801899a5c'
 });
 session.open().then(function (global) {
-  console.log(global);
   global.openDoc('d077bbca-1fa2-4564-83d5-88f801899a5c').then(function (app) {
-    console.log(app);
     var bookmark = new Bookmark('websy-bookmark', {
       app: app
     });

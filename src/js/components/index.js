@@ -371,8 +371,7 @@ class Bookmark {
     }
     if (event.target.classList.contains('trash-icon')) {
       const bookmarkId = event.target.getAttribute('data-bookmark')
-      const deleteThis = document.getElementById(`trashIcon-${bookmarkId}`)
-      this.options.app.destroyBookmark(deleteThis)
+      this.options.app.destroyBookmark(bookmarkId)
         .then(() => {
           this.render()
         })
