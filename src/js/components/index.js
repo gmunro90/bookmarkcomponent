@@ -221,7 +221,7 @@ class Bookmark {
               createDate = new Date(bookmark.qMeta.createdDate)
             }
             bookmarkHtml += `
-              <div class="myBookmarks-li" id="myBookmarks-li data-bookmark="${bookmark.qInfo.qId} >
+              <div class="myBookmarks-li" id="myBookmarks-li" data-bookmark="${bookmark.qInfo.qId}">
                 <span class="bookmark-text data-bookmark="${bookmark.qInfo.qId}">${bookmark.qMeta.title}</span>
                 <div class="date-and-i">
                 <span class="bookmark-text">${new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10)}</span>
@@ -400,20 +400,20 @@ class Bookmark {
       const bookmarkId = event.target.getAttribute('data-bookmark')
       const editTitle = document.getElementById(`edit-title-${bookmarkId}`)
       const editDescription = document.getElementById(`edit-description-${bookmarkId}`)
-      this.options.app.getBookmark(bookmarkId)
-        .then((result) => { 
-          result.getProperties().then((props) => {
-            props.qMetaDef.title = editTitle.value
-            props.qMetaDef.description = editDescription.value
-            result.setProperties(props)
-            this.render()
-          })
+      this.options.app.getBookmark(bookmarkId).then((result) => { 
+        result.getProperties().then((props) => {
+          props.qMetaDef.title = editTitle.value
+          props.qMetaDef.description = editDescription.value
+          result.setProperties(props)
+          this.render()
         })
+      })
     }
     if (event.target.classList.contains('public-li') || (event.target.classList.contains('myBookmarks-li'))) {
       const bookmarkId = event.target.getAttribute('data-bookmark')
-      this.options.app.applyBookmark(bookmarkId)
-        .then()
+      this.options.app.applyBookmark(bookmarkId).then(result => {
+        console.log(result)
+      })
       this.closeForm()
     }
     if (event.target.classList.contains('copy')) {
@@ -531,8 +531,7 @@ class Bookmark {
       event.preventDefault()
       const bookmarkId = event.target.getAttribute('data-bookmark')
       const rightClickMenu = document.getElementById(`rightClickPopup-${bookmarkId}`)
-      console.log(rightClickMenu)
-      // rightClickMenu.classList.toggle('active')
+      rightClickMenu.classList.toggle('active')
     }
   }
 }
