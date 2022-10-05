@@ -216,9 +216,9 @@ class Bookmark {
               publicHtml += `
                 <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
                 <ul class="right-click-menu">
-                  <li class="li-item">Apply bookmark</li>
-                  <li class="li-item">Publish</li>
-                  <li class="li-item">Delete</li>
+                  <li class="li-item" data-bookmark="${bookmark.qInfo.qId}">Apply bookmark</li>
+                  <li class="li-item" data-bookmark="${bookmark.qInfo.qId}">Publish</li>
+                  <li class="li-item" data-bookmark="${bookmark.qInfo.qId}">Delete</li>
                 </ul>
                 </div>
                 `
@@ -302,9 +302,9 @@ class Bookmark {
               bookmarkHtml += `
                       <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
                       <div class="right-click-menu">
-                        <p class="li-item">Apply bookmark</p>
-                        <p class="li-item">Publish</p>
-                        <p class="li-item">Delete</p>
+                        <p class="li-item" data-bookmark="${bookmark.qInfo.qId}">Apply bookmark</p>
+                        <p class="li-item" data-bookmark="${bookmark.qInfo.qId}">Publish</p>
+                        <p class="li-item" data-bookmark="${bookmark.qInfo.qId}">Delete</p>
                       </div>
                       </div>
                       `
@@ -546,7 +546,14 @@ class Bookmark {
       const bookmarkId = event.target.getAttribute('data-bookmark')
       const rightClickMenu = document.getElementById(`rightClickPopup-${bookmarkId}`)
       rightClickMenu.classList.toggle('active')
-      // this.options.app.publish('')
+    }
+  }
+  publish (event) {
+    if (event.target.classlist.contains('')) {
+      const bookmarkId = event.target.getAttribute('data-bookmark')
+      const publishBtn = document.getElementById(``)
+      console.log('publish clicked')
+    // this.options.app.publish('')
     }
   }
 }
