@@ -216,9 +216,7 @@ class Bookmark {
               publicHtml += `
                 <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
                 <ul class="right-click-menu">
-                  <li class="li-item" data-bookmark="${bookmark.qInfo.qId}">Apply bookmark</li>
-                  <li class="li-item" data-bookmark="${bookmark.qInfo.qId}">Publish</li>
-                  <li class="li-item" data-bookmark="${bookmark.qInfo.qId}">Delete</li>
+                  <p class="publish-btn" id="publishBtn-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">Publish</p>
                 </ul>
                 </div>
                 `
@@ -302,9 +300,7 @@ class Bookmark {
               bookmarkHtml += `
                       <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
                       <div class="right-click-menu">
-                        <p class="li-item" data-bookmark="${bookmark.qInfo.qId}">Apply bookmark</p>
-                        <p class="li-item" data-bookmark="${bookmark.qInfo.qId}">Publish</p>
-                        <p class="li-item" data-bookmark="${bookmark.qInfo.qId}">Delete</p>
+                        <p class="publish-btn" id="publishBtn-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">Publish</p>
                       </div>
                       </div>
                       `
@@ -434,6 +430,10 @@ class Bookmark {
       this.copyToClipboard(event)
       this.toggleCopied(event)
     }
+    if (event.target.classList.contains('publish-btn')) {
+      this.publish(event)
+      this.handleContextMenu(event) // closes the context menu on publish
+    }
   }
   handleChange (event) {
     if (event.target.classList.contains('search')) {
@@ -445,6 +445,11 @@ class Bookmark {
     input = document.getElementById('myInput')
     filter = input.value.toLowerCase()
     this.render(filter)
+  }
+  publish (event) {
+    const bookmarkId = event.target.getAttribute('data-bookmark')
+    const streamId = document.getElementById(`publishBtn-${bookmarkId}`)
+    this.options.app.publish(streamId)
   }
   openForm () {
     const myForm = document.getElementById('bookmarkPopup')
@@ -548,20 +553,12 @@ class Bookmark {
       rightClickMenu.classList.toggle('active')
     }
   }
-  publish (event) {
-    if (event.target.classlist.contains('')) {
-      const bookmarkId = event.target.getAttribute('data-bookmark')
-      const publishBtn = document.getElementById(``)
-      console.log('publish clicked')
-    // this.options.app.publish('')
-    }
-  }
 }
 
 
 const session = enigma.create({
   schema, 
-  url: 'wss://ec2-3-86-99-193.compute-1.amazonaws.com/app//d077bbca-1fa2-4564-83d5-88f801899a5c'
+  url: 'wss://ec2-3-86-99-193.compute-1.amazonaws.com/app/d077bbca-1fa2-4564-83d5-88f801899a5c'
 })
 
 session.open().then(global => {

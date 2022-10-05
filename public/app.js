@@ -99,7 +99,7 @@ var Bookmark = /*#__PURE__*/function () {
             publicHtml += "\n              <span class=\"selections\"><b>Selections:</b> ".concat(bookmark.qData.selectionFields, " </span>\n              <div class=\"info-copy\">\n              <span class=\"set-expression\">Set expression</span>\n              <input type=\"text\" READONLY class=\"info-input\" id=\"infoInput\" value=\"").concat(bookmark.qData.selectionFields, "\" />\n            \n              <div class=\"flex\">\n              <div class=\"copied\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copied-").concat(bookmark.qInfo.qId, "\"><h5>copied to clipboard</h5></div>\n              <button class=\"copy\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copyBtn-").concat(bookmark.qInfo.qId, "\" >Copy</button>\n              </div>\n              </div>\n              </div>\n              ");
 
             if (bookmark.qMeta.privileges.indexOf('publish') !== -1) {
-              publicHtml += "\n                <div class=\"right-click-popup\" id=\"rightClickPopup-".concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">\n                <ul class=\"right-click-menu\">\n                  <li class=\"li-item\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">Apply bookmark</li>\n                  <li class=\"li-item\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">Publish</li>\n                  <li class=\"li-item\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">Delete</li>\n                </ul>\n                </div>\n                ");
+              publicHtml += "\n                <div class=\"right-click-popup\" id=\"rightClickPopup-".concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">\n                <ul class=\"right-click-menu\">\n                  <p class=\"publish-btn\" id=\"publishBtn-").concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">Publish</p>\n                </ul>\n                </div>\n                ");
             }
           });
           var bookmarkHtml = '';
@@ -126,7 +126,7 @@ var Bookmark = /*#__PURE__*/function () {
             bookmarkHtml += "\n              <span class=\"selections\"><b>Selections:</b> ".concat(bookmark.qData.selectionFields, " </span>\n              <div class=\"info-copy\">\n              <span class=\"set-expression\">Set expression</span>\n              <input type=\"text\" READONLY class=\"info-input\" value=\"").concat(bookmark.qData.selectionFields, "\" />\n              <div class=\"flex\">\n              <div class=\"copied\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copied\"><h5>copied to clipboard</h5></div>\n              <button class=\"copy\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copyBtn-").concat(bookmark.qInfo.qId, "\" >Copy</button>\n              </div>\n              </div>\n              </div>\n              ");
 
             if (bookmark.qMeta.privileges.indexOf('publish') !== -1) {
-              bookmarkHtml += "\n                      <div class=\"right-click-popup\" id=\"rightClickPopup-".concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">\n                      <div class=\"right-click-menu\">\n                        <p class=\"li-item\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">Apply bookmark</p>\n                        <p class=\"li-item\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">Publish</p>\n                        <p class=\"li-item\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">Delete</p>\n                      </div>\n                      </div>\n                      ");
+              bookmarkHtml += "\n                      <div class=\"right-click-popup\" id=\"rightClickPopup-".concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">\n                      <div class=\"right-click-menu\">\n                        <p class=\"publish-btn\" id=\"publishBtn-").concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">Publish</p>\n                      </div>\n                      </div>\n                      ");
             }
           });
           var publicPlaceholder = document.getElementById('public-placeholder');
@@ -279,6 +279,11 @@ var Bookmark = /*#__PURE__*/function () {
         this.copyToClipboard(event);
         this.toggleCopied(event);
       }
+
+      if (event.target.classList.contains('publish-btn')) {
+        this.publish(event);
+        this.handleContextMenu(event); // closes the context menu on publish
+      }
     }
   }, {
     key: "handleChange",
@@ -294,6 +299,13 @@ var Bookmark = /*#__PURE__*/function () {
       input = document.getElementById('myInput');
       filter = input.value.toLowerCase();
       this.render(filter);
+    }
+  }, {
+    key: "publish",
+    value: function publish(event) {
+      var bookmarkId = event.target.getAttribute('data-bookmark');
+      var streamId = document.getElementById("publishBtn-".concat(bookmarkId));
+      this.options.app.publish(streamId);
     }
   }, {
     key: "openForm",
@@ -432,15 +444,6 @@ var Bookmark = /*#__PURE__*/function () {
         rightClickMenu.classList.toggle('active');
       }
     }
-  }, {
-    key: "publish",
-    value: function publish(event) {
-      if (event.target.classlist.contains('')) {
-        var bookmarkId = event.target.getAttribute('data-bookmark');
-        var publishBtn = document.getElementById("");
-        console.log('publish clicked'); // this.options.app.publish('')
-      }
-    }
   }]);
 
   return Bookmark;
@@ -448,7 +451,7 @@ var Bookmark = /*#__PURE__*/function () {
 
 var session = enigma.create({
   schema: schema,
-  url: 'wss://ec2-3-86-99-193.compute-1.amazonaws.com/app//d077bbca-1fa2-4564-83d5-88f801899a5c'
+  url: 'wss://ec2-3-86-99-193.compute-1.amazonaws.com/app/d077bbca-1fa2-4564-83d5-88f801899a5c'
 });
 session.open().then(function (global) {
   global.openDoc('d077bbca-1fa2-4564-83d5-88f801899a5c').then(function (app) {
