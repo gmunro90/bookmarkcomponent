@@ -32,6 +32,7 @@ var Bookmark = /*#__PURE__*/function () {
       el.addEventListener('keyup', this.handleKeyUp.bind(this));
       el.addEventListener('change', this.handleChange.bind(this));
       el.addEventListener('contextmenu', this.handleContextMenu.bind(this));
+      el.addEventListener('contextmenu', this.getMouseLocation.bind(this));
       var html = "<div>\n      <svg xmlns='http://www.w3.org/2000/svg' class='bookmarkBtn' viewBox='0 0 512 512'>\n        <title>Bookmark</title>\n        <path d='M352 48H160a48 48 0 00-48 48v368l144-128 144 128V96a48 48 0 00-48-48z' fill='none' stroke='currentColor'\n          stroke-linecap='round' stroke-linejoin='round' stroke-width='32' />\n        </svg>\n\n        <div class='bookmarkPopup' id='bookmarkPopup'></div>\n        <div class='bookmarkContainer' id='bookmarkContainer'>\n          <div class='bookmark-topline'>\n            <span class=\"heading\">Bookmarks</span><button class='createNew'>Create new bookmark</button>\n          </div>\n          <div class='btn'>\n          </div>\n          <div>\n            <input class='search' type='text' id=\"myInput\" placeholder=\"Search\">\n          </div>\n          <hr>\n          <div class='public'>\n          <div class=\"public-heading-caret\">\n              <svg class='public-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n                <title>Caret Down</title>\n                <path d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n              </svg>\n\n              <span class=\"heading\">Public bookmarks <span id=\"publicCount\">(0)</span></span>\n              </div>\n              <div id=\"public-placeholder\" class=\"active\"><p class='public-text'>You have no public bookmarks</p>\n              <p class='public-text'>Right-click on a bookmark and select 'Make public'.</p>\n            \n          </div>\n        </div>\n          <div class='my-bookmarks'>\n\n          <div class=\"heading-caret\">\n            <svg class='myBookmarks-caret caret' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n              <title>Caret Down</title>\n              <path\n                d='M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z' />\n            </svg>\n            <span class=\"heading\">My bookmarks <span id=\"myBookmarksCount\">(0)</span></span>\n            </div>\n\n            <div id=\"myBookmarks-placeholder\" class=\"active\">\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class='createNewPopup' id='createForm'>\n    <div class='createTopline'>\n    <span class=\"heading\">Create bookmark</span>\n    <span class='closeCreate'><svg xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512'>\n    <title>Close</title>\n    <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'\n      d='M368 368L144 144M368 144L144 368' />\n  </svg></span>\n\n    </div>\n    <hr>\n    <div class=\"create-input\">\n    <label for='bookmarkName' class=\"title\">Title</label>\n      <input type='text' class=\"bookmark-name\" id='bookmarkName' name='bookmarkName'>\n      <label for='bookmarkDescription' class=\"description\">Description <span class='optional'>(optional)</span></label><br>\n      <input type='text' id='bookmarkDescription' name='bookmarkDescription'>\n      <div class=\"create-flex\"><button type=\"button\" disabled class='createSubmit' id='createSubmit'>Create</button>\n      </div>\n    </div>\n  </div>\n    ";
       el.innerHTML = html;
       this.render();
@@ -98,8 +99,9 @@ var Bookmark = /*#__PURE__*/function () {
 
             publicHtml += "\n              <span class=\"selections\"><b>Selections:</b> ".concat(bookmark.qData.selectionFields, " </span>\n              <div class=\"info-copy\">\n              <span class=\"set-expression\">Set expression</span>\n              <input type=\"text\" READONLY class=\"info-input\" id=\"infoInput\" value=\"").concat(bookmark.qData.selectionFields, "\" />\n            \n              <div class=\"flex\">\n              <div class=\"copied\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copied-").concat(bookmark.qInfo.qId, "\"><h5>copied to clipboard</h5></div>\n              <button class=\"copy\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\" id=\"copyBtn-").concat(bookmark.qInfo.qId, "\" >Copy</button>\n              </div>\n              </div>\n              </div>\n              ");
 
-            if (bookmark.qMeta.privileges.indexOf('publish') !== -1) {
-              publicHtml += "\n                <div class=\"right-click-popup\" id=\"rightClickPopup-".concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">\n                <ul class=\"right-click-menu\">\n                  <p class=\"publish-btn\" id=\"publishBtn-").concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">Publish</p>\n                </ul>\n                </div>\n                ");
+            if (bookmark.qMeta.published === true && bookmark.qMeta.privileges.indexOf('publish') !== -1) {
+              console.log('put unpublish option here');
+              publicHtml += "\n                <div class=\"right-click-popup\" id=\"rightClickPopup-".concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">\n                <ul class=\"right-click-menu\">\n                  <p class=\"unpublish-btn\" id=\"unpublishBtn-").concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">Unpublish</p>\n                </ul>\n                </div>\n                ");
             }
           });
           var bookmarkHtml = '';
@@ -282,6 +284,11 @@ var Bookmark = /*#__PURE__*/function () {
         this.publish(event);
         this.handleContextMenu(event);
       }
+
+      if (event.target.classList.contains('unpublish-btn')) {
+        this.unpublish(event);
+        this.handleContextMenu(event);
+      }
     }
   }, {
     key: "handleChange",
@@ -303,8 +310,17 @@ var Bookmark = /*#__PURE__*/function () {
     value: function publish(event) {
       var bookmarkId = event.target.getAttribute('data-bookmark');
       this.options.app.getBookmark(bookmarkId).then(function (result) {
-        console.log('result', result);
         result.publish();
+      })["catch"](function (error) {
+        console.log('error', error);
+      });
+    }
+  }, {
+    key: "unpublish",
+    value: function unpublish(event) {
+      var bookmarkId = event.target.getAttribute('data-bookmark');
+      this.options.app.getBookmark(bookmarkId).then(function (result) {
+        result.unpublish();
       })["catch"](function (error) {
         console.log('error', error);
       });
@@ -448,6 +464,15 @@ var Bookmark = /*#__PURE__*/function () {
           e.classList.remove('active');
         });
         rightClickMenu.classList.toggle('active');
+      }
+    }
+  }, {
+    key: "getMouseLocation",
+    value: function getMouseLocation(event) {
+      if (event.target.classList.contains('public-li') || event.target.classList.contains('myBookmarks-li')) {
+        var clientX = event.clientX;
+        var clientY = event.clientY;
+        console.log(clientX + ' ' + clientY);
       }
     }
   }]);
