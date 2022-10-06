@@ -269,9 +269,7 @@ var Bookmark = /*#__PURE__*/function () {
       if (event.target.classList.contains('public-li') || event.target.classList.contains('myBookmarks-li')) {
         var _bookmarkId2 = event.target.getAttribute('data-bookmark');
 
-        this.options.app.applyBookmark(_bookmarkId2).then(function (result) {
-          console.log(result);
-        });
+        this.options.app.applyBookmark(_bookmarkId2);
         this.closeForm();
       }
 
@@ -282,7 +280,7 @@ var Bookmark = /*#__PURE__*/function () {
 
       if (event.target.classList.contains('publish-btn')) {
         this.publish(event);
-        this.handleContextMenu(event); // closes the context menu on publish
+        this.handleContextMenu(event);
       }
     }
   }, {
@@ -307,6 +305,8 @@ var Bookmark = /*#__PURE__*/function () {
       this.options.app.getBookmark(bookmarkId).then(function (result) {
         console.log('result', result);
         result.publish();
+      })["catch"](function (error) {
+        console.log('error', error);
       });
     }
   }, {

@@ -412,9 +412,7 @@ class Bookmark {
     }
     if (event.target.classList.contains('public-li') || (event.target.classList.contains('myBookmarks-li'))) {
       const bookmarkId = event.target.getAttribute('data-bookmark')
-      this.options.app.applyBookmark(bookmarkId).then(result => {
-        console.log(result)
-      })
+      this.options.app.applyBookmark(bookmarkId)
       this.closeForm()
     }
     if (event.target.classList.contains('copy')) {
@@ -423,7 +421,7 @@ class Bookmark {
     }
     if (event.target.classList.contains('publish-btn')) {
       this.publish(event)
-      this.handleContextMenu(event) // closes the context menu on publish
+      this.handleContextMenu(event)
     }
   }
   handleChange (event) {
@@ -443,6 +441,9 @@ class Bookmark {
       console.log('result', result)
       result.publish()
     })
+      .catch(error => {
+        console.log('error', error)
+      })
   }
   openForm () {
     const myForm = document.getElementById('bookmarkPopup')
