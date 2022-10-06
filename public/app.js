@@ -460,13 +460,10 @@ var Bookmark = /*#__PURE__*/function () {
           e.classList.remove('active');
         });
         var clientX = event.clientX;
-        var clientY = event.clientY;
-        console.log(clientX + ' ' + clientY);
         var bookmarkId = event.target.getAttribute('data-bookmark');
         var rightClickMenu = document.getElementById("rightClickPopup-".concat(bookmarkId));
         rightClickMenu.classList.toggle('active');
-        rightClickMenu.style.right = "".concat(clientX);
-        rightClickMenu.style.top = "".concat(clientY);
+        rightClickMenu.style.left = "".concat(clientX, "px");
       }
     }
   }]);

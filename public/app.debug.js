@@ -570,13 +570,10 @@ class Bookmark {
         e.classList.remove('active')
       })
       let clientX = event.clientX
-      let clientY = event.clientY
-      console.log(clientX + ' ' + clientY)
       const bookmarkId = event.target.getAttribute('data-bookmark')
       const rightClickMenu = document.getElementById(`rightClickPopup-${bookmarkId}`)
       rightClickMenu.classList.toggle('active')
-      rightClickMenu.style.right = `${clientX}`
-      rightClickMenu.style.top = `${clientY}`
+      rightClickMenu.style.left = `${clientX}px`
     }
   }
 }
