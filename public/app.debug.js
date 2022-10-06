@@ -448,8 +448,10 @@ class Bookmark {
   }
   publish (event) {
     const bookmarkId = event.target.getAttribute('data-bookmark')
-    const streamId = document.getElementById(`publishBtn-${bookmarkId}`)
-    this.options.app.publish(streamId)
+    this.options.app.getBookmark(bookmarkId).then((result) => {
+      console.log('result', result)
+      result.publish()
+    })
   }
   openForm () {
     const myForm = document.getElementById('bookmarkPopup')
@@ -550,6 +552,10 @@ class Bookmark {
       event.preventDefault()
       const bookmarkId = event.target.getAttribute('data-bookmark')
       const rightClickMenu = document.getElementById(`rightClickPopup-${bookmarkId}`)
+      const infoList = Array.from(document.getElementsByClassName('right-click-popup'))
+      infoList.forEach(e => {
+        e.classList.remove('active')
+      })
       rightClickMenu.classList.toggle('active')
     }
   }

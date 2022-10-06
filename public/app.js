@@ -304,8 +304,10 @@ var Bookmark = /*#__PURE__*/function () {
     key: "publish",
     value: function publish(event) {
       var bookmarkId = event.target.getAttribute('data-bookmark');
-      var streamId = document.getElementById("publishBtn-".concat(bookmarkId));
-      this.options.app.publish(streamId);
+      this.options.app.getBookmark(bookmarkId).then(function (result) {
+        console.log('result', result);
+        result.publish();
+      });
     }
   }, {
     key: "openForm",
@@ -441,6 +443,10 @@ var Bookmark = /*#__PURE__*/function () {
         event.preventDefault();
         var bookmarkId = event.target.getAttribute('data-bookmark');
         var rightClickMenu = document.getElementById("rightClickPopup-".concat(bookmarkId));
+        var infoList = Array.from(document.getElementsByClassName('right-click-popup'));
+        infoList.forEach(function (e) {
+          e.classList.remove('active');
+        });
         rightClickMenu.classList.toggle('active');
       }
     }
