@@ -20,7 +20,6 @@ class Bookmark {
       el.addEventListener('keyup', this.handleKeyUp.bind(this))
       el.addEventListener('change', this.handleChange.bind(this))
       el.addEventListener('contextmenu', this.handleContextMenu.bind(this))
-      el.addEventListener('contextmenu', this.getMouseLocation.bind(this))
       let html = `<div>
       <svg xmlns='http://www.w3.org/2000/svg' class='bookmarkBtn' viewBox='0 0 512 512'>
         <title>Bookmark</title>
@@ -214,7 +213,6 @@ class Bookmark {
               </div>
               `
             if (bookmark.qMeta.published === true && (bookmark.qMeta.privileges.indexOf('publish') !== -1)) {
-              console.log('put unpublish option here')
               publicHtml += `
                 <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
                 <ul class="right-click-menu">
@@ -567,20 +565,18 @@ class Bookmark {
   handleContextMenu (event) {
     if (event.target.classList.contains('public-li') || (event.target.classList.contains('myBookmarks-li'))) {
       event.preventDefault()
-      const bookmarkId = event.target.getAttribute('data-bookmark')
-      const rightClickMenu = document.getElementById(`rightClickPopup-${bookmarkId}`)
       const infoList = Array.from(document.getElementsByClassName('right-click-popup'))
       infoList.forEach(e => {
         e.classList.remove('active')
       })
-      rightClickMenu.classList.toggle('active')
-    }
-  }
-  getMouseLocation (event) {
-    if (event.target.classList.contains('public-li') || (event.target.classList.contains('myBookmarks-li'))) {
       let clientX = event.clientX
       let clientY = event.clientY
       console.log(clientX + ' ' + clientY)
+      const bookmarkId = event.target.getAttribute('data-bookmark')
+      const rightClickMenu = document.getElementById(`rightClickPopup-${bookmarkId}`)
+      rightClickMenu.classList.toggle('active')
+      rightClickMenu.style.right = `${clientX}`
+      rightClickMenu.style.top = `${clientY}`
     }
   }
 }
