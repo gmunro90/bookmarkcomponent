@@ -215,9 +215,9 @@ class Bookmark {
             if (bookmark.qMeta.published === true && (bookmark.qMeta.privileges.indexOf('publish') !== -1)) {
               publicHtml += `
                 <div class="right-click-popup" id="rightClickPopup-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">
-                <ul class="right-click-menu">
+                <div class="right-click-menu">
                   <p class="unpublish-btn" id="unpublishBtn-${bookmark.qInfo.qId}" data-bookmark="${bookmark.qInfo.qId}">Unpublish</p>
-                </ul>
+                </div>
                 </div>
                 `
             }      
