@@ -143,6 +143,9 @@ class Bookmark {
           })
           let publicHtml = `<div id="info-popup-mask" class="info-popup-mask"></div>`
           publicBookmarks.forEach(bookmark => {
+            if (this.options.hidePrefix && bookmark.qMeta.title.indexOf(this.options.hidePrefix) === 0) {
+              return 
+            }
             console.log('public', bookmark)
             publicHtml += `
               <div class="public-li" id="public-li" data-bookmark="${bookmark.qInfo.qId}">
@@ -485,6 +488,22 @@ class Bookmark {
     if (bookmarkContainer) { 
       bookmarkContainer.style.display = 'none'
     }
+    const infoList = Array.from(document.getElementsByClassName('info-popup'))
+    infoList.forEach(e => {
+      e.classList.remove('active')
+    })
+    const publicForm = Array.from(document.getElementsByClassName('right-click-popup'))
+    publicForm.forEach(e => {
+      e.classList.remove('active')
+    })
+    const editOptions = document.querySelectorAll('.edit-topline svg')
+    editOptions.forEach(e => {
+      e.classList.remove('active')
+    })
+    const inputOptions = document.querySelectorAll('.edit-topline svg')
+    editOptions.forEach(e => {
+      e.classList.remove('active')
+    })
   }
   createNewBookmark () {
     const createNew = document.getElementById('createForm')
@@ -572,8 +591,10 @@ class Bookmark {
       let clientX = event.clientX
       const bookmarkId = event.target.getAttribute('data-bookmark')
       const rightClickMenu = document.getElementById(`rightClickPopup-${bookmarkId}`)
-      rightClickMenu.classList.toggle('active')
-      rightClickMenu.style.left = `${clientX}px`
+      if (rightClickMenu) {
+        rightClickMenu.classList.toggle('active')
+        rightClickMenu.style.left = `${clientX}px`
+      }
     }
   }
 }

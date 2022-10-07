@@ -41,6 +41,8 @@ var Bookmark = /*#__PURE__*/function () {
   _createClass(Bookmark, [{
     key: "render",
     value: function render(searchText) {
+      var _this = this;
+
       var publicCount = document.getElementById('publicCount');
       var publicBookmarks = [];
       var myBookmarksCount = document.getElementById('myBookmarksCount');
@@ -83,6 +85,10 @@ var Bookmark = /*#__PURE__*/function () {
           });
           var publicHtml = "<div id=\"info-popup-mask\" class=\"info-popup-mask\"></div>";
           publicBookmarks.forEach(function (bookmark) {
+            if (_this.options.hidePrefix && bookmark.qMeta.title.indexOf(_this.options.hidePrefix) === 0) {
+              return;
+            }
+
             console.log('public', bookmark);
             publicHtml += "\n              <div class=\"public-li\" id=\"public-li\" data-bookmark=\"".concat(bookmark.qInfo.qId, "\">\n              <span class=\"bookmark-text\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">").concat(bookmark.qMeta.title, "</span>\n              <div class=\"date-and-i\">\n              <span class=\"bookmark-text\">").concat(new Date(bookmark.qMeta.createdDate).toLocaleString().slice(0, 10), "</span>\n              <span class=\"infoBtn\">\n               <svg data-bookmark=\"").concat(bookmark.qInfo.qId, "\" class=\"i-icon-public\" id=\"i-icon-public\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">\n               <title>Information Circle</title><path d=\"M256 56C145.72 56 56 145.72 56 256s89.72 200 200 200 200-89.72 200-200S366.28 \n               56 256 56zm0 82a26 26 0 11-26 26 26 26 0 0126-26zm48 226h-88a16 16 0 010-32h28v-88h-16a16 16 0 010-32h32a16 16 0 0116 \n               16v104h28a16 16 0 010 32z\"/>\n               </svg>\n               </span>\n               </div>\n              </div>\n             \n              <div class=\"info-popup\" id=\"info-popup-").concat(bookmark.qInfo.qId, "\">\n              <div class=\"info-topline\" id=\"info-topline-").concat(bookmark.qInfo.qId, "\" data-bookmark=\"").concat(bookmark.qInfo.qId, "\">\n              <span class=\"description-heading\" id=\"description-heading\">").concat(bookmark.qMeta.description, "</span>\n              </div>");
 
@@ -158,7 +164,7 @@ var Bookmark = /*#__PURE__*/function () {
   }, {
     key: "handleClick",
     value: function handleClick(event) {
-      var _this = this;
+      var _this2 = this;
 
       var bookmarkTitle = document.getElementById('bookmarkName');
       var bookmarkDescription = document.getElementById('bookmarkDescription');
@@ -211,7 +217,7 @@ var Bookmark = /*#__PURE__*/function () {
         }).then(function () {
           document.getElementById('bookmarkName').value = '';
 
-          _this.render();
+          _this2.render();
         });
         this.closeBookmark();
       }
@@ -219,7 +225,7 @@ var Bookmark = /*#__PURE__*/function () {
       if (event.target.classList.contains('trash-icon')) {
         var bookmarkId = event.target.getAttribute('data-bookmark');
         this.options.app.destroyBookmark(bookmarkId).then(function () {
-          _this.render();
+          _this2.render();
         });
       }
 
@@ -261,7 +267,7 @@ var Bookmark = /*#__PURE__*/function () {
             props.qMetaDef.description = editDescription.value;
             result.setProperties(props);
 
-            _this.render();
+            _this2.render();
           });
         });
       }
@@ -348,6 +354,23 @@ var Bookmark = /*#__PURE__*/function () {
       if (bookmarkContainer) {
         bookmarkContainer.style.display = 'none';
       }
+
+      var infoList = Array.from(document.getElementsByClassName('info-popup'));
+      infoList.forEach(function (e) {
+        e.classList.remove('active');
+      });
+      var publicForm = Array.from(document.getElementsByClassName('right-click-popup'));
+      publicForm.forEach(function (e) {
+        e.classList.remove('active');
+      });
+      var editOptions = document.querySelectorAll('.edit-topline svg');
+      editOptions.forEach(function (e) {
+        e.classList.remove('active');
+      });
+      var inputOptions = document.querySelectorAll('.edit-topline svg');
+      editOptions.forEach(function (e) {
+        e.classList.remove('active');
+      });
     }
   }, {
     key: "createNewBookmark",
@@ -462,8 +485,11 @@ var Bookmark = /*#__PURE__*/function () {
         var clientX = event.clientX;
         var bookmarkId = event.target.getAttribute('data-bookmark');
         var rightClickMenu = document.getElementById("rightClickPopup-".concat(bookmarkId));
-        rightClickMenu.classList.toggle('active');
-        rightClickMenu.style.left = "".concat(clientX, "px");
+
+        if (rightClickMenu) {
+          rightClickMenu.classList.toggle('active');
+          rightClickMenu.style.left = "".concat(clientX, "px");
+        }
       }
     }
   }]);
