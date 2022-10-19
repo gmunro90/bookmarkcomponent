@@ -371,6 +371,10 @@ var Bookmark = /*#__PURE__*/function () {
       editOptions.forEach(function (e) {
         e.classList.remove('active');
       });
+      var editInputs = document.querySelectorAll('.edit-inputs');
+      editInputs.forEach(function (e) {
+        e.classList.remove('active');
+      });
     }
   }, {
     key: "createNewBookmark",

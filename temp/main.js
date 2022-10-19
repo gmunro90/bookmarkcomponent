@@ -504,6 +504,10 @@ class Bookmark {
     editOptions.forEach(e => {
       e.classList.remove('active')
     })
+    const editInputs = document.querySelectorAll('.edit-inputs')
+    editInputs.forEach(e => {
+      e.classList.remove('active')
+    })
   }
   createNewBookmark () {
     const createNew = document.getElementById('createForm')
